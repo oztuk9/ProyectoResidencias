@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Producto</title>
+    <link rel="stylesheet" type="text/css" href="ccs/NuevoProducto.css">
+</head>
+
+<body>
+    <div>
+        <h1 id="ubicacion">Nuevo Producto</h1>
+    </div>
+    <form id="form_new_product"></form>
+    <div id="columnas">
+        <div id="column1">
+            <div id="imagen">
+                <img id="img" src="image/pngwing.com.png" />
+                <input type="file" id="imagenInput" accept="image/*" />
+            </div>
+            <span>Descripcion:</span>
+            <textarea name="txtDescripcion" id="descripcion" cols="30" rows="15"></textarea>
+        </div>
+
+
+        <div id="column2">
+            <div>
+                <span class="DescripcionDato">Nombre:</span>
+                <br>
+                <span class="DescripcionDato">Marca:</span>
+                <br>
+                <span class="DescripcionDato">Categoria:</span>
+                <br>
+                <span class="DescripcionDato">Precio venta:</span>
+                <br>
+                <span class="DescripcionDato">Minimo:</span>
+                <br>
+                <span class="DescripcionDato">Maximo:</span>
+                <br>
+                <span class="DescripcionDato">Cantidad por paquete:</span>
+                <br>
+                <span class="DescripcionDato">Codigo de barras:</span>
+                <br>
+                <button class="cancelar" onclick="location.href='./gestion.html'">CANCELAR</button>
+            </div>
+
+            <div>
+                <input id="nombre" class="InputData" type="text">
+                <select id="select_marca"> </select> <input id="agregar_marca" class="agregarSelect" type="button"
+                    value="+" data-open="modal1">
+                <select id="select_categoria"> </select> <input id="agregar_categoria" class="agregarSelect"
+                    type="button" value="+" data-open="modal2">
+                <input id="precioVenta" class="InputData" type="number">
+                <input id="minimo" class="InputData" type="number">
+                <input id="maximo" class="InputData" type="number">
+                <input id="cantidadPorPaquete" class="InputData" type="number">
+                <input id="radioSi" class="radios" type="radio" name="radio_codigo_barras" value="Si"
+                    onclick="validarRadios()" checked> Si
+                <input id="radioNo" class="radios" type="radio" name="radio_codigo_barras" value="No"
+                    onclick="validarRadios()">
+                No, generar
+                <input id="codigoBarras" class="InputData" type="text">
+            </div>
+            <button id="finalizar" class="FINALIZAR" type="submit">
+                FINALIZAR
+            </button>
+            </form>
+
+            <div class="modal" id="modal1">
+                <button class="close-modal" aria-label="close modal" data-close>X</button>
+                <div class="modal-dialog">
+                    <header class="modal-header">
+                        <h1 class="tituloModal"> Nueva Marca </h1>
+                    </header>
+                    <section class="modal-content">
+                        <form class="formModal">
+                            <span id="texto-new-marca">Nombre</span>
+                            <input id="input-new-marca" type="text">
+                        </form>
+                        <button id="button_new_marca" class="finalizarModal">AGREGAR</button>
+                    </section>
+                </div>
+            </div>
+
+            <div class="modal" id="modal2">
+                <button class="close-modal" aria-label="close modal" data-close>X</button>
+                <div class="modal-dialog">
+                    <header class="modal-header">
+                        <h1 class="tituloModal">Nueva Categoria</h1>
+                    </header>
+                    <section class="modal-content">
+                        <form class="formModal">
+                            <span id="texto-new-categoria">Nombre</span>
+                            <input id="input-new-categoria" type="text">
+                        </form>
+                        <button id="button_new_categoria" class="finalizarModal">AGREGAR</button>
+                    </section>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="./nuevoProducto.js"></script>
+    <script src="jquery/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

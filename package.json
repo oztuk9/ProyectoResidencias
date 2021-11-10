@@ -1,0 +1,22 @@
+{
+  "name": "punto-de-venta-y-control-de-almacen",
+  "version": "1.0.0",
+  "description": "Programa para control de ventas y almacen",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Oscar Eduardo Macias Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "@electron/remote": "^2.0.1",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-toaster": "^2.0.4",
+    "jquery": "^3.6.0",
+    "promise-mysql": "^5.0.4",
+    "sweetalert2": "^11.1.9"
+  },
+  "devDependencies": {
+    "electron": "^15.3.0"
+  }
+}

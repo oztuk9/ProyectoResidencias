@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Gestion</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="ccs/General.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="usuario">
+            <img class="imagenUsuario" src="./image/usuario.png" alt="imagen">
+            <span id="datosUsuario">Datos del Usuario</span>
+        </div>
+        <div class="navegacion">
+            <button id="caja" class="botonesNav">Caja</button>
+            <button id="stock" class="botonesNav">Stock</button>
+            <button id="entradas_salidas" class="botonesNav">Entradas <br> /Salidas</button>
+            <button id="historial" class="botonesNav">Historial</button>
+        </div>
+
+        <div class="filtros">
+
+            <input type="text" class="inputsfil" placeholder="BUSCAR">
+
+            <div class="divfiltros">
+                <span>FILTRAR POR</span>
+                <select class="selectfil"></select>
+            </div>
+
+            <div class="divfiltros">
+                <span>ORDENAR</span>
+                <select class="selectfil"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="divTabla">
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>MARCA</th>
+                    <th>CATEGORIA</th>
+                    <th>PRECIO VENTA</th>
+                    <th>CODIGO</th>
+                    <th>CANTIDAD</th>
+                    <th>TOTAL MONETARIO</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>d</td>
+                <td>e</td>
+                <td>f</td>
+                <td>g</td>
+            </tr>
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>d</td>
+                <td>e</td>
+                <td>f</td>
+                <td>g</td>
+            </tr>
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>d</td>
+                <td>e</td>
+                <td>f</td>
+                <td>g</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="divUbicacion">
+        <h1 id="ubicacion">General</h1>
+    </div>
+
+
+
+    <div class="barraOpciones">
+
+        <div class="divProductosBaja">
+            <button class="botonProductosBaja">PRODUCTOS <br> DADOS DE BAJA</button>
+        </div>
+        <div class="botonesCrud">
+            <button id="editar" class="botonesOpcion">EDITAR</button>
+            <button id="descartar" class="botonesOpcion">DESCARTAR</button>
+            <button id="nuevo" class="botonesOpcion" onclick="location.href='./nuevoProducto.html'">NUEVO </button>
+            <button id="botonesOpcion" class="botonesOpcion">BUSCAR</button>
+        </div>
+    </div>
+</body>
+
+</html>
