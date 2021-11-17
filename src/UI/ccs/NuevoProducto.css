@@ -16,14 +16,15 @@ body {
 }
 
 #columnas {
+  margin-top: 5%;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 40% 40%;
 }
 
 #column1 {
   display: grid;
   grid-template-rows: 45% 10% 35%;
-  padding-left: 10%;
+  padding-left: 30%;
   padding-right: 10%;
   margin: 5%;
   margin-bottom: 0;
@@ -87,6 +88,7 @@ body {
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
+  transition: .7s;
 }
 
 .agregarSelect:hover{
@@ -97,10 +99,11 @@ body {
 
 #select_marca {
   margin-bottom: 20px;
-  margin-top: 12px;
-  border-radius: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
   height: 30px;
-  width: 410px;
+  width: 90%;
+  border: 2px solid rgb(175, 180, 182);
 }
 
 #select_categoria {
@@ -108,15 +111,15 @@ body {
   margin-top: 12px;
   border-radius: 15px;
   height: 30px;
-  width: 410px;
+  width: 90%;
+  border: 2px solid rgb(175, 180, 182);
 }
 
 .InputData {
-  margin-bottom: 20px;
-  margin-top: 12px;
+  margin-bottom: 2.5%;
+  margin-top: 4%;
   border-radius: 15px;
-  height: 30px;
-  width: 440px;
+  width: 100%;
   border: 2px solid rgb(175, 180, 182);
 }
 
@@ -135,6 +138,7 @@ body {
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
+  transition: .7s;
 }
 
 .finalizar:hover{
@@ -143,7 +147,7 @@ body {
   cursor: pointer;
 }
 
-.cancelar {
+#cancelar {
   position: relative;
   left: 50%;
   top: 7%;
@@ -154,9 +158,10 @@ body {
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
+  transition: .7s;
 }
 
-.cancelar:hover{
+#cancelar:hover{
   background-color: fff;
   color:#bb0000;
   cursor: hand;
@@ -165,11 +170,9 @@ body {
 /*Estilos de la modal*/
 
 .modal {
-  position: fixed;
-  top: 30%;
-  left: 30%;
-  right: 0;
-  bottom: 0;
+  position: absolute;
+  top: 40%;
+  left: 38%;
   display: flex;
   height: 150;
   width: 500px;
@@ -252,7 +255,7 @@ body {
   border-radius: 15px;
   border: 0;
   background-color: #bb0000;
-  color:fff;
+  color:#fff;
 }
 
 .close-modal:hover{
@@ -317,6 +320,5 @@ body {
 .modal.is-visible {
   visibility: visible;
   opacity: 1;
-  height: 130px;
-  width: 450px;
+
 }
