@@ -15,7 +15,7 @@ function createWindow() {
             enableRemoteModule: true
         }
     })
-    window.loadFile('src/ui/gestion.html');
+    window.loadFile('src/ui/entradas_salidas.html');
 }
 
 function prueba() {

@@ -23,11 +23,11 @@ body {
 .sidebar {
   position: absolute;
   width: 15%;
-  height: 87%;
+  height: 100%;
   right: 0;
   background-color: #ddd;
   display: grid;
-  grid-template-rows: 30% 40% 30%;
+  grid-template-rows: 25% 35% 40%;
   padding: 0%;
   margin: 0%;
 }
@@ -48,15 +48,76 @@ body {
   margin: 0%;
 }
 
-.filtros {
+/*Opciones*/
+
+.barraOpciones {
   display: grid;
-  grid-template-rows: 33% 33% 33%;
+  grid-template-rows: 10% 20% 20% 20% 30%;
   padding: 0%;
   margin: 0;
 }
 
-.tituloSidebar {
-  margin: 0;
+.divfiltros {
+  margin: 0 auto;
+  width: 80%;
+}
+
+#inputcodigoBarras {
+  height: 70%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#textoCantidad{
+  margin-left: 10%;
+}
+
+#cantidad{
+  height: 60%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.botonesOpciones{
+  margin: 0 auto;
+  margin-top:3%;
+  height: 75%;
+  width: 80%;
+  font-size: 130%;
+  border-radius: 15px;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+.botonesOpciones:hover{
+  background-color: white;
+  color: rgb(27, 81, 97);
+  cursor: pointer;
+}
+
+#eliminar{
+  background-color: rgb(133, 1, 1);
+}
+
+#eliminar:hover{
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+#finalizar {
+  background-color: #236e25;
+  color: white;
+}
+
+#finalizar:hover {
+  background-color: white;
+  color: #236e25;
 }
 
 /*grid usuario*/
@@ -105,25 +166,6 @@ body {
   color: rgb(105, 0, 105);
 }
 
-#entradas_salidas {
-  height: 100%;
-  font-size: 120%;
-}
-
-/*Filtros*/
-.divfiltros {
-  margin: 0 auto;
-  width: 80%;
-}
-
-#inputfill {
-  height: 40%;
-  width: 80%;
-  border-radius: 15px;
-  margin: auto;
-  border: 2px solid rgb(175, 180, 182);
-}
-
 .selectfil {
   height: 40%;
   width: 100%;
@@ -138,93 +180,13 @@ body {
   left: 0;
 }
 
-/*Barra inferior*/
-
-.barraOpciones {
-  position: absolute;
-  width: 100%;
-  height: 13%;
-  bottom: 0;
-  background-color: #ddd;
-  display: grid;
-  grid-template-columns: 30% 70%;
-}
-
-.divProductosBaja {
-  width: 80%;
-}
-
-.botonesCrud {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-}
-
-.botonesOpcion {
-  width: 80%;
-  height: 60%;
-  margin-top: 8%;
-  margin-left: 15%;
-  border-radius: 15px;
-  font-size: 130%;
-  border: 0;
-  background-color: rgb(27, 81, 97);
-  color: white;
-  cursor: pointer;
-  box-shadow: -1px 7px 10px black;
-  transition: 0.7s;
-}
-
-.botonesOpcion:hover {
-  background-color: white;
-  color: rgb(27, 81, 97);
-}
-
-#descartar {
-  background-color: rgb(133, 1, 1);
-}
-
-#descartar:hover {
-  background-color: white;
-  color: rgb(133, 1, 1);
-}
-
-#nuevo {
-  background-color: #236e25;
-  color: white;
-}
-
-#nuevo:hover {
-  background-color: white;
-  color: #236e25;
-}
-
-#botonProductosBaja {
-  width: 65%;
-  height: 60%;
-  margin-top: 6%;
-  margin-left: 6%;
-  border-radius: 15px;
-  font-size: 100%;
-  background-color: rgb(27, 81, 97);
-  color: white;
-  border: 0;
-  cursor: pointer;
-  box-shadow: -1px 7px 10px black;
-  transition: 0.7s;
-}
-
-#botonProductosBaja:hover {
-  background-color: white;
-  color: rgb(27, 81, 97);
-}
-
 /*Tabla de datos*/
 
 .divTabla {
   overflow: scroll;
   position: absolute;
   width: 85%;
-  height: 84%;
+  height: 93%;
   top: 48px;
 }
 
@@ -312,44 +274,6 @@ tr:hover td {
   cursor: pointer;
   transition: .5s;
   transform: scale(1.1);
-}
-
-.opcionesDescartar {
-  position: relative;
-  bottom: 10px;
-  border-radius: 5px;
-  background-color: #bb0000;
-  color: #fff;
-  border: 0;
-  box-shadow: -1px 7px 10px black;
-}
-
-.opcionesDescartar:hover{
-  background-color: #fff;
-  color: #bb0000;
-  cursor:pointer;
-}
-
-#darDeBajaTemporal{
-  width: 200px;
-  height: 65px;
-  left: 20px;
-  font-size: 130%;
-  background-color: rgb(27, 81, 97);
-  color: white;
-}
-
-#darDeBajaTemporal:hover{
-  background-color: white;
-  color: rgb(27, 81, 97);
-}
-
-#eliminar{
-  width: 130px;
-  height: 50px;
-  bottom: 0px;
-  left: 80px;
-  font-size: 130%;
 }
 
 /*Fundamental para mostrar y oculpar la modal*/

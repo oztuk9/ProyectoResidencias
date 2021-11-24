@@ -4,10 +4,9 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Gestion</title>
+    <title>Entradas y Salidas</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type="text/css" href="ccs/Entradas_Salidas.css">
-    <script>console.log(__dirname)</script>
 </head>
 
 <body>
@@ -17,34 +16,19 @@
             <img class="imagenUsuario" src="./image/usuario.png" alt="imagen">
             <span id="datosUsuario">Datos del Usuario</span>
         </div>
-        <div class="navegacion">
+        <div class="navegacion">    
             <button id="caja" class="botonesNav">Caja</button>
             <button id="stock" class="botonesNav">Stock</button>
-            <button id="entradas_salidas" class="botonesNav">Entradas <br> /Salidas</button>
+            <button id="entradas_salidas" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
             <button id="historial" class="botonesNav">Historial</button>
         </div>
 
-        <div class="filtros">
-
-            <input type="text" id="inputfill" placeholder="BUSCAR">
-
-            <div class="divfiltros">
-                <span>FILTRAR POR</span>
-                <select id="filtrarPor" class="selectfil">
-                    <option value="codigoBarras">CODIGO DE BARRAS</option>
-                    <option value="nombre">NOMBRE</option>
-                    <option value="marca">MARCA</option>
-                    <option value="categoria">CATEGORIA</option>
-                </select>
-            </div>
-
-            <div class="divfiltros">
-                <span>ORDENAR</span>
-                <select id="ordenar" class="selectfil">
-                    <option value="ASC">ASCENDENTE</option>
-                    <option value="DESC">DESCENDENTE</option>
-                </select>
-            </div>
+        <div class="barraOpciones">
+            <input  id="inputcodigoBarras" type="text" placeholder="BUSCAR">
+            <button class="botonesOpciones">EDITAR</button>
+            <button id="eliminar" class="botonesOpciones">ELIMINAR</button>
+            <button class="botonesOpciones">BUSCAR</button>
+            <button id="finalizar" class="botonesOpciones">FINZALIZAR</button>
         </div>
     </div>
 
@@ -54,10 +38,7 @@
                 <tr>
                     <th>IMAGEN</th>
                     <th>NOMBRE</th>
-                    <th>MARCA</th>
-                    <th>CATEGORIA</th>
-                    <th>PRECIO VENTA</th>
-                    <th>CODIGO</th>
+                    <th>PRECIO COMPRA</th>
                     <th>CANTIDAD</th>
                     <th>TOTAL MONETARIO</th>
                 </tr>
@@ -67,22 +48,7 @@
     </div>
 
     <div id="divUbicacion">
-        <h1 id="ubicacion">General</h1>
-    </div>
-
-
-
-    <div class="barraOpciones">
-
-        <div class="divProductosBaja">
-            <button id="botonProductosBaja" >PRODUCTOS <br> DADOS DE BAJA</button>
-        </div>
-        <div class="botonesCrud">
-            <button id="editar" class="botonesOpcion">EDITAR</button>
-            <button id="descartar" class="botonesOpcion" data-open="modal1">DESCARTAR</button>
-            <button id="nuevo" class="botonesOpcion" onclick="location.href='./nuevoProducto.html'">NUEVO </button>
-            <button id="buscar" class="botonesOpcion">BUSCAR</button>
-        </div>
+        <h1 id="ubicacion">Entradas y Salidas</h1>
     </div>
 
     <div class="modal" id="modal1">
