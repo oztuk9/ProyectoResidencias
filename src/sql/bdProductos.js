@@ -1,5 +1,5 @@
 const { getConnection } = require('../database')
-const storage = require("../UI/local");
+const storage = require("../js/local");
 
 //Notificacion toast con sweetalert2
 const Swal = require('sweetalert2');

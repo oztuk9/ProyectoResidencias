@@ -1,5 +1,4 @@
-const storage = require("./local");
-
+const storage = require('../js/local');
 const bdTabla = require('../sql/bdGestion');
 const tbody = document.getElementById('tbody');
 const openEls = document.querySelectorAll("[data-open]");
@@ -12,9 +11,10 @@ const bBuscar = document.getElementById('buscar');
 const sFiltrarPor = document.getElementById('filtrarPor');
 const sOrdenar = document.getElementById('ordenar');
 const bEditar = document.getElementById('editar');
-
+const bAccederProductosBaja = document.getElementById('botonProductosBaja')
 let arrayDataTable = [];
 let copyArrayDataTable = [];
+let altaBaja = true;
 var idRow = "";
 var positionRows = 1;
 var equals = false;
@@ -62,15 +62,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
     // Your code to run since DOM is loaded and ready
     getDataTable();
     llenarTabla();
-
-
-    console.log(storage.getStorage("idProducto").id)
 });
 
 async function getDataTable() {
     arrayDataTable = [];
     copyArrayDataTable = [];
-    const res = await bdTabla.getDataTable();
+    const res = await bdTabla.getDataTable(altaBaja);
     console.log(res);
     res.forEach(e => {
         arrayDataTable.push(e);
@@ -80,9 +77,10 @@ async function getDataTable() {
 }
 
 async function llenarTabla() {
+    idRow = "";
     positionRows = 1
     tbody.innerHTML = ""; // reset data
-    const res = await bdTabla.getDataTable();
+    const res = await bdTabla.getDataTable(altaBaja);
     copyArrayDataTable.forEach((e) => {
         console.log("entro al for");
         console.log(e);
@@ -193,7 +191,7 @@ bEliminar.addEventListener('click', (e) => {
     inputfill.focus();
 })
 
-//Dar de baja producto
+//Dar de baja y alta producto
 
 bBajaProducto.addEventListener('click', (e) => {
     if (idRow == "") {
@@ -204,20 +202,65 @@ bBajaProducto.addEventListener('click', (e) => {
             width: 450
         })
     } else {
+        altaBaja ?
+            Toast.fire({
+                icon: 'info',
+                title: 'Se dio de baja el producto',
+                background: 'FFFF',
+                width: 450
+            })
+            : Toast.fire({
+                icon: 'info',
+                title: 'Se dio de alta el producto',
+                background: 'FFFF',
+                width: 450
+            });
         var baja = {
-            altaBaja: false
+            altaBaja: !altaBaja
         }
-        const res = bdTabla.bajaProducto(baja, idRow);
+        bdTabla.bajaProducto(baja, idRow);
         getDataTable();
         llenarTabla();
     }
 })
 
+//Cargar productos dados de baja en la pantalla
+
+bAccederProductosBaja.addEventListener('click', (e) => {
+    altaBaja ? altaBaja = false : altaBaja = true;
+    getDataTable();
+    llenarTabla();
+    colorBotonBajaAlta();
+    cambiarColorTitulo();
+    cambiarBotonAltaBaja()
+})
+
+function colorBotonBajaAlta() {
+    altaBaja ? backG = "rgb(27, 81, 97)" : backG = "white";
+    altaBaja ? color = "white" : color = "rgb(27, 81, 97)";
+    bAccederProductosBaja.style.backgroundColor = backG;
+    bAccederProductosBaja.style.color = color;
+}
+
+function cambiarColorTitulo() {
+    ubicacion = document.getElementById('ubicacion')
+    altaBaja ? backG = "#d19d2c" : backG = "rgb(133, 1, 1)";
+    ubicacion.style.backgroundColor = backG;
+    altaBaja ? titulo = "General" : titulo = "Productos Dados de Baja";
+    ubicacion.innerHTML = titulo;
+}
+
+function cambiarBotonAltaBaja(){
+    altaBaja ? texto="DAR DE BAJA TEMPORAL" : texto="DAR DE ALTA";
+    bBajaAlta = document.getElementById('darDeBajaTemporal')
+    bBajaAlta.innerHTML=texto;
+}
+
 //Buscar producto
 async function ordenarPor() {
     var order = sFiltrarPor.value;
     var by = sOrdenar.value;
-    arrayDataTable = (await bdTabla.getDataTableOrder(order, by)).slice();
+    arrayDataTable = (await bdTabla.getDataTableOrder(order, by, altaBaja)).slice();
 }
 
 bBuscar.addEventListener('click', (e) => {

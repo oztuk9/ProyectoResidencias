@@ -5,8 +5,7 @@ const closeEls = document.querySelectorAll("[data-close]");
 const cancelar = document.getElementById('cancelar');
 const isVisible = "is-visible";
 const bdProductos = require('../sql/bdProductos');
-const storage = require('./local');
-bdProductos.cargarDatosMarca();
+const storage = require('../js/local');
 
 
 //Variables de getters
@@ -23,6 +22,7 @@ const descripcion = document.getElementById('descripcion');
 const image = document.getElementById("img");
 
 //Variables contador de elementos en un select
+
 
 
 
@@ -180,11 +180,6 @@ finalizar.addEventListener('click', (e) => {
     ID_Categoria: categoria.value,
     ID_Marca: marca.value,
   }
-
-  let idProducto = {
-    id: storage.getStorage("idProducto").id,
-    editar: false
-}
 
 var id=parseInt(storage.getStorage("idProducto").id)
 
