@@ -33,19 +33,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   editar();
 });
 
-//Toast seetalert2
-const Swal = require('sweetalert2');
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top',
-  showConfirmButton: false,
-  timer: 2500,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
 async function cargarDatosMarca(){
   try {
@@ -85,7 +72,7 @@ window.addEventListener("click",function(e){
 */
 
 //Evento para capturar teclado
-//onkeypress
+//  
 /*function shotgun(){
   Toast.fire({
       icon: 'info',

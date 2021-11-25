@@ -173,13 +173,6 @@ body {
   border: 2px solid rgb(175, 180, 182);
 }
 
-.flecha {
-  position: absolute;
-  width: 25%;
-  height: 85%;
-  left: 0;
-}
-
 /*Tabla de datos*/
 
 .divTabla {
@@ -229,11 +222,11 @@ tr:hover td {
 
 .modal {
   position: absolute;
-  top: 40%;
-  left: 38%;
+  top: 35%;
+  left: 35%;
   display: flex;
-  height: 180px;
-  width: 500px;
+  height: 250px;
+  width: 400px;
   align-items: center;
   justify-content: center;
   padding: 1rem;
@@ -248,13 +241,16 @@ tr:hover td {
 
 /*Componenetes*/
 
+.tituloModa1{
+  margin: 0;
+}
+
 .close-modal {
   position: absolute;
   right: 5px;
   top: 5px;
   width: 30PX;
   height: 30PX;
-  border-radius: 5px;
   border-radius: 15px;
   border: 0;
   background-color: #bb0000;
@@ -276,6 +272,68 @@ tr:hover td {
   transform: scale(1.1);
 }
 
+.modal-content{
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.modal-dialog{
+  width: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 25% 50% 30%;
+}
+
+/*Elementos dentro de la modal*/
+
+.divcantidades{
+  margin: 0;
+  display: grid;
+  grid-template-columns: 35% 50%;
+  margin-bottom: 2%;
+}
+
+.cantidadPrecio{
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.editarPrecioVenta{
+  border-radius: 10px;
+  height: 75%;
+  width: 20%;
+  font-size: 110%;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 4px 5px black;
+}
+
+.editarPrecioVenta:hover{
+  cursor: pointer;
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+.ok{
+  margin: 0 auto;
+  font-size: 160%;
+  margin-top: 1%;
+  width: 50%;
+  height: 70%;
+  border-radius: 15px;
+  border: 0;
+  background-color: #236e25;
+  color: white;
+  box-shadow: -1px 4px 5px black;
+}
+
+.ok:hover{
+  cursor: pointer;
+  background-color: white;
+  color: #236e25;
+}
 /*Fundamental para mostrar y oculpar la modal*/
 
 .modal {

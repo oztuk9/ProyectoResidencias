@@ -51,16 +51,24 @@
         <h1 id="ubicacion">Entradas y Salidas</h1>
     </div>
 
-    <div class="modal" id="modal1">
+    <div class="modal is-visible" id="modal1">
         <button class="close-modal" aria-label="close modal" data-close>X</button>
         <div class="modal-dialog">
             <header class="modal-header">
-                <h1 class="tituloModa1">Elige la opcion de descarte</h1>
+                <h1 class="tituloModa1">Ingrese los Datos</h1>
             </header>
             <section class="modal-content">
-                <button id="darDeBajaTemporal" class="opcionesDescartar">DAR DE BAJA TEMPORAL</button>
-                <button id="eliminar" class="opcionesDescartar" >ELIMINAR</button>
+                <div class="divcantidades">
+                    <span>Piezas: </span> <input id="inputPiezas" class="cantidadPrecio" type="number" placeholder="0">
+                </div>
+                <div class="divcantidades">
+                    <span>Paquetes: </span> <input id="inputPaquetes" class="cantidadPrecio" type="number" placeholder="0">
+                </div>
+                <div>
+                    <span>Precio Compra: </span> <input id="inputPrecioCompra" class="cantidadPrecio" type="number" disabled placeholder="0"> <input id="checkboxEditar" type="checkbox">
+                </div>
             </section>
+            <button id="OK" class="ok">OK</button>
         </div>
     </div>
     <script src="../js/entradas_salidas.js"></script>
