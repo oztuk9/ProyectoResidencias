@@ -10,7 +10,7 @@ async function idProductoEscaneado(idEscaneado){
 //Consultamos el ultimo registro para obtener el precio
 async function ultimoRegistroPrecio(idAlmacen){
     const conn = await getConnection();
-    const result = await conn.query("SELECT precioCompra FROM detalleProductoAlmacen WHERE ID_Almacen=? ORDER BY ID DESC LIMIT 1",idAlmacen);
+    const result = await conn.query("SELECT precioCompra FROM detalleProductoAlmacen WHERE ID_Almacen=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
     return result;
 }
 

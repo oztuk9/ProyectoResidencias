@@ -289,7 +289,7 @@ tr:hover td {
 .divcantidades{
   margin: 0;
   display: grid;
-  grid-template-columns: 35% 50%;
+  grid-template-columns: 34% 50%;
   margin-bottom: 2%;
 }
 
