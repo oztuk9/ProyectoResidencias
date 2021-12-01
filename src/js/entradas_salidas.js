@@ -1,25 +1,39 @@
 const inputcodigoBarras = document.getElementById("inputcodigoBarras");
 const bdEntradasSalidas = require('../sql/bdEntradasSalidas')
 const closeEls = document.querySelectorAll("[data-close]");
+const logicaTabla = require('../js/tablaProductos')
+const tbodySolicitud = document.getElementById('tbodySolicitud');
+const tbody = document.getElementById('tbody');
 
 //inputs
 
 const inputPiezas = document.getElementById('inputPiezas');
 const inputPaquetes = document.getElementById('inputPaquetes');
 const inputPrecioCompra = document.getElementById('inputPrecioCompra');
+const sFiltrarPor = document.getElementById('filtrarPor');
+const sOrdenar = document.getElementById('ordenar');
 
 //botones
 
 const bOk = document.getElementById('OK');
-const editarPrecioVenta = document.getElementsByClassName('editarPrecioVenta')
+const bEliminar = document.getElementById('eliminar')
+const bEditar = document.getElementById('editar')
+const bEditarPrecioVenta = document.getElementsByClassName('editarPrecioVenta')
+const bBuscar = document.getElementById('buscar')
+const buscarProducto = document.getElementById('buscarProducto')
+const bSeleccionar = document.getElementById('seleccionar')
 
 //variables para almacenar datos dinamicos
 let idProducto = "";
 let listaProductosSolicitados = [];
+var piezas = "";
+var paquetes = "";
 var idRow = "";
-var selectedRow="";
+var selectedRow = "";
 var positionRows = 1;
 var equals = false;
+var editar = false;
+let altaBaja = true;
 
 const checkBox = document.getElementById('checkboxEditar');
 checkBox.addEventListener('click', (e) => {
@@ -49,6 +63,10 @@ for (const el of closeEls) {
     el.addEventListener("click", function () {
         console.log(this.parentElement.classList);
         this.parentElement.classList.remove("is-visible");
+        editar = false;
+        inputPiezas.value = "";
+        inputPaquetes.value = "";
+        inputPrecioCompra.value = "";
     });
 }
 
@@ -68,7 +86,7 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
             const precio = await bdEntradasSalidas.ultimoRegistroPrecio(idProducto)
             document.getElementById("modal1").classList.add("is-visible");
             if (precio.length == 0) {
-                editarPrecioVenta.disabled = true;
+                bEditarPrecioVenta.disabled = true;
                 Toast.fire({
                     icon: 'info',
                     title: 'No a tenido entradas este producto',
@@ -90,8 +108,8 @@ bOk.addEventListener('click', (e) => {
 })
 
 function validarEspaciosSolicitud() {
-    const piezas = inputPiezas.value
-    const paquetes = inputPaquetes.value
+    piezas = inputPiezas.value
+    paquetes = inputPaquetes.value
     if ((piezas == "" && paquetes == "") || ((parseInt(piezas)) == 0 && (parseInt(paquetes)) == 0) || (piezas == "" && (parseInt(paquetes)) == 0) || ((parseInt(piezas)) == 0 && paquetes == "")) {
         Toast.fire({
             icon: 'info',
@@ -122,15 +140,16 @@ function validarEspaciosSolicitud() {
                     width: 420
                 })
             } else {
-                agregarSolicitudProductoArray(piezas, paquetes)
+                solicitudProductoArray()
             }
         }
     }
 }
 
-async function agregarSolicitudProductoArray(piezas, paquetes) {
+//obtener datos
+
+async function obtenerCantidadTotal() {
     const result = await bdEntradasSalidas.datosProducto(idProducto);
-    console.log(result);
     if (paquetes == "") {
         paquetes = 0;
     } else {
@@ -139,21 +158,37 @@ async function agregarSolicitudProductoArray(piezas, paquetes) {
     if (piezas == "") {
         piezas = 0;
     }
-    var cantidad = piezas + paquetes;
-    console.log(result);
-    const solicitudProductos = {
-        idProducto: idProducto,
-        imagen: result.at(0).imagen,
-        nombre: result.at(0).nombre,
-        precioCompra: inputPrecioCompra.value,
-        cantidad: cantidad,
-        idAlmacen: idProducto
+    var cantidad = parseInt(piezas) + parseInt(paquetes);
+    return cantidad;
+}
+
+async function solicitudProductoArray() {
+    if (editar == true) {
+        editarProductoLista();
+        inputPiezas.value = "";
+        inputPaquetes.value = "";
+        inputPrecioCompra.value = "";
+        llenarTabla()
+        document.querySelector(".modal.is-visible").classList.remove("is-visible");
+    } else {
+        const result = await bdEntradasSalidas.datosProducto(idProducto);
+        console.log(result);
+        const solicitudProductos = {
+            imagen: result.at(0).imagen,
+            nombre: result.at(0).nombre,
+            precioCompra: inputPrecioCompra.value,
+            piezas : piezas,
+            paquetes : paquetes,
+            cantidad: await obtenerCantidadTotal(),
+            idAlmacen: idProducto
+        }
+        listaProductosSolicitados.push(solicitudProductos)
+        inputPiezas.value = "";
+        inputPaquetes.value = "";
+        inputPrecioCompra.value = "";
+        llenarTabla()
+        document.querySelector(".modal.is-visible").classList.remove("is-visible");
     }
-    listaProductosSolicitados.push(solicitudProductos)
-    inputPiezas.value="";
-    inputPaquetes.value="";
-    inputPrecioCompra.value="";
-    llenarTabla()
 }
 
 //Llenar tabla con los productos solicitados
@@ -161,11 +196,11 @@ async function agregarSolicitudProductoArray(piezas, paquetes) {
 async function llenarTabla() {
     idRow = "";
     positionRows = 1
-    tbody.innerHTML = ""; // reset data
+    tbodySolicitud.innerHTML = ""; // reset data
     listaProductosSolicitados.forEach((e) => {
         console.log("entro al for");
         console.log(e);
-        tbody.innerHTML += `<tr id=${positionRows} value=${e.idProducto}>
+        tbodySolicitud.innerHTML += `<tr id=${positionRows} value=${e.idAlmacen}>
     <td>
         <img class="tbImagen" src="${e.imagen}"/>
     </td>
@@ -190,14 +225,14 @@ async function llenarTabla() {
 
 //Evento para cambiar el color de la tabla cuando se da click sobre una fila al mismo tiempo captura el id del producto
 
-tbody.addEventListener('click', (e) => {
+tbodySolicitud.addEventListener('click', (e) => {
     logicaCambiarColores(e)
 })
 
 function logicaCambiarColores(e) {
     var backG, letras;
     if (idRow != "") {
-        if ((idRow % 2 == 0)) {   
+        if ((idRow % 2 == 0)) {
             backG = "#ddd";
         } else {
             backG = "#fff";
@@ -214,7 +249,7 @@ function logicaCambiarColores(e) {
             letras = "white";
         }
     } else {
-        //e.path en la posicion 1 nos devolvera el id de la fila donde hicimos clic (el ID es el de la base de datos, valor que insertamos en la tabla)
+        //e.path en la posicion 1 nos devolvera el id de la fila donde hicimos clic (el ID es el valor de la fila, valor que insertamos en la tabla)
         selectedRow = (e.path[1].getAttribute("value"))
         idRow = (e.path[1].id)
         backG = "#369681"
@@ -234,3 +269,114 @@ function cambiarColor(backG, letras) {
         equals = false;
     }
 }
+
+bEliminar.addEventListener('click', (e) => {
+    var copiaArray = listaProductosSolicitados.slice();
+    listaProductosSolicitados = [];
+    for (let i = 0; i < copiaArray.length; i++) {
+        if (idRow - 1 == i) {
+            Toast.fire({
+                icon: 'info',
+                title: 'Se elimino el elemento: ' + (i + 1),
+                background: 'FFFF',
+                width: 420
+            })
+        } else {
+            listaProductosSolicitados.push(copiaArray[i])
+        }
+    }
+    llenarTabla();
+})
+
+bEditar.addEventListener('click', (e) => {
+    if (idRow == "") {
+        Toast.fire({
+            icon: 'info',
+            title: 'Seleccione el producto que quiere editar',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
+        editar = true
+        cargarDatosProductoEditar();
+        document.getElementById("modal1").classList.add("is-visible");
+    }
+})
+
+//Cargar datos del producto a editar
+
+function cargarDatosProductoEditar() {
+    for (let i = 0; i < listaProductosSolicitados.length; i++) {
+        if (idRow - 1 == i) {
+            inputPiezas.value = listaProductosSolicitados[i].piezas
+            inputPaquetes.value = listaProductosSolicitados[i].paquetes
+            inputPrecioCompra.value = listaProductosSolicitados[i].precioCompra;
+        }
+    }
+}
+
+//Editar productos en la lista
+
+async function editarProductoLista() {
+    for (let i = 0; i < listaProductosSolicitados.length; i++) {
+        if (idRow - 1 == i) {
+            console.log(listaProductosSolicitados[i]);
+            listaProductosSolicitados[i].precioCompra = inputPrecioCompra.value;
+            listaProductosSolicitados[i].piezas = piezas;
+            listaProductosSolicitados[i].paquetes = paquetes;
+            listaProductosSolicitados[i].cantidad = await obtenerCantidadTotal();
+            Toast.fire({
+                icon: 'info',
+                title: 'Se edito el elemento: ' + (i + 1),
+                background: 'FFFF',
+                width: 420
+            })
+        }
+    }
+    llenarTabla();
+    editar = false;
+}
+
+//Abrir modal
+
+bBuscar.addEventListener('click', (e)=>{
+    logicaTabla.getDataTable(altaBaja);
+    logicaTabla.llenarTabla();
+    document.getElementById("modal2").classList.add("is-visible");
+})
+
+tbody.addEventListener('click', (e) => {
+    logicaTabla.logicaCambiarColores(e)
+})
+
+buscarProducto.addEventListener('click',(e)=>{
+    e.preventDefault();
+    logicaTabla.filtrarTabla(e);
+})
+
+bSeleccionar.addEventListener('click',async(e)=>{
+    if (idRow=="") {
+        Toast.fire({
+            icon: 'info',
+            title: 'Seleccione un producto',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
+        idProducto=idRow
+        const precio = await bdEntradasSalidas.ultimoRegistroPrecio(idProducto)
+        document.querySelector(".modalBuscar.is-visible").classList.remove("is-visible");
+            document.getElementById("modal1").classList.add("is-visible");
+            if (precio.length == 0) {
+                bEditarPrecioVenta.disabled = true;
+                Toast.fire({
+                    icon: 'info',
+                    title: 'No a tenido entradas este producto',
+                    background: 'FFFF',
+                    width: 420
+                })
+            } else {
+                inputPrecioCompra.value = precio.at(0).precioCompra;
+            }
+    }
+})

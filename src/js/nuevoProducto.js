@@ -3,10 +3,26 @@ const finalizar = document.getElementById('finalizar');
 const openEls = document.querySelectorAll("[data-open]");
 const closeEls = document.querySelectorAll("[data-close]");
 const cancelar = document.getElementById('cancelar');
+const inputMarca = document.getElementById('input-new-marca')
+const inputCategoria = document.getElementById('input-new-categoria')
 const isVisible = "is-visible";
 const bdProductos = require('../sql/bdProductos');
 const storage = require('../js/local');
 
+
+//Notificacion toast con sweetalert2
+const Swal = require('sweetalert2');
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 //Variables de getters
 
@@ -34,29 +50,29 @@ document.addEventListener("DOMContentLoaded", (e) => {
 });
 
 
-async function cargarDatosMarca(){
+async function cargarDatosMarca() {
   try {
     const result = await bdProductos.cargarDatosMarca();
     marca.innerHTML = "";
     for (let i = 0; i < result.length; i++) {
-        objeto = document.createElement('option')
-        objeto.value = result[i].id
-        objeto.text = result[i].nombre
-        marca.appendChild(objeto);
+      objeto = document.createElement('option')
+      objeto.value = result[i].id
+      objeto.text = result[i].nombre
+      marca.appendChild(objeto);
     }
   } catch (error) {
   }
 }
 
-async function cargarDatosCategoria(){
+async function cargarDatosCategoria() {
   try {
     const result = await bdProductos.cargarDatosCategoria();
     categoria.innerHTML = "";
     for (let i = 0; i < result.length; i++) {
-        objeto = document.createElement('option')
-        objeto.value = result[i].id
-        objeto.text = result[i].nombre
-        categoria.appendChild(objeto);
+      objeto = document.createElement('option')
+      objeto.value = result[i].id
+      objeto.text = result[i].nombre
+      categoria.appendChild(objeto);
     }
   } catch (error) {
   }
@@ -136,21 +152,40 @@ efecto.onmouseout = function (e) {
 }
 
 button_new_marca.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const newMarcaData = document.getElementById("input-new-marca")
-  const newMarca = {
-    nombre: newMarcaData.value
+  console.log(inputMarca.value);
+  if (inputMarca.value == "") {
+    Toast.fire({
+      icon: 'info',
+      title: 'Escribe el nombre de la marca',
+      background: 'FFFF',
+      width: 420
+    })
+  } else {
+    e.preventDefault();
+    const newMarca = {
+      nombre: inputMarca.value
+    }
+    await bdProductos.insertarMarca(newMarca);
+    cargarDatosMarca();
   }
-  await bdProductos.insertarMarca(newMarca);
 })
 
 button_new_categoria.addEventListener('click', async (e) => {
   e.preventDefault();
-  const newCategoriData = document.getElementById("input-new-categoria")
-  const newCategori = {
-    nombre: newCategoriData.value
+  if (inputCategoria.value = "") {
+    Toast.fire({
+      icon: 'info',
+      title: 'Escribe el nombre de la categoria',
+      background: 'FFFF',
+      width: 420
+    })
+  } else {
+    const newCategori = {
+      nombre: inputCategoria.value
+    }
+    await bdProductos.insertarCategoria(newCategori);
+    cargarDatosCategoria();
   }
-  await bdProductos.insertarCategoria(newCategori);
 })
 
 finalizar.addEventListener('click', (e) => {
@@ -168,35 +203,34 @@ finalizar.addEventListener('click', (e) => {
     ID_Marca: marca.value,
   }
 
-var id=parseInt(storage.getStorage("idProducto").id)
+  var id = parseInt(storage.getStorage("idProducto").id)
 
-  if (storage.getStorage("idProducto").editar==true) {
-    bdProductos.editarProducto(formulario,id);
-  }else{
+  if (storage.getStorage("idProducto").editar == true) {
+    bdProductos.editarProducto(formulario, id);
+  } else {
     bdProductos.insertarProducto(formulario);
     resetForm();
   }
 })
 
-function resetForm(){
-  console.log("Entro al reset form");
-  nombreProducto.value="";
+function resetForm() {
+  nombreProducto.value = "";
   cargarDatosMarca();
   cargarDatosCategoria();
-  precioVenta.value= "";
-  minimo.value= "";
-  maximo.value= "";
-  cantidadPorPaquete.value= "";
-  codigoBarras.value= "";
-  image.src="image/pngwing.com.png";
-  descripcion.value= "";
+  precioVenta.value = "";
+  minimo.value = "";
+  maximo.value = "";
+  cantidadPorPaquete.value = "";
+  codigoBarras.value = "";
+  image.src = "image/pngwing.com.png";
+  descripcion.value = "";
 }
 
 cancelar.addEventListener('click', (e) => {
   let idProducto = {
     id: storage.getStorage("idProducto").id,
     editar: false
-}
+  }
   storage.setStorage("idProducto", idProducto);
   location.href = './gestion.html'
 })
@@ -223,7 +257,7 @@ function addValuesEdit(result) {
       break;
     }
   }
-    //Seleccionamos la marca en el select con base a la categoria que se registro en el producto
+  //Seleccionamos la marca en el select con base a la categoria que se registro en el producto
   var countCategoria = categoria.options;
   for (var opt, j = 0; opt = countCategoria[j]; j++) {
     if (opt.value == result[0].ID_Categoria) {

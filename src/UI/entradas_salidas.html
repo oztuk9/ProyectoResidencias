@@ -24,10 +24,10 @@
         </div>
 
         <div class="barraOpciones">
-            <input  id="inputcodigoBarras" type="text" placeholder="BUSCAR">
-            <button class="botonesOpciones">EDITAR</button>
+            <input  id="inputcodigoBarras" type="text" placeholder="CODIGO">
+            <button id="editar" class="botonesOpciones">EDITAR</button>
             <button id="eliminar" class="botonesOpciones">ELIMINAR</button>
-            <button class="botonesOpciones">BUSCAR</button>
+            <button id="buscar" class="botonesOpciones">BUSCAR</button>
             <button id="finalizar" class="botonesOpciones">FINZALIZAR</button>
         </div>
     </div>
@@ -43,7 +43,7 @@
                     <th>TOTAL MONETARIO</th>
                 </tr>
             </thead>
-            <tbody id="tbody"></tbody>
+            <tbody id="tbodySolicitud"></tbody>
         </table>
     </div>
 
@@ -51,7 +51,7 @@
         <h1 id="ubicacion">Entradas y Salidas</h1>
     </div>
 
-    <div class="modal is-visible" id="modal1">
+    <div class="modal" id="modal1">
         <button class="close-modal" aria-label="close modal" data-close>X</button>
         <div class="modal-dialog">
             <header class="modal-header">
@@ -69,6 +69,54 @@
                 </div>
             </section>
             <button id="OK" class="ok">OK</button>
+        </div>
+    </div>
+    
+    <div class="modalBuscar" id="modal2">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-buscar">
+            <section class="modal-content-buscar">
+            <div>
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>IMAGEN</th>
+                            <th>NOMBRE</th>
+                            <th>MARCA</th>
+                            <th>CATEGORIA</th>
+                            <th>PRECIO VENTA</th>
+                            <th>CODIGO</th>
+                            <th>CANTIDAD</th>
+                            <th>TOTAL MONETARIO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            <div class="gridFiltros">
+                <div class="divfiltros">
+                    <span>FILTRAR POR</span>
+                    <select id="filtrarPor" class="selectfil">
+                        <option value="codigoBarras">CODIGO DE BARRAS</option>
+                        <option value="nombre">NOMBRE</option>
+                        <option value="marca">MARCA</option>
+                        <option value="categoria">CATEGORIA</option>
+                    </select>
+                </div>
+    
+                <div class="divfiltros">
+                    <span>ORDENAR</span>
+                    <select id="ordenar" class="selectfil">
+                        <option value="ASC">ASCENDENTE</option>
+                        <option value="DESC">DESCENDENTE</option>
+                    </select>
+                </div>
+
+                <input type="text" id="inputfill" placeholder="BUSCAR">
+                <button id="buscarProducto" class="botonesBuscar">BUSCAR</button>
+                <button id="seleccionar" class="botonesBuscar">SELECCIONAR</button>
+            </div>
+            </section>
         </div>
     </div>
     <script src="../js/entradas_salidas.js"></script>

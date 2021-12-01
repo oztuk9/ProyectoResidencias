@@ -10,7 +10,7 @@ async function idProductoEscaneado(idEscaneado){
 //Consultamos el ultimo registro para obtener el precio
 async function ultimoRegistroPrecio(idAlmacen){
     const conn = await getConnection();
-    const result = await conn.query("SELECT precioCompra FROM detalleProductoAlmacen WHERE ID_Almacen=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
+    const result = await conn.query("SELECT precioCompra FROM detallePedidoAlmacen WHERE ID_Productos=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
     return result;
 }
 
@@ -25,7 +25,7 @@ async function datosProducto(idProducto){
 
 async function insertarDetalleProductoAlmacen(datos){
     const conn = await getConnection();
-    const result = await conn.query("INSERT INTO detalleProductoAlmacen SET ?",datos);
+    const result = await conn.query("INSERT INTO detallePedidoAlmacen SET ?",datos);
 }
 
 module.exports = {
