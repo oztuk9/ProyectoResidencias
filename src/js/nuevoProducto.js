@@ -172,7 +172,7 @@ button_new_marca.addEventListener('click', async (e) => {
 
 button_new_categoria.addEventListener('click', async (e) => {
   e.preventDefault();
-  if (inputCategoria.value = "") {
+  if (inputCategoria.value == "") {
     Toast.fire({
       icon: 'info',
       title: 'Escribe el nombre de la categoria',

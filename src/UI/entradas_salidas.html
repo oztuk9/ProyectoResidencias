@@ -13,7 +13,7 @@
 
     <div class="sidebar">
         <div class="usuario">
-            <img class="imagenUsuario" src="./image/usuario.png" alt="imagen">
+            <img id="irUsuario" class="imagenUsuario" src="./image/usuario.png" alt="imagen">
             <span id="datosUsuario">Datos del Usuario</span>
         </div>
         <div class="navegacion">    
@@ -116,6 +116,110 @@
                 <button id="buscarProducto" class="botonesBuscar">BUSCAR</button>
                 <button id="seleccionar" class="botonesBuscar">SELECCIONAR</button>
             </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="modalFinalizar" id="modal3">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog">
+            <header class="modal-header">
+                <h1 class="tituloModa1">Ingrese los Datos</h1>
+            </header>
+            <section class="modal-content">
+                <label class="switch">
+                    <input type="checkbox">
+                    <div class="slider round"></div>
+                  </label>
+            </section>
+            <button id="OK" class="ok">OK</button>
+        </div>
+    </div>
+
+    <div class="modalUsuario" id="modal4">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-usuario">
+            <header class="modal-header">
+                <h1 class="tituloModa4">Configuracion Usuario</h1>
+            </header>
+            <section class="modal-content-usuario">
+                <div id="imagen">
+                    <img id="img" src="image/usuario.png" />
+                    <input type="file" id="imagenInput" accept="image/*" />
+                </div>
+            </section>
+            <div class="usuariosEmpleados">
+                <button id="empleados" class="usem">EMPLEADOS</button>
+                <button id="usuarios" class="usem">USUARIOS</button>
+            </div>
+            <div class="divInputUsuario">
+                <input id="nombre"  class="inputUsuario" placeholder="nombre" type="text">
+                <input id="email"  class="inputUsuario" placeholder="email" type="text">
+                <input id="contraseña"  class="inputUsuario" placeholder="contraseña" type="text">
+                <input id="confContraseña"  class="inputUsuario" placeholder="confirmar contraseña" type="text">
+            </div>
+            <div class="botonesCrudUsuario">
+                <button id="guardarCambiosUsuario">GUARDAR</button>
+                <button id="cerrarSesion">CERRAR SESIÓN</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modalEmpleados" id="modal5">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-empleados">
+            <header class="modal-header">
+                <h1 class="tituloModa1">Empleados</h1>
+            </header>
+            <section class="modal-content-empleados">
+                <div class="divArea">
+                    <span>Area</span>
+                    <div class="crud">
+                         <button id="areaAgregar" class="botonesCrud" >AGREGAR</button><input id="agregarInput" class="inputsEmpleado" type="text">
+                    </div>
+                    <div class="crud">
+                        <button id="areaEditar" class="botonesCrud">EDITAR</button> <input id="editarInput" class="inputsEmpleado" type="text"> <select id="editarSelect" class="selectEmpleado"></select>
+                    </div>
+                    <div class="crud">
+                        <button id="areaEliminar" class="botonesCrud">ELIMINAR</button> <select id="eliminarSelect" class="selectEmpleado"></select>
+                    </div>
+                </div>
+                <div class="divEmpleado">
+                    <span>Empleado</span>
+                    <div class="crud">
+                        <button id="empleadoAgregar" class="botonesCrud">AGREGAR</button><input id="agregarInput" class="inputsEmpleado" type="text"> <span>Area:</span> <select id="empleadoAreaSelect" class="selectEmpleado"></select>
+                   </div>
+                   <div class="crud">
+                       <button id="empleadoEditar" class="botonesCrud">EDITAR</button> <input id="editarInput" class="inputsEmpleado" type="text"> <select id="editarSelect" class="selectEmpleado"></select> <select id="empleadoEditarAreaSelect" class="selectEmpleado"></select>
+                   </div>
+                   <div class="crud">
+                       <button id="empleadoEliminar" class="botonesCrud">ELIMINAR</button> <select id="eliminarSelect" class="selectEmpleado"></select>
+                   </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="modalUsuarioEdit" id="modal6">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-usuario-edit">
+            <header class="modal-header">
+                <h1 class="tituloModa1">Configuracion Usuario</h1>
+            </header>
+            <section class="modal-content-usuario-edit">
+                <div class="selectsUsuario">
+                    
+                    <div class="divicionesSelect">
+                        <span>Usuario: </span> <select id="selectUsuario" class="selectsEditUsuario"></select>
+                    </div>
+
+                    <div class="divicionesSelect">
+                     <span> Permisos de: </span> <select id="selectPermisos" class="selectsEditUsuario"></select>
+                    </div>
+
+                </div>
+                <div class="botonesUsuario"><button id="guardarUsuarioEdit" class="botonGE">GUARDAR</button> <button id="eliminarUsuario" class="botonGE">ELIMINAR</button>
+                </div>
             </section>
         </div>
     </div>

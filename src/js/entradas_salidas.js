@@ -1,9 +1,13 @@
 const inputcodigoBarras = document.getElementById("inputcodigoBarras");
-const bdEntradasSalidas = require('../sql/bdEntradasSalidas')
+const bdEntradasSalidas = require('../sql/bdEntradasSalidas');
 const closeEls = document.querySelectorAll("[data-close]");
-const logicaTabla = require('../js/tablaProductos')
+const logicaTabla = require('../js/tablaProductos');
 const tbodySolicitud = document.getElementById('tbodySolicitud');
 const tbody = document.getElementById('tbody');
+const irUsuario = document.getElementById('irUsuario');
+const img = document.getElementById('img')
+const efecto = document.getElementById('imagenInput');
+
 
 //inputs
 
@@ -16,12 +20,15 @@ const sOrdenar = document.getElementById('ordenar');
 //botones
 
 const bOk = document.getElementById('OK');
-const bEliminar = document.getElementById('eliminar')
-const bEditar = document.getElementById('editar')
-const bEditarPrecioVenta = document.getElementsByClassName('editarPrecioVenta')
-const bBuscar = document.getElementById('buscar')
-const buscarProducto = document.getElementById('buscarProducto')
-const bSeleccionar = document.getElementById('seleccionar')
+const bEliminar = document.getElementById('eliminar');
+const bEditar = document.getElementById('editar');
+const bEditarPrecioVenta = document.getElementsByClassName('editarPrecioVenta');
+const bBuscar = document.getElementById('buscar');
+const buscarProducto = document.getElementById('buscarProducto');
+const bSeleccionar = document.getElementById('seleccionar');
+const bFinalzar = document.getElementById('finalizar');
+const bEmpleados = document.getElementById('empleados');
+const bUsuarios = document.getElementById('usuarios');
 
 //variables para almacenar datos dinamicos
 let idProducto = "";
@@ -40,9 +47,6 @@ checkBox.addEventListener('click', (e) => {
     checkBox.checked ? inputPrecioCompra.disabled = false : inputPrecioCompra.disabled = true;
     console.log(checkBox.checked);
 })
-
-
-
 
 //Toast seetalert2
 const Swal = require('sweetalert2');
@@ -68,6 +72,44 @@ for (const el of closeEls) {
         inputPaquetes.value = "";
         inputPrecioCompra.value = "";
     });
+}
+
+//Cargar imagen
+
+const reader = new FileReader();
+const fileInput = document.getElementById("imagenInput");
+reader.onload = e => {
+    img.src = e.target.result;
+}
+fileInput.addEventListener('change', e => {
+    const f = e.target.files[0];
+    reader.readAsDataURL(f);
+})
+
+//  Efecto Imagen 
+
+irUsuario.onmouseover = function (e) {
+    irUsuario.style.transition = '.5s';
+    irUsuario.style.transform = 'scale(1.1)';
+}
+
+irUsuario.onmouseout = function (e) {
+    irUsuario.style.transform = 'scale(1)';
+}
+
+//Usuario
+
+irUsuario.addEventListener('click',(e)=>{
+    document.getElementById("modal4").classList.add("is-visible");
+})
+
+efecto.onmouseover = function (e) {
+    img.style.transition = '.5s';
+    img.style.transform = 'scale(1.1)';
+}
+
+efecto.onmouseout = function (e) {
+    img.style.transform = 'scale(1)';
 }
 
 inputcodigoBarras.addEventListener('keypress', async (e) => {
@@ -100,6 +142,18 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
         inputcodigoBarras.value = "";
     }
 })
+
+//Empleado
+
+bEmpleados.addEventListener('click',(e)=>{
+    document.getElementById("modal5").classList.add("is-visible");
+})
+
+//UsuarioEdit
+bUsuarios.addEventListener('click',(e)=>{
+    document.getElementById("modal6").classList.add("is-visible");
+})
+
 
 //Agregar producto a la solicitud
 
@@ -379,4 +433,10 @@ bSeleccionar.addEventListener('click',async(e)=>{
                 inputPrecioCompra.value = precio.at(0).precioCompra;
             }
     }
+})
+
+//Finalizar solicitud
+
+bFinalzar.addEventListener('click',(e)=>{
+    document.getElementById("modal3").classList.add("is-visible");
 })

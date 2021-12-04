@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    font-family: "Lucida Sans Unicode";
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+}
+
+input{
+    display: inline-block;
+    height: 70%;
+    border-radius: 15px;
+    margin-top: 1%;
+    font-size: 110%;
+    border: 2px solid rgb(175, 180, 182);
+    margin-bottom: 10%;
+}
+
+button{
+    width: 50%;
+    margin: 0 auto;
+    font-size: 110%;
+    border-radius: 15px;
+    border: 0;
+    background-color: rgb(27, 81, 97);
+    color: white;
+    box-shadow: -1px 7px 10px black;
+    transition: 0.7s;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color:white;
+    color:  black;
+    box-shadow: 0px 0px 20px rgb(255, 191, 89);
+}
+
+a{
+    color: white;
+}
+
+h1{
+    margin-top: 4%;
+    text-align: center;
+    color: white;
+}
+
+.imagenIzquierda{
+    position: absolute;
+    left: 0;
+    width: 40%;
+    height: 100%;
+}
+
+.imagenDerecha{
+    position: absolute;
+    right: 0;
+    width: 40%;
+    height: 100%;
+}
+
+.panelPrincipal{
+    position: absolute;
+    display: grid;
+    grid-template-rows: 10% 30% 60%;
+    height: 100%;
+    width: 30%;
+    top: 0;
+    left: 35%;
+    background-image: linear-gradient(to bottom, rgb(255, 191, 89), rgb(100, 24, 24));
+    margin: auto;
+    border-radius: 80px;
+    color: white;
+    font-size: 110%;
+}
+
+#imagen {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 15px;
+  }
+  
+  #img {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 50%;
+    transition: 1.5s ease;
+  }
+  
+  #imagenInput {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: transparent;
+    right: 0%;
+    bottom: 100%;
+    border: none !important;
+    opacity: 0;
+  }
+  
+  #imagenInput:hover{
+    cursor: pointer;
+  }
+
+  #datos{
+      display: grid;
+      grid-template-rows: auto;
+      margin: 0 auto;
+      padding-bottom: 10%;
+      width: 60%;
+  }
+
+  .redirigir{
+      margin: 0 auto;
+  }
+
+  .swal2-actions {
+      width: 30% !important;
+  }

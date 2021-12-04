@@ -70,11 +70,11 @@ body {
   border: 2px solid rgb(175, 180, 182);
 }
 
-#textoCantidad{
+#textoCantidad {
   margin-left: 10%;
 }
 
-#cantidad{
+#cantidad {
   height: 60%;
   width: 80%;
   border-radius: 15px;
@@ -82,9 +82,9 @@ body {
   border: 2px solid rgb(175, 180, 182);
 }
 
-.botonesOpciones{
+.botonesOpciones {
   margin: 0 auto;
-  margin-top:3%;
+  margin-top: 3%;
   height: 75%;
   width: 80%;
   font-size: 130%;
@@ -95,17 +95,17 @@ body {
   box-shadow: -1px 7px 10px black;
   transition: 0.7s;
 }
-.botonesOpciones:hover{
+.botonesOpciones:hover {
   background-color: white;
   color: rgb(27, 81, 97);
   cursor: pointer;
 }
 
-#eliminar{
+#eliminar {
   background-color: rgb(133, 1, 1);
 }
 
-#eliminar:hover{
+#eliminar:hover {
   background-color: white;
   color: rgb(133, 1, 1);
 }
@@ -183,7 +183,9 @@ body {
   top: 48px;
 }
 
-::-webkit-scrollbar {display: none;}
+::-webkit-scrollbar {
+  display: none;
+}
 
 .tabla {
   width: 100%;
@@ -217,6 +219,12 @@ tr:hover td {
   width: 80px;
   height: 80px;
 }
+
+#irUsuario {
+  cursor: pointer;
+}
+
+/*_________________________________________________________________________________________________________*/
 
 /*Modales*/
 
@@ -256,31 +264,493 @@ tr:hover td {
   box-shadow: -1px 7px 10px black;
 }
 
+.modalFinalizar {
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  display: flex;
+  height: 30%;
+  width: 40%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+.modalUsuario {
+  position: absolute;
+  top: 5%;
+  left: 35%;
+  display: flex;
+  height: 75%;
+  width: 25%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  padding-bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+.modalEmpleados {
+  position: absolute;
+  top: 5%;
+  left: 27%;
+  display: flex;
+  height: 65%;
+  width: 40%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+.modalUsuarioEdit {
+  position: absolute;
+  top: 5%;
+  left: 32.5%;
+  display: flex;
+  height: 25%;
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
 
 /*Componenetes*/
 
+/*Componentes modalUsuario*/
+
+#imagen {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 10%;
+  border-radius: 15px;
+}
+
+#img {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50%;
+  transition: 1.5s ease;
+}
+
+#imagenInput {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: transparent;
+  right: 0%;
+  bottom: 100%;
+  border: none !important;
+  border-radius: 15px;
+  opacity: 0;
+}
+
+#imagenInput:hover {
+  cursor: pointer;
+}
+
+.modal-dialog-usuario {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 10% 35% 10% 30% 10%;
+}
+
+.usuariosEmpleados {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.usem {
+  font-size: 100%;
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+.usem:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+.divInputUsuario {
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.inputUsuario {
+  font-size: 100%;
+  margin: auto;
+  height: 50%;
+  width: 60%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.botonesCrudUsuario {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+#guardarCambiosUsuario {
+  font-size: 100%;
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#guardarCambiosUsuario:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+#cerrarSesion {
+  font-size: 100%;
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+#cerrarSesion:hover {
+  background-color: white;
+  color: #bb0000;
+}
+
+/*Componentes modalEmpleado*/
+
+.modal-dialog-empleados {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 15% 85%;
+}
+
+.modal-content-empleados {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50% 50%;
+}
+
+.divArea {
+  padding-bottom: 2%;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  border: 2px solid rgb(175, 180, 182);
+  padding: 2%;
+}
+
+.divEmpleado {
+  padding-top: 2%;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  border: 2px solid rgb(175, 180, 182);
+  padding: 2%;
+}
+
+.crud {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.inputsEmpleado {
+  width: 80%;
+  height: 40%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.selectEmpleado {
+  width: 85%;
+  height: 50%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.botonesCrud {
+  width: 85%;
+  height: 70%;
+  border-radius: 10px;
+  border: 0;
+  box-shadow: -1px 5px 10px black;
+  transition: 0.7s;
+}
+
+#areaAgregar {
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#empleadoAgregar {
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#areaEditar {
+  background-color: rgb(27, 81, 97);
+  color: white;
+  cursor: pointer;
+}
+
+#empleadoEditar {
+  background-color: rgb(27, 81, 97);
+  color: white;
+  cursor: pointer;
+}
+
+#areaEliminar {
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+#empleadoEliminar {
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+#areaAgregar:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+#empleadoAgregar:hover {
+  background-color: white;
+  color: #236e25;
+  cursor: pointer;
+}
+
+#areaEditar:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#empleadoEditar:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#areaEliminar:hover {
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+#empleadoEliminar:hover {
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+/*Componentes modalUsuariosEdit*/
+
+.modal-dialog-usuario-edit {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 30% 70%;
+}
+
+.modal-content-usuario-edit {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50% 50%;
+}
+
+.selectsUsuario {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-right: 10%;
+}
+
+.botonesUsuario {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-top: 5%;
+  padding-right: 5%;
+}
+
+
+.botonGE {
+  margin: auto;
+  width: 70%;
+  height: 100%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 5px 10px black;
+  transition: 0.7s;
+}
+
+#guardarUsuarioEdit{
+  background-color: rgb(27, 81, 97);
+  color: white;
+  cursor: pointer;
+}
+
+#eliminarUsuario{
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+#guardarUsuarioEdit:hover{
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#eliminarUsuario:hover{
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+.selectsEditUsuario {
+  width: 80%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.divicionesSelect{
+  padding-left: 20%;
+}
+
+
+/*Componentes modalFinalizar*/
+
+/* Formateamos el label que servirá de contenedor */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  height: 34px;
+}
+
+/* Ocultamos el checkbox html */
+.switch input {
+  display: none;
+}
+
+/* Formateamos la caja del interruptor sobre la cual se deslizará la perilla de control o slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Pintamos la perilla de control o slider usando el selector before */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Cambiamos el color de fondo cuando el checkbox esta activado */
+input:checked + .slider {
+  background-color: #e27ad8;
+}
+
+/* Deslizamos el slider a la derecha cuando el checkbox esta activado */
+input:checked + .slider:before {
+  -webkit-transform: translateX(365px);
+  -ms-transform: translateX(365px);
+  transform: translateX(365px);
+}
+
+/* Aplicamos efecto de bordes redondeados en slider y en el fondo del slider */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 /*Componentes modalBuscar*/
 
-.modal-dialog-buscar{
+.modal-dialog-buscar {
   width: 100%;
   height: 100%;
 }
 
-.modal-content-buscar{
+.modal-content-buscar {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: 90% auto;
-} 
+}
 
-.gridFiltros{
+.gridFiltros {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20% ;
+  grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
-#inputfill{
+#inputfill {
   margin: auto;
   width: 80%;
   height: 40%;
@@ -288,7 +758,7 @@ tr:hover td {
   border: 2px solid rgb(175, 180, 182);
 }
 
-.botonesBuscar{
+.botonesBuscar {
   font-size: 140%;
   margin: auto;
   width: 80%;
@@ -299,30 +769,30 @@ tr:hover td {
   transition: 0.7s;
 }
 
-#buscarProducto{
+#buscarProducto {
   background-color: rgb(27, 81, 97);
   color: white;
   cursor: pointer;
 }
-#buscarProducto:hover{
+#buscarProducto:hover {
   background-color: white;
   color: rgb(27, 81, 97);
 }
 
-#seleccionar{
+#seleccionar {
   background-color: #236e25;
   color: white;
   cursor: pointer;
 }
 
-#seleccionar:hover{
-  background-color:white;
-  color:  #236e25;
+#seleccionar:hover {
+  background-color: white;
+  color: #236e25;
 }
 
 /*Componentes modal*/
 
-.tituloModa1{
+.tituloModa1 {
   margin: 0;
 }
 
@@ -330,12 +800,12 @@ tr:hover td {
   position: absolute;
   right: 5px;
   top: 5px;
-  width: 30PX;
-  height: 30PX;
+  width: 30px;
+  height: 30px;
   border-radius: 15px;
   border: 0;
   background-color: #bb0000;
-  color:#fff;
+  color: #fff;
 }
 
 .modal-header {
@@ -347,18 +817,18 @@ tr:hover td {
   text-align: center;
 }
 
-.close-modal:hover{
+.close-modal:hover {
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
   transform: scale(1.1);
 }
 
-.modal-content{
+.modal-content {
   display: grid;
   grid-template-rows: auto;
 }
 
-.modal-dialog{
+.modal-dialog {
   width: 90%;
   height: 100%;
   display: grid;
@@ -367,20 +837,20 @@ tr:hover td {
 
 /*Elementos dentro de la modal*/
 
-.divcantidades{
+.divcantidades {
   margin: 0;
   display: grid;
   grid-template-columns: 34% 50%;
   margin-bottom: 2%;
 }
 
-.cantidadPrecio{
+.cantidadPrecio {
   border-radius: 15px;
   margin: auto;
   border: 2px solid rgb(175, 180, 182);
 }
 
-.editarPrecioVenta{
+.editarPrecioVenta {
   border-radius: 10px;
   height: 75%;
   width: 20%;
@@ -391,13 +861,13 @@ tr:hover td {
   box-shadow: -1px 4px 5px black;
 }
 
-.editarPrecioVenta:hover{
+.editarPrecioVenta:hover {
   cursor: pointer;
   background-color: white;
   color: rgb(27, 81, 97);
 }
 
-.ok{
+.ok {
   margin: 0 auto;
   font-size: 160%;
   margin-top: 1%;
@@ -410,13 +880,14 @@ tr:hover td {
   box-shadow: -1px 4px 5px black;
 }
 
-.ok:hover{
+.ok:hover {
   cursor: pointer;
   background-color: white;
   color: #236e25;
 }
 /*Fundamental para mostrar y oculpar la modal*/
 
+/*Ocultar modales*/
 .modal {
   visibility: hidden;
   opacity: 0;
@@ -429,14 +900,57 @@ tr:hover td {
   transition: all 0.35s ease-in;
 }
 
-/*Abrir modal Buscar*/
+.modalFinalizar {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+.modalUsuario {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modalEmpleados {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modalUsuarioEdit {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+/*Mostrar modales*/
+
+.modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
 
 .modalBuscar.is-visible {
   visibility: visible;
   opacity: 1;
 }
 
-.modal.is-visible {
+.modalFinalizar.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalUsuario.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalEmpleados.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalUsuarioEdit.is-visible {
   visibility: visible;
   opacity: 1;
 }
