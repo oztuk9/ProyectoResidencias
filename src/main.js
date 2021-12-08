@@ -15,7 +15,7 @@ function createWindow() {
             enableRemoteModule: true
         }
     })
-    window.loadFile('src/ui/register.html');
+    window.loadFile('src/ui/sesion.html');
 }
 
 function prueba() {

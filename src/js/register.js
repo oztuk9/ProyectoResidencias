@@ -21,6 +21,7 @@ const Toast = Swal.mixin({
     }
 })
 
+
 //Cargar imagen
 
 const reader = new FileReader();
@@ -59,6 +60,7 @@ async function validaciones() {
         })
     } else {
         const usuarioRegistado = await bdUsuarios.verificarNombreRegistrado(nombre.value)
+        console.log(usuarioRegistado);
         if (usuarioRegistado.length == 0) {
             //validacion de email
             const emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
@@ -70,7 +72,8 @@ async function validaciones() {
                         email: email.value,
                         pass: contraseña.value,
                         tipoUsuario: false,
-                        imagen: image.src
+                        imagen: image.src,
+                        bajaUsuario : false,
                     }
                     bdUsuarios.registrarUsuario(usuario);
                 } else {

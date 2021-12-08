@@ -38,12 +38,12 @@ iniciar.addEventListener('click', async (e)=>{
                 width: 420
               })
         }else{
-            let idProducto = {
-                id: idUsuario,
+            let iniciarSesion = {
+                id: idUsuario.at(0).id,
                 sesionIniciada: true
             }
-            storage.setStorage("idUsuario", idProducto)
-            location.href = './gestion.html'
+            storage.setStorage("idUsuario", iniciarSesion)
+            location.href='./gestion.html';
         }
     }
 })
