@@ -154,7 +154,7 @@ body {
   width: 80%;
 }
 
-.botonesCrud {
+.botonesCrudGestor {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
 }

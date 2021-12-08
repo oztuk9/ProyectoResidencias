@@ -48,12 +48,30 @@ for (const el of openEls) {
     });
 }
 
+//Cerrar modal con atributo data-close
 for (const el of closeEls) {
     el.addEventListener("click", function () {
         console.log(this.parentElement.classList);
-        this.parentElement.classList.remove(isVisible);
+        this.parentElement.classList.remove("is-visible");
     });
 }
+
+//  Efecto Imagen 
+
+irUsuario.onmouseover = function (e) {
+    irUsuario.style.transition = '.5s';
+    irUsuario.style.transform = 'scale(1.1)';
+}
+
+irUsuario.onmouseout = function (e) {
+    irUsuario.style.transform = 'scale(1)';
+}
+
+//Usuario
+
+irUsuario.addEventListener('click', (e) => {
+    document.getElementById("modal4").classList.add("is-visible");
+})
 
 
 
