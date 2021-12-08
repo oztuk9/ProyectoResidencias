@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+.tituloModa4{
+  font-size: 180%;
+}
+
 /*Modales*/
 
 .modalUsuario {
