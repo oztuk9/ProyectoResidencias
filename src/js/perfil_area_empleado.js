@@ -321,6 +321,7 @@ async function cargarEmpleado() {
     }
 }
 
+
 bAgregarEmpleado.addEventListener('click', (e) => {
     if (iAgregarInputEmpleado.value == "" || sEmpleadoAreaSelect.value == 0) {
         Toast.fire({
@@ -330,10 +331,9 @@ bAgregarEmpleado.addEventListener('click', (e) => {
             width: 420
         })
     } else {
-        console.log("Area nueva" + sEmpleadoEditarAreaSelect.value);
         var empleado = {
             nombre: iAgregarInputEmpleado.value,
-            ID_Area: parseInt(sEmpleadoEditarAreaSelect.value)
+            ID_Area: parseInt(sEmpleadoAreaSelect.value)
         }
         bdEmpleado.insertarEmpleado(empleado);
         iAgregarInputEmpleado.value = "";

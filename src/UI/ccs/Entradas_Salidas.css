@@ -267,11 +267,11 @@ tr:hover td {
 
 .modalFinalizar {
   position: absolute;
-  top: 30%;
-  left: 35%;
+  top: 25%;
+  left: 30%;
   display: flex;
-  height: 30%;
-  width: 40%;
+  height: 40%;
+  width: 35%;
   align-items: center;
   justify-content: center;
   padding: 2rem;
@@ -286,16 +286,86 @@ tr:hover td {
 
 /*Componenetes*/
 
-
-
 /*Componentes modalFinalizar*/
 
+.tituloModa3{
+  margin-top: 0;
+}
+
+.modal-dialog-finalizar{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 20% 50% 30%;
+  align-items: center;
+}
+
+.modal-content-finalizar{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 40% 30% 30%;
+}
+
+/*letras Entrada Salida*/
+
+.divLetras{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.letras{
+  font-size: 150%;
+  font-weight: bold
+}
+
+#letrasEntrada{
+  text-align: left;
+}
+
+#letrasSalida{
+  text-align: right;
+}
+
+#finalizarSolicitud{
+  height: 60%;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 0;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#finalizarSolicitud:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+
 /* Formateamos el label que servirá de contenedor */
+
+.divCheckBox{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .switch {
   position: relative;
   display: inline-block;
-  width: 400px;
+  width: 350px;
   height: 34px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Ocultamos el checkbox html */
@@ -311,7 +381,7 @@ tr:hover td {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #236e25;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -331,14 +401,14 @@ tr:hover td {
 
 /* Cambiamos el color de fondo cuando el checkbox esta activado */
 input:checked + .slider {
-  background-color: #e27ad8;
+  background-color: #bb0000;
 }
 
 /* Deslizamos el slider a la derecha cuando el checkbox esta activado */
 input:checked + .slider:before {
-  -webkit-transform: translateX(365px);
-  -ms-transform: translateX(365px);
-  transform: translateX(365px);
+  -webkit-transform: translateX(315px);
+  -ms-transform: translateX(315px);
+  transform: translateX(315px);
 }
 
 /* Aplicamos efecto de bordes redondeados en slider y en el fondo del slider */
@@ -348,6 +418,28 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/*Select empleado*/
+
+.divEmpleadoSolicitud{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  align-content: center;
+}
+
+#letraEmpleado{
+  font-size: 130%; 
+}
+
+#empleadoSolicitud{
+  margin: 0 auto;
+  width: 70%;
+  border-radius: 15px;
+  margin-right: 25%;
 }
 
 /*Componentes modalBuscar*/
@@ -417,18 +509,6 @@ input:checked + .slider:before {
   margin: 0;
 }
 
-.close-modal {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  border: 0;
-  background-color: #bb0000;
-  color: #fff;
-}
-
 .modal-header {
   position: relative;
   align-items: center;
@@ -436,12 +516,6 @@ input:checked + .slider:before {
   height: 50;
   width: 400;
   text-align: center;
-}
-
-.close-modal:hover {
-  cursor: pointer;
-  transition: 0.5s;
-  transform: scale(1.1);
 }
 
 .modal-content {

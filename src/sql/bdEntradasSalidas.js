@@ -16,7 +16,7 @@ async function idProductoEscaneado(idEscaneado){
 async function ultimoRegistroPrecio(idAlmacen){
     try {
         const conn = await getConnection();
-        const result = await conn.query("SELECT precioCompra FROM detallePedidoAlmacen WHERE ID_Productos=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
+        const result = await conn.query("SELECT precioCompra FROM detallePedidoAlmacen WHERE ID_Producto=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
         return result;
     } catch (error) {
         console.log(error);
@@ -36,19 +36,69 @@ async function datosProducto(idProducto){
 
 }
 
-//Insertar en la tabla DetalleProductoAlmacen
+//Pedido Almacen
 
-async function insertarDetalleProductoAlmacen(datos){
+async function insertarPedidoAlmacen(datos){
     try {
         const conn = await getConnection();
-        const result = await conn.query("INSERT INTO detallePedidoAlmacen SET ?",datos);
+        const result = await conn.query("INSERT INTO pedidoAlmacen SET ?",datos);
     } catch (error) {
         console.log(error);   
     }
 }
-    
+
+//Insertar en la tabla DetallePedidoAlmacen
+
+async function insertarDetallePedidoAlmacen(datos){
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("INSERT INTO detallepedidoAlmacen SET ?",datos);
+    } catch (error) {
+        console.log(error);   
+    }
+}
+
+//Consultar el ultimo pedidoAlmacen
+
+async function obtenerUltimoIdPedidoAlmacen(){
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("SELECT id FROM pedidoAlmacen ORDER BY id DESC LIMIT 1");
+        return result;
+    } catch (error) {
+        console.log(error);   
+    }
+}
+
+/*Obtener la cantidad de producto en almacen*/
+async function cantidadAlmacen(id){
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("SELECT cantidad FROM almacen WHERE ID_Productos = ?", id);
+        return result;
+    } catch (error) {
+        console.log(error);   
+    }
+}
+
+//Acualizar la cantidad de productos almacenados
+
+async function actualizarAlmacen(update,id){
+    try {
+        const conn = getConnection();
+        const result = (await conn).query("UPDATE almacen SET ? WHERE ID_Productos = ?",[update,id])
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     idProductoEscaneado,
     ultimoRegistroPrecio,
-    datosProducto
+    datosProducto,
+    insertarPedidoAlmacen,
+    insertarDetallePedidoAlmacen,
+    obtenerUltimoIdPedidoAlmacen,
+    cantidadAlmacen,
+    actualizarAlmacen
 }

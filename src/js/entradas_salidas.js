@@ -4,6 +4,9 @@ const closeEls = document.querySelectorAll("[data-close]");
 const logicaTabla = require('../js/tablaProductos');
 const tbodySolicitud = document.getElementById('tbodySolicitud');
 const tbody = document.getElementById('tbody');
+
+//muchas de las variables no se usan en este script pero otro script si las usa, como local storage que se usa desde perfil_area_empleado, esto se hizo asi con la dinalidad de no tener problemas con variables duplicadas o variables en otro script que no quedan bien tenerlas ahí.
+
 const storage = require("../js/local");
 
 
@@ -14,6 +17,8 @@ const inputPaquetes = document.getElementById('inputPaquetes');
 const inputPrecioCompra = document.getElementById('inputPrecioCompra');
 const sFiltrarPor = document.getElementById('filtrarPor');
 const sOrdenar = document.getElementById('ordenar');
+const checkBoxEntradaSalida = document.getElementById('checkBoxEntradaSalida');
+const checkboxEditar = document.getElementById('checkboxEditar');
 
 //botones
 
@@ -25,10 +30,15 @@ const bBuscar = document.getElementById('buscar');
 const buscarProducto = document.getElementById('buscarProducto');
 const bSeleccionar = document.getElementById('seleccionar');
 const bFinalzar = document.getElementById('finalizar');
+const bfinalizarSolicitud = document.getElementById('finalizarSolicitud');
+
+//Selects
+
+const sEmpleadoSolicitud = document.getElementById('empleadoSolicitud')
 
 //variables para almacenar datos dinamicos
-let idProducto = "";
-let listaProductosSolicitados = [];
+var idProducto = "";
+var listaProductosSolicitados = [];
 var piezas = "";
 var paquetes = "";
 var idRow = "";
@@ -36,13 +46,13 @@ var selectedRow = "";
 var positionRows = 1;
 var equals = false;
 var editar = false;
-let altaBaja = true;
+var altaBaja = true;
+var checkInOut = true;
 
 
 const checkBox = document.getElementById('checkboxEditar');
 checkBox.addEventListener('click', (e) => {
     checkBox.checked ? inputPrecioCompra.disabled = false : inputPrecioCompra.disabled = true;
-    console.log(checkBox.checked);
 })
 
 //Toast seetalert2
@@ -62,12 +72,13 @@ const Toast = Swal.mixin({
 //Cerrar modal con atributo data-close
 for (const el of closeEls) {
     el.addEventListener("click", function () {
-        console.log(this.parentElement.classList);
         this.parentElement.classList.remove("is-visible");
         editar = false;
         inputPiezas.value = "";
         inputPaquetes.value = "";
         inputPrecioCompra.value = "";
+        inputPrecioCompra.disabled=true;
+        checkboxEditar.checked=false;
     });
 }
 
@@ -125,7 +136,9 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
 //Agregar producto a la solicitud
 
 bOk.addEventListener('click', (e) => {
-    validarEspaciosSolicitud()
+    validarEspaciosSolicitud();
+    inputPrecioCompra.disabled=true;
+    checkboxEditar.checked=false;
 })
 
 function validarEspaciosSolicitud() {
@@ -174,7 +187,7 @@ async function obtenerCantidadTotal() {
     if (paquetes == "") {
         paquetes = 0;
     } else {
-        paquetes = paquetes * parseInt(result.at(0).cantidadPorPaquete);
+        paquetes = parseInt(paquetes) * parseInt(result.at(0).cantidadPorPaquete);
     }
     if (piezas == "") {
         piezas = 0;
@@ -193,15 +206,14 @@ async function solicitudProductoArray() {
         document.querySelector(".modal.is-visible").classList.remove("is-visible");
     } else {
         const result = await bdEntradasSalidas.datosProducto(idProducto);
-        console.log(result);
         const solicitudProductos = {
             imagen: result.at(0).imagen,
             nombre: result.at(0).nombre,
             precioCompra: inputPrecioCompra.value,
-            piezas: piezas,
-            paquetes: paquetes,
+            piezas: parseInt(piezas),
+            paquetes: parseInt(paquetes),
             cantidad: await obtenerCantidadTotal(),
-            idAlmacen: idProducto
+            idProducto: idProducto
         }
         listaProductosSolicitados.push(solicitudProductos)
         inputPiezas.value = "";
@@ -219,8 +231,7 @@ async function llenarTabla() {
     positionRows = 1
     tbodySolicitud.innerHTML = ""; // reset data
     listaProductosSolicitados.forEach((e) => {
-        console.log("entro al for");
-        console.log(e);
+
         tbodySolicitud.innerHTML += `<tr id=${positionRows} value=${e.idAlmacen}>
     <td>
         <img class="tbImagen" src="${e.imagen}"/>
@@ -238,7 +249,6 @@ async function llenarTabla() {
     ${totalMonetario = (parseFloat(e.cantidad)) * (parseFloat(e.precioCompra))}
     </td>
     </tr>`;
-        console.log(positionRows);
         positionRows++;
 
     });
@@ -277,7 +287,6 @@ function logicaCambiarColores(e) {
         letras = "white";
     }
     cambiarColor(backG, letras)
-    console.log(selectedRow);
 }
 
 function cambiarColor(backG, letras) {
@@ -341,7 +350,6 @@ function cargarDatosProductoEditar() {
 async function editarProductoLista() {
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
         if (idRow - 1 == i) {
-            console.log(listaProductosSolicitados[i]);
             listaProductosSolicitados[i].precioCompra = inputPrecioCompra.value;
             listaProductosSolicitados[i].piezas = piezas;
             listaProductosSolicitados[i].paquetes = paquetes;
@@ -405,5 +413,165 @@ bSeleccionar.addEventListener('click', async (e) => {
 //Finalizar solicitud
 
 bFinalzar.addEventListener('click', (e) => {
-    document.getElementById("modal3").classList.add("is-visible");
+    if (listaProductosSolicitados.length==0) {
+        Toast.fire({
+            icon: 'info',
+            title: 'No hay ningun producto en la solicitud',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
+        cargarEmpleadoSolicitud()
+        document.getElementById("modal3").classList.add("is-visible");
+    }
 })
+
+//Cambiar color de las letras cuando cambie el checkBox
+
+checkBoxEntradaSalida.addEventListener('change', (e) => {
+    let letrasSalida = document.getElementById('letrasSalida');
+    let letrasEntrada = document.getElementById('letrasEntrada');
+    if (checkInOut == true) {
+        letrasSalida.style.color = "#bb0000";
+        letrasEntrada.style.color = "black";
+    } else {
+        letrasEntrada.style.color = "#236e25";
+        letrasSalida.style.color = "black";
+    }
+    checkInOut ? checkInOut = false : checkInOut = true;
+})
+
+//llenar select empleado en la finalizacion de pedido
+
+async function cargarEmpleadoSolicitud(){
+    try {
+        const result = await bdEmpleado.mostrarEmpleados();
+        sEmpleadoSolicitud.innerHTML = "";
+        objeto = document.createElement('option')
+        objeto.value = 0
+        objeto.text = ""
+        sEmpleadoSolicitud.appendChild(objeto);
+        for (let i = 0; i < result.length; i++) {
+            objeto = document.createElement('option')
+            objeto.value = result[i].id
+            objeto.text = result[i].nombre
+            sEmpleadoSolicitud.appendChild(objeto);
+        }
+    } catch (error) {
+    }
+}
+
+//Finalizar solicitud
+
+bfinalizarSolicitud.addEventListener('click',(e)=>{
+    if (sEmpleadoSolicitud.value==0) {
+        Toast.fire({
+            icon: 'info',
+            title: 'Seleccione quien pide la solicitud',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
+        if (checkBoxEntradaSalida.checked) {
+            validacionSolicitudSalida();
+        }else{
+            pedidoAlmacen();
+            detallePedidoAlmacen();
+        }
+        document.querySelector(".modalFinalizar.is-visible").classList.remove("is-visible");
+    }
+})
+
+//Ingresar pedido en la base de datos
+
+function pedidoAlmacen(){
+    let totalDinero=0;
+    for (let i = 0; i < listaProductosSolicitados.length; i++) {
+        totalDinero = listaProductosSolicitados[i].totalMonetario = (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra))+totalDinero;
+    }
+    let pedidoAlmacen = {
+        tipo : checkInOut,
+        totalDinero : totalDinero,
+        ID_Usuario : ID_Usuario,
+        ID_Trabajador : sEmpleadoSolicitud.value
+    }    
+    bdEntradasSalidas.insertarPedidoAlmacen(pedidoAlmacen);
+}
+
+async function detallePedidoAlmacen(){
+    let idAlmacen = await bdEntradasSalidas.obtenerUltimoIdPedidoAlmacen();
+    for (let i = 0; i < listaProductosSolicitados.length; i++) {
+        let detallePedidoAlmacen = {
+            cantidad : listaProductosSolicitados[i].cantidad,
+            precioCompra : listaProductosSolicitados[i].precioCompra,
+            total : (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra)),
+            ID_PedidoAlmacen : parseInt(idAlmacen[0].id),
+            ID_Producto : listaProductosSolicitados[i].idProducto
+        }
+
+//Operacion para modificar la cantidad en almacen
+
+        var cantidadSolicitada = listaProductosSolicitados[i].cantidad;
+        var cantidadAlmacen = await bdEntradasSalidas.cantidadAlmacen(parseInt(listaProductosSolicitados[i].idProducto));
+        var cantidadFinal = 0;
+        console.log(cantidadAlmacen);
+        if (checkBoxEntradaSalida.checked){
+            cantidadFinal = parseInt(cantidadAlmacen.at(0).cantidad) - parseInt(cantidadSolicitada);
+        }else{
+            cantidadFinal = parseInt(cantidadAlmacen.at(0).cantidad) + parseInt(cantidadSolicitada);
+        }
+        console.log(listaProductosSolicitados[i].nombre+": "+cantidadFinal);
+        var actualizarAlmacen = {
+            cantidad : cantidadFinal
+        }
+        console.log(cantidadAlmacen.at(0).cantidad);
+        console.log(cantidadSolicitada);
+        bdEntradasSalidas.actualizarAlmacen(actualizarAlmacen,listaProductosSolicitados[i].idProducto);
+        bdEntradasSalidas.insertarDetallePedidoAlmacen(detallePedidoAlmacen);
+    }
+    listaProductosSolicitados=[];
+    llenarTabla();
+    Toast.fire({
+        icon: 'success',
+        title: 'Se a realizado la solicitud con exito',
+        background: 'FFFF',
+        width: 420
+    })
+}
+
+
+//Comprobar que el producto solicitado en caso de ser SALIDA no sea mayor a la cantidad existente en el almacen
+async function validacionSolicitudSalida(){
+    console.log("Entro a la funcion validar Salida");
+    cantidadSuperior=false
+    var productosExeden = "";
+    for (let i = 0; i < listaProductosSolicitados.length; i++) {
+        var idProducto = listaProductosSolicitados[i].idProducto;
+        var cantidadAlmacen = await bdEntradasSalidas.cantidadAlmacen(idProducto);
+        console.log("ID producto");
+        console.log("Cantidad solicitada: "+listaProductosSolicitados[i].cantidad);
+        console.log("Cantidad almacenada: "+cantidadAlmacen.at(0).cantidad);
+
+        if ((parseInt(listaProductosSolicitados[i].cantidad))>(parseInt(cantidadAlmacen.at(0).cantidad))) {
+            cantidadSuperior = true
+            if (i==0) {
+                productosExeden = listaProductosSolicitados[i].nombre; 
+            }else{
+                productosExeden = productosExeden+ ", "+listaProductosSolicitados[i].nombre;
+            }
+        }
+    }
+
+    if (cantidadSuperior==false) {
+        pedidoAlmacen();
+        detallePedidoAlmacen();
+    }else{
+        Toast.fire({
+            icon: 'error',
+            title: 'Algunos de los productos que desea solicitar exceden la cantiad de existencias en almacen. \nLos productos son:'+productosExeden,
+            background: 'FFFF',
+            width: 600,
+            timer: 6000,
+        })
+    }
+}

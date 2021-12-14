@@ -4,9 +4,9 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Gestion</title>
+    <title>Stock</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" type="text/css" href="ccs/General.css">
+    <link rel="stylesheet" type="text/css" href="ccs/stock.css">
     <link rel="stylesheet" type="text/css" href="ccs/perfil_area_empleado.css">
 </head>
 
@@ -17,9 +17,9 @@
             <img id="irUsuario" class="imagenUsuario" src="./image/usuario.png" alt="imagen">
             <span id="datosUsuario">Datos del Usuario</span>
         </div>
-        <div class="navegacion">
+        <div class="navegacion">    
             <button id="caja" class="botonesNav">Caja</button>
-            <button id="stock" class="botonesNav" onclick="location.href = './stock.html'">Stock</button>
+            <button id="gestion" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
             <button id="entradas_salidas" class="botonesNav" onclick="location.href = './entradas_salidas.html'" >Entradas <br> /Salidas</button>
             <button id="historial" class="botonesNav">Historial</button>
         </div>
@@ -45,7 +45,10 @@
                     <option value="DESC">DESCENDENTE</option>
                 </select>
             </div>
+
+            <button>Buscar</button>
         </div>
+        <button>REPORTE</button>
     </div>
 
     <div class="divTabla">
@@ -54,48 +57,17 @@
                 <tr>
                     <th>IMAGEN</th>
                     <th>NOMBRE</th>
-                    <th>MARCA</th>
-                    <th>CATEGORIA</th>
-                    <th>PRECIO VENTA</th>
-                    <th>CODIGO</th>
-                    <th>ALMACEN</th>
+                    <th>PRECIO COMPRA</th>
+                    <th>CANTIDAD</th>
                     <th>TOTAL MONETARIO</th>
                 </tr>
             </thead>
-            <tbody id="tbody"></tbody>
+            <tbody id="tbodySolicitud"></tbody>
         </table>
     </div>
 
     <div id="divUbicacion">
-        <h1 id="ubicacion">Gestion</h1>
-    </div>
-
-
-
-    <div class="barraOpciones">
-
-        <div class="divProductosBaja">
-            <button id="botonProductosBaja" >PRODUCTOS <br> DADOS DE BAJA</button>
-        </div>
-        <div class="botonesCrudGestor">
-            <button id="editar" class="botonesOpcion">EDITAR</button>
-            <button id="descartar" class="botonesOpcion" data-open="modal1">DESCARTAR</button>
-            <button id="nuevo" class="botonesOpcion" onclick="location.href='./nuevoProducto.html'">NUEVO </button>
-            <button id="buscar" class="botonesOpcion">BUSCAR</button>
-        </div>
-    </div>
-
-    <div class="modal" id="modal1">
-        <button class="close-modal" aria-label="close modal" data-close>X</button>
-        <div class="modal-dialog">
-            <header class="modal-header">
-                <h1 class="tituloModa1">Elige la opcion de descarte</h1>
-            </header>
-            <section class="modal-content">
-                <button id="darDeBajaTemporal" class="opcionesDescartar">DAR DE BAJA TEMPORAL</button>
-                <button id="eliminar" class="opcionesDescartar" >ELIMINAR</button>
-            </section>
-        </div>
+        <h1 id="ubicacion">Stock</h1>
     </div>
 
     <div class="modalUsuario" id="modal4">
@@ -186,8 +158,7 @@
             </section>
         </div>
     </div>
-    <script src="../js/gestion.js"></script>
+    <script src="../js/stock.js"></script>
     <script src="../js/perfil_area_empleado.js"></script>
 </body>
-
 </html>

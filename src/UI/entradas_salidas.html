@@ -19,7 +19,7 @@
         </div>
         <div class="navegacion">    
             <button id="caja" class="botonesNav">Caja</button>
-            <button id="stock" class="botonesNav">Stock</button>
+            <button id="stock" class="botonesNav" onclick="location.href = './stock.html'">Stock</button>
             <button id="entradas_salidas" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
             <button id="historial" class="botonesNav">Historial</button>
         </div>
@@ -87,7 +87,7 @@
                             <th>CATEGORIA</th>
                             <th>PRECIO VENTA</th>
                             <th>CODIGO</th>
-                            <th>CANTIDAD</th>
+                            <th>ALMACEN</th>
                             <th>TOTAL MONETARIO</th>
                         </tr>
                     </thead>
@@ -123,17 +123,26 @@
 
     <div class="modalFinalizar" id="modal3">
         <button class="close-modal" aria-label="close modal" data-close>X</button>
-        <div class="modal-dialog">
+        <div class="modal-dialog-finalizar">
             <header class="modal-header">
-                <h1 class="tituloModa1">Ingrese los Datos</h1>
+                <h1 class="tituloModa3">Ingrese los Datos</h1>
             </header>
-            <section class="modal-content">
-                <label class="switch">
-                    <input type="checkbox">
-                    <div class="slider round"></div>
-                  </label>
+            <section class="modal-content-finalizar">
+                <div class="divLetras">
+                    <span id="letrasEntrada" class="letras">ENTRADA</span><span id="letrasSalida" class="letras">SALIDA</span>
+                </div>
+                <div class="divCheckBox">
+                    <label class="switch">
+                        <input id="checkBoxEntradaSalida" type="checkbox">
+                        <div class="slider round"></div>
+                      </label>
+                </div>
+                <div class="divEmpleadoSolicitud">
+                    <span id="letraEmpleado">Solicitante:</span> <select id="empleadoSolicitud"></select>
+                </div>
+                
             </section>
-            <button id="OK" class="ok">OK</button>
+            <button id="finalizarSolicitud">Finalizar Solicitud</button>
         </div>
     </div>
 
