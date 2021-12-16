@@ -105,12 +105,11 @@ async function ordenarPor() {
 
 //filtros
 
-function filtrarTabla(e){
+function filtrarTabla(){
     cadenaBusqueda = inputfill.value;
     copyArrayDataTable = [];
-
-
     arrayDataTable.forEach(e => {
+
         if (sFiltrarPor.value == "codigoBarras") {
             if ((e.codigo.indexOf(cadenaBusqueda)) != -1) {
                 console.log("Se encontro una palabra");

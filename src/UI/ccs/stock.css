@@ -1,86 +1,140 @@
 * {
-    font-family: "Lucida Sans Unicode";
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #divUbicacion {
-    width: 85%;
-    position: absolute;
-    border-bottom: solid 5px #0f362d;
-  }
-  
-  #ubicacion {
-    text-align: center;
-    margin: 0;
-    background-color: #d19d2c;
-    color: #fff;
-  }
-  
-  .sidebar {
-    position: absolute;
-    width: 15%;
-    height: 100%;
-    right: 0;
-    background-color: #ddd;
-    display: grid;
-    grid-template-rows: 25% 35% 30% 10%;
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  
-  /*Divs del navbar*/
-  
-  .usuario {
-    display: grid;
-    grid-template-rows: 75% 25%;
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  .navegacion {
-    display: grid;
-    grid-template-rows: 25% 25% 25% 25%;
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  .filtros {
-    display: grid;
-    grid-template-rows: 25% 27.5% 27.5% 20%;
-    padding: 0%;
-    margin: 0;
-  }
-   
-  .tituloSidebar {
-    margin: 0;
-  }
-  
-  /*grid usuario*/
-  
-  .imagenUsuario {
-    display: block;
-    margin: auto;
-    width: 110px;
-    height: 110px;
-    margin-top: 5%;
-  }
-  
-  #datosUsuario {
-    margin: auto;
-  }
-  
-  /*botones de navegacion */
-  
-  .botonesNav {
-    margin: auto;
+  font-family: "Lucida Sans Unicode";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#divUbicacion {
+  width: 85%;
+  position: absolute;
+  border-bottom: solid 5px #0f362d;
+}
+
+#ubicacion {
+  text-align: center;
+  margin: 0;
+  background-color: #d19d2c;
+  color: #fff;
+}
+
+.sidebar {
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  right: 0;
+  background-color: #ddd;
+  display: grid;
+  grid-template-rows: 25% 35% 30% 10%;
+  padding: 0%;
+  margin: 0%;
+}
+
+/*Divs del navbar*/
+
+.usuario {
+  display: grid;
+  grid-template-rows: 75% 25%;
+  padding: 0%;
+  margin: 0%;
+}
+
+.navegacion {
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  padding: 0%;
+  margin: 0%;
+}
+
+.filtros {
+  display: grid;
+  grid-template-rows: 25% 27.5% 27.5% 20%;
+  padding: 0%;
+  margin: 0;
+}
+
+.tituloSidebar {
+  margin: 0;
+}
+
+/*grid usuario*/
+
+.imagenUsuario {
+  display: block;
+  margin: auto;
+  width: 110px;
+  height: 110px;
+  margin-top: 5%;
+}
+
+#datosUsuario {
+  margin: auto;
+}
+
+/*botones de navegacion */
+
+.botonesNav {
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  text-align: center;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+.botonesNav:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+  cursor: pointer;
+}
+
+#caja {
+  background-color: rgb(105, 0, 105);
+  color: white;
+}
+
+#caja:hover {
+  background-color: white;
+  color: rgb(105, 0, 105);
+}
+
+#entradas_salidas {
+  height: 100%;
+  font-size: 120%;
+}
+
+/*Filtros*/
+.divfiltros {
+  margin: 0 auto;
+  width: 80%;
+}
+
+#inputfill {
+  height: 40%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.selectfil {
+  height: 40%;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#buscar{
     width: 80%;
-    height: 70%;
-    text-align: center;
+    height: 90%;
+    margin: 0 auto;
     font-size: 150%;
     border-radius: 15px;
     border: 0;
@@ -88,104 +142,90 @@
     color: white;
     box-shadow: -1px 7px 10px black;
     transition: 0.7s;
-  }
-  
-  .botonesNav:hover {
+    cursor: pointer;
+}
+
+#buscar:hover{
     background-color: white;
     color: rgb(27, 81, 97);
-    cursor: pointer;
-  }
-  
-  #caja {
-    background-color: rgb(105, 0, 105);
-    color: white;
-  }
-  
-  #caja:hover {
-    background-color: white;
-    color: rgb(105, 0, 105);
-  }
-  
-  #entradas_salidas {
-    height: 100%;
-    font-size: 120%;
-  }
-  
-  /*Filtros*/
-  .divfiltros {
-    margin: 0 auto;
-    width: 80%;
-  }
-  
-  #inputfill {
-    height: 40%;
-    width: 80%;
-    border-radius: 15px;
-    margin: auto;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  .selectfil {
-    height: 40%;
-    width: 100%;
-    border-radius: 15px;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  .flecha {
-    position: absolute;
-    width: 25%;
-    height: 85%;
-    left: 0;
-  }
+}
 
-  /*Tabla de datos*/
+/*Tabla de datos*/
 
 .divTabla {
-    overflow: scroll;
-    position: absolute;
-    width: 85%;
-    height: 93%;
-    top: 48px;
-  }
-  
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .tabla {
-    width: 100%;
+  overflow: scroll;
+  position: absolute;
+  width: 85%;
+  height: 93%;
+  top: 48px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.tabla {
+  width: 100%;
+  background-color: white;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+thead {
+  background-color: #369681;
+  border-bottom: solid 5px #0f362d;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tr:hover td {
+  background-color: #369681;
+  color: white;
+  cursor: pointer;
+}
+
+.tbImagen {
+  width: 80px;
+  height: 80px;
+}
+
+#irUsuario {
+  cursor: pointer;
+}
+
+/*div reporte*/
+
+.divReporte {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#reporte {
+  width: 80%;
+  height: 80%;
+  font-size: 150%;
+  margin: 0 auto;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#reporte:hover{
     background-color: white;
-    text-align: left;
-    border-collapse: collapse;
-  }
-  
-  th,
-  td {
-    padding: 10px;
-  }
-  
-  thead {
-    background-color: #369681;
-    border-bottom: solid 5px #0f362d;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #ddd;
-  }
-  
-  tr:hover td {
-    background-color: #369681;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .tbImagen {
-    width: 80px;
-    height: 80px;
-  }
-  
-  #irUsuario {
-    cursor: pointer;
-  }
+    color: #236e25;
+}

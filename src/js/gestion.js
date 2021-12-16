@@ -18,7 +18,6 @@ let copyArrayDataTable = [];
 let altaBaja = true;
 var idRow = "";
 var positionRows = 1;
-var equals = false;
 
 //Focus al input de los filtros al iniciar la pagina
 

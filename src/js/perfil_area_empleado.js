@@ -49,6 +49,7 @@ let idEmpleado;
 let idArea;
 let UsuarioLogeado;
 let ID_Usuario;
+var equals = false;
 
 //Cargar usuarios en select
 

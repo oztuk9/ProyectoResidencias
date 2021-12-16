@@ -44,7 +44,6 @@ var paquetes = "";
 var idRow = "";
 var selectedRow = "";
 var positionRows = 1;
-var equals = false;
 var editar = false;
 var altaBaja = true;
 var checkInOut = true;
