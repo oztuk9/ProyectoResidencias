@@ -19,6 +19,7 @@ const obtenerListaDeImpresoras = () => {
     ConectorPlugin.obtenerImpresoras()
         .then(listaDeImpresoras => {
             loguear("Lista cargada");
+            $listaDeImpresoras.innerHTML = "";
             listaDeImpresoras.forEach(nombreImpresora => {
                 const option = document.createElement('option');
                 option.value = option.text = nombreImpresora;
