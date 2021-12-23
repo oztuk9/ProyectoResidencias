@@ -76,10 +76,11 @@
 
         <div class="divProductosBaja">
             <button id="botonProductosBaja" >PRODUCTOS <br> DADOS DE BAJA</button>
+            <button id="impresora" >IMPRESORA</button>
         </div>
         <div class="botonesCrudGestor">
-            <button id="editar" class="botonesOpcion">EDITAR</button>
             <button id="descartar" class="botonesOpcion" data-open="modal1">DESCARTAR</button>
+            <button id="editar" class="botonesOpcion">EDITAR</button>
             <button id="nuevo" class="botonesOpcion" onclick="location.href='./nuevoProducto.html'">NUEVO </button>
             <button id="buscar" class="botonesOpcion">BUSCAR</button>
         </div>
@@ -186,6 +187,27 @@
             </section>
         </div>
     </div>
+
+    <div class="modalConfigurarImpresora" id="modal7">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-usuario-configurar-impresora">
+            <header class="modal-header-impresora">
+                <h1 class="tituloModaImpresora">Configuracion Impresora</h1>
+            </header>
+            <section class="modal-content-usuario-configurar-impresora">
+                    <div class="Buscar-impresora">
+                            <select id="listaDeImpresoras"></select>
+                            <button id="btnImprimir">Probar</button>
+                    </div>
+                    <div class="statusImpresora">
+                        <button id="btnLimpiarLog">Limpiar log</button>
+                        <textarea  id="estado"></textarea>
+                    </div>
+            </section>
+        </div>
+    </div>
+    <script src="../js/Impresora.js"></script>
+    <script src="../js/pruebaImprimir.js"></script>
     <script src="../js/gestion.js"></script>
     <script src="../js/perfil_area_empleado.js"></script>
 </body>

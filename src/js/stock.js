@@ -13,6 +13,7 @@ const inputfill = document.getElementById('inputfill');
 //botones
 
 const bBuscar = document.getElementById('buscar')
+const bReporte = document.getElementById('reporte')
 
 //selects
 const sFiltrarPor = document.getElementById('filtrarPor');
@@ -22,6 +23,17 @@ const storage = require("../js/local");
 
 let arrayStock = [];
 let copiaArrayStock = [];
+let palabraMoldeada = "";
+let nuevaRuta = "";
+
+//Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
+for (let i = 0; i < __dirname.length; i++) {
+    if (__dirname.charAt(i) == "\\") {
+        nuevaRuta = nuevaRuta + "\\"
+    }
+    nuevaRuta = nuevaRuta + __dirname.charAt(i)
+}
+console.log(nuevaRuta);
 
 document.addEventListener("DOMContentLoaded", (e) => {
     // Your code to run since DOM is loaded and ready
@@ -122,18 +134,18 @@ irUsuario.addEventListener('click', (e) => {
     document.getElementById("modal4").classList.add("is-visible");
 })
 
-bBuscar.addEventListener('click',(e)=>{
+bBuscar.addEventListener('click', (e) => {
     filtrarTabla();
 })
 
 //obtener productos stock
 
-async function obtenerDatosStock(){
-   let datosStock = await bdStock.getDataTable();
-   datosStock.forEach(e => {
-       arrayStock.push(e)
-       copiaArrayStock.push(e)
-   });
+async function obtenerDatosStock() {
+    let datosStock = await bdStock.getDataTable();
+    datosStock.forEach(e => {
+        arrayStock.push(e)
+        copiaArrayStock.push(e)
+    });
 }
 
 async function llenarTablaStock() {
@@ -176,10 +188,10 @@ async function llenarTablaStock() {
 async function ordenarPor() {
     var order = sFiltrarPor.value;
     var by = sOrdenar.value;
-    arrayStock = (await bdStock.getDataTableOrder(order,by)).slice();
+    arrayStock = (await bdStock.getDataTableOrder(order, by)).slice();
 }
 
-async function filtrarTabla(){
+async function filtrarTabla() {
     cadenaBusqueda = inputfill.value;
     copiaArrayStock = [];
     arrayStock.forEach(e => {
@@ -218,4 +230,115 @@ async function filtrarTabla(){
     ordenarPor();
     llenarTablaStock();
     inputfill.focus();
+}
+
+bReporte.addEventListener('click', async () => {
+    //la impresora puede imprimir 48 caracteres en un renglon antes de hacer salto de linea
+    let lineaDivisora = "================================================\n";
+    let nombreRestaurant = "El Mitote";
+    let calle = "Calle Gobernador Medina Ascencio 556 Centro, 47180 Arandas, Jalisco";
+    let telefono = "3487832388"
+    let encabezadoTabla = "Producto        Marca       Alm   Min   Max   "
+    console.log(lineaDivisora);
+    console.log(encabezadoTabla);
+
+    const conector = new ConectorPlugin()
+        .cortar()
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .imagenLocal(nuevaRuta + "\\image\\El mitote Logotipo redimencionada.jpg")
+        .texto("================================================\n")
+        .texto(nombreRestaurant + "\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .textoConAcentos("Ubicación: " + calle + "\n")
+        .texto("Telefono: " + telefono + "\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .feed(2)
+        .texto("================================================\n")
+        .texto("STOCK\n")
+        .texto("================================================\n")
+        .texto(encabezadoTabla + "\n")
+        .texto("================================================\n")
+
+    copiaArrayStock.forEach(e => {
+        let rowProducto = ""
+        agregarEspacios(e.nombre, "Producto")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(e.marca, "Marca")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(e.cantidad, "Almacen")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(e.minimo, "Min")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(e.maximo, "Max")
+        rowProducto = rowProducto + palabraMoldeada;
+        console.log(rowProducto);
+        conector
+            .establecerTamanioFuente(1, 1)
+            .textoConAcentos(rowProducto + "\n")
+    });
+    conector
+        .texto("================================================\n")
+        .feed(1)
+        .establecerTamanioFuente(1, 1)
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .qrComoImagen("https://www.facebook.com/ElMitoteArandas")
+        .abrirCajon()
+        .cortar();
+    if (localStorage.getItem("impresora") === null) {
+        Toast.fire({
+            icon: 'info',
+            title: 'No se a configurado correctamente la impresora',
+            background: 'FFFF',
+            width: 420
+          })
+    } else {
+        if ((storage.getStorage("impresora").estado) == true) {
+            let nombreImpresora = storage.getStorage("impresora").nombre
+            console.log(nombreImpresora);
+            const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
+        }else{
+            Toast.fire({
+                icon: 'info',
+                title: 'No se a configurado correctamente la impresora',
+                background: 'FFFF',
+                width: 420
+              })
+        }
+    }
+})
+
+function agregarEspacios(palabra, tipoPalabra) {
+    palabraMoldeada = "";
+    palabra = palabra + "";
+    let sizeLetra;
+    switch (tipoPalabra) {
+        case 'Producto':
+            sizeLetra = 16;
+            break;
+        case 'Marca':
+            sizeLetra = 12;
+            break;
+        case 'Almacen':
+            sizeLetra = 6;
+            break;
+        case 'Min':
+            sizeLetra = 6;
+            break;
+        case 'Max':
+            sizeLetra = 6;
+            break;
+    }
+
+    if (palabra.length < sizeLetra) {
+        contador = sizeLetra - palabra.length;
+        for (let i = 0; i < contador; i++) {
+            palabra = palabra + " ";
+        }
+        palabraMoldeada = palabra
+    } else if (palabra.length >= sizeLetra) {
+        for (let i = 0; i < sizeLetra - 1; i++) {
+            palabraMoldeada = palabraMoldeada + palabra.charAt(i)
+        }
+        palabraMoldeada = palabraMoldeada + " ";
+    }
 }

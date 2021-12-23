@@ -147,11 +147,13 @@ body {
   bottom: 0;
   background-color: #ddd;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 35% 65%;
 }
 
 .divProductosBaja {
-  width: 80%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 .botonesCrudGestor {
@@ -199,7 +201,7 @@ body {
 }
 
 #botonProductosBaja {
-  width: 65%;
+  width: 85%;
   height: 60%;
   margin-top: 6%;
   margin-left: 6%;
@@ -214,6 +216,25 @@ body {
 }
 
 #botonProductosBaja:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#impresora{
+  width: 65%;
+  height: 60%;
+  margin-top: 6%;
+  border-radius: 15px;
+  font-size: 120%;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  border: 0;
+  cursor: pointer;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+#impresora:hover {
   background-color: white;
   color: rgb(27, 81, 97);
 }
@@ -283,6 +304,23 @@ tr:hover td {
   box-shadow: -1px 7px 10px black;
 }
 
+.modalConfigurarImpresora {
+  position: absolute;
+  display: block;
+  top: 25%;
+  left: 30%;
+  height: 40%;
+  width: 35%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
 
 /*Componenetes*/
 
@@ -352,7 +390,75 @@ tr:hover td {
   font-size: 130%;
 }
 
+/*Componentes modal impresora*/
+
+.modal-content-usuario-configurar-impresora{
+  height: 100%;
+  display: grid;
+  grid-template-rows: 30% 70%;
+}
+
+.tituloModaImpresora{
+  text-align: center;
+}
+
+
+#listaDeImpresoras{
+  height: 70%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#btnImprimir{
+  height: 70%;
+  width: 20%;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btnImprimir:hover{
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+.statusImpresora{
+  margin-top: 5%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 20% 80%;
+}
+
+#btnLimpiarLog{
+  height: 150%;
+  width: 30%;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btnLimpiarLog:hover{
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#estado{
+  margin-top: 5%;
+  height: 100%;
+  border-radius: 15px;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
 /*Fundamental para mostrar y oculpar la modal*/
+
+/*Ocultar modales*/
 
 .modal {
   visibility: hidden;
@@ -360,7 +466,21 @@ tr:hover td {
   transition: all 0.35s ease-in;
 }
 
+.modalConfigurarImpresora {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+
+/*Mostrar modales*/
+
 .modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalConfigurarImpresora.is-visible {
   visibility: visible;
   opacity: 1;
 }

@@ -13,6 +13,7 @@ const sFiltrarPor = document.getElementById('filtrarPor');
 const sOrdenar = document.getElementById('ordenar');
 const bEditar = document.getElementById('editar');
 const bAccederProductosBaja = document.getElementById('botonProductosBaja')
+const bImpresora = document.getElementById('impresora')
 let arrayDataTable = [];
 let copyArrayDataTable = [];
 let altaBaja = true;
@@ -196,4 +197,9 @@ bEditar.addEventListener('click', e => {
         storage.setStorage("idProducto", idProducto)
         location.href = './nuevoProducto.html';
     }
+})
+
+bImpresora.addEventListener('click',()=>{
+    document.getElementById("modal7").classList.add("is-visible");
+    obtenerListaDeImpresoras();
 })
