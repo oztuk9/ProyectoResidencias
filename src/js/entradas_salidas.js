@@ -76,8 +76,8 @@ for (const el of closeEls) {
         inputPiezas.value = "";
         inputPaquetes.value = "";
         inputPrecioCompra.value = "";
-        inputPrecioCompra.disabled=true;
-        checkboxEditar.checked=false;
+        inputPrecioCompra.disabled = true;
+        checkboxEditar.checked = false;
     });
 }
 
@@ -111,7 +111,7 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
                 background: 'FFFF',
                 width: 420
             })
-        } else {
+        } else if (consultaIdProducto.at(0).AltaBaja != false) {
             idProducto = consultaIdProducto.at(0).ID;
             const precio = await bdEntradasSalidas.ultimoRegistroPrecio(idProducto)
             document.getElementById("modal1").classList.add("is-visible");
@@ -126,6 +126,13 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
             } else {
                 inputPrecioCompra.value = precio.at(0).precioCompra;
             }
+        } else {
+            Toast.fire({
+                icon: 'info',
+                title: 'El prudcto esta dado de baja',
+                background: 'FFFF',
+                width: 420
+            })
         }
         inputcodigoBarras.value = "";
     }
@@ -136,8 +143,8 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
 
 bOk.addEventListener('click', (e) => {
     validarEspaciosSolicitud();
-    inputPrecioCompra.disabled=true;
-    checkboxEditar.checked=false;
+    inputPrecioCompra.disabled = true;
+    checkboxEditar.checked = false;
 })
 
 function validarEspaciosSolicitud() {
@@ -412,14 +419,14 @@ bSeleccionar.addEventListener('click', async (e) => {
 //Finalizar solicitud
 
 bFinalzar.addEventListener('click', (e) => {
-    if (listaProductosSolicitados.length==0) {
+    if (listaProductosSolicitados.length == 0) {
         Toast.fire({
             icon: 'info',
             title: 'No hay ningun producto en la solicitud',
             background: 'FFFF',
             width: 420
         })
-    }else{
+    } else {
         cargarEmpleadoSolicitud()
         document.getElementById("modal3").classList.add("is-visible");
     }
@@ -442,7 +449,7 @@ checkBoxEntradaSalida.addEventListener('change', (e) => {
 
 //llenar select empleado en la finalizacion de pedido
 
-async function cargarEmpleadoSolicitud(){
+async function cargarEmpleadoSolicitud() {
     try {
         const result = await bdEmpleado.mostrarEmpleados();
         sEmpleadoSolicitud.innerHTML = "";
@@ -462,18 +469,18 @@ async function cargarEmpleadoSolicitud(){
 
 //Finalizar solicitud
 
-bfinalizarSolicitud.addEventListener('click',(e)=>{
-    if (sEmpleadoSolicitud.value==0) {
+bfinalizarSolicitud.addEventListener('click', (e) => {
+    if (sEmpleadoSolicitud.value == 0) {
         Toast.fire({
             icon: 'info',
             title: 'Seleccione quien pide la solicitud',
             background: 'FFFF',
             width: 420
         })
-    }else{
+    } else {
         if (checkBoxEntradaSalida.checked) {
             validacionSolicitudSalida();
-        }else{
+        } else {
             pedidoAlmacen();
             detallePedidoAlmacen();
         }
@@ -483,52 +490,52 @@ bfinalizarSolicitud.addEventListener('click',(e)=>{
 
 //Ingresar pedido en la base de datos
 
-function pedidoAlmacen(){
-    let totalDinero=0;
+function pedidoAlmacen() {
+    let totalDinero = 0;
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
-        totalDinero = listaProductosSolicitados[i].totalMonetario = (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra))+totalDinero;
+        totalDinero = listaProductosSolicitados[i].totalMonetario = (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra)) + totalDinero;
     }
     let pedidoAlmacen = {
-        tipo : checkInOut,
-        totalDinero : totalDinero,
-        ID_Usuario : ID_Usuario,
-        ID_Trabajador : sEmpleadoSolicitud.value
-    }    
+        tipo: checkInOut,
+        totalDinero: totalDinero,
+        ID_Usuario: ID_Usuario,
+        ID_Trabajador: sEmpleadoSolicitud.value
+    }
     bdEntradasSalidas.insertarPedidoAlmacen(pedidoAlmacen);
 }
 
-async function detallePedidoAlmacen(){
+async function detallePedidoAlmacen() {
     let idAlmacen = await bdEntradasSalidas.obtenerUltimoIdPedidoAlmacen();
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
         let detallePedidoAlmacen = {
-            cantidad : listaProductosSolicitados[i].cantidad,
-            precioCompra : listaProductosSolicitados[i].precioCompra,
-            total : (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra)),
-            ID_PedidoAlmacen : parseInt(idAlmacen[0].id),
-            ID_Producto : listaProductosSolicitados[i].idProducto
+            cantidad: listaProductosSolicitados[i].cantidad,
+            precioCompra: listaProductosSolicitados[i].precioCompra,
+            total: (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra)),
+            ID_PedidoAlmacen: parseInt(idAlmacen[0].id),
+            ID_Producto: listaProductosSolicitados[i].idProducto
         }
 
-//Operacion para modificar la cantidad en almacen
+        //Operacion para modificar la cantidad en almacen
 
         var cantidadSolicitada = listaProductosSolicitados[i].cantidad;
         var cantidadAlmacen = await bdEntradasSalidas.cantidadAlmacen(parseInt(listaProductosSolicitados[i].idProducto));
         var cantidadFinal = 0;
         console.log(cantidadAlmacen);
-        if (checkBoxEntradaSalida.checked){
+        if (checkBoxEntradaSalida.checked) {
             cantidadFinal = parseInt(cantidadAlmacen.at(0).cantidad) - parseInt(cantidadSolicitada);
-        }else{
+        } else {
             cantidadFinal = parseInt(cantidadAlmacen.at(0).cantidad) + parseInt(cantidadSolicitada);
         }
-        console.log(listaProductosSolicitados[i].nombre+": "+cantidadFinal);
+        console.log(listaProductosSolicitados[i].nombre + ": " + cantidadFinal);
         var actualizarAlmacen = {
-            cantidad : cantidadFinal
+            cantidad: cantidadFinal
         }
         console.log(cantidadAlmacen.at(0).cantidad);
         console.log(cantidadSolicitada);
-        bdEntradasSalidas.actualizarAlmacen(actualizarAlmacen,listaProductosSolicitados[i].idProducto);
+        bdEntradasSalidas.actualizarAlmacen(actualizarAlmacen, listaProductosSolicitados[i].idProducto);
         bdEntradasSalidas.insertarDetallePedidoAlmacen(detallePedidoAlmacen);
     }
-    listaProductosSolicitados=[];
+    listaProductosSolicitados = [];
     llenarTabla();
     Toast.fire({
         icon: 'success',
@@ -540,34 +547,34 @@ async function detallePedidoAlmacen(){
 
 
 //Comprobar que el producto solicitado en caso de ser SALIDA no sea mayor a la cantidad existente en el almacen
-async function validacionSolicitudSalida(){
+async function validacionSolicitudSalida() {
     console.log("Entro a la funcion validar Salida");
-    cantidadSuperior=false
+    cantidadSuperior = false
     var productosExeden = "";
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
         var idProducto = listaProductosSolicitados[i].idProducto;
         var cantidadAlmacen = await bdEntradasSalidas.cantidadAlmacen(idProducto);
         console.log("ID producto");
-        console.log("Cantidad solicitada: "+listaProductosSolicitados[i].cantidad);
-        console.log("Cantidad almacenada: "+cantidadAlmacen.at(0).cantidad);
+        console.log("Cantidad solicitada: " + listaProductosSolicitados[i].cantidad);
+        console.log("Cantidad almacenada: " + cantidadAlmacen.at(0).cantidad);
 
-        if ((parseInt(listaProductosSolicitados[i].cantidad))>(parseInt(cantidadAlmacen.at(0).cantidad))) {
+        if ((parseInt(listaProductosSolicitados[i].cantidad)) > (parseInt(cantidadAlmacen.at(0).cantidad))) {
             cantidadSuperior = true
-            if (i==0) {
-                productosExeden = listaProductosSolicitados[i].nombre; 
-            }else{
-                productosExeden = productosExeden+ ", "+listaProductosSolicitados[i].nombre;
+            if (i == 0) {
+                productosExeden = listaProductosSolicitados[i].nombre;
+            } else {
+                productosExeden = productosExeden + ", " + listaProductosSolicitados[i].nombre;
             }
         }
     }
 
-    if (cantidadSuperior==false) {
+    if (cantidadSuperior == false) {
         pedidoAlmacen();
         detallePedidoAlmacen();
-    }else{
+    } else {
         Toast.fire({
             icon: 'error',
-            title: 'Algunos de los productos que desea solicitar exceden la cantiad de existencias en almacen. \nLos productos son:'+productosExeden,
+            title: 'Algunos de los productos que desea solicitar exceden la cantiad de existencias en almacen. \nLos productos son:' + productosExeden,
             background: 'FFFF',
             width: 600,
             timer: 6000,

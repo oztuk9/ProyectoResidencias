@@ -4,7 +4,7 @@ const { getConnection } = require('../database')
 async function idProductoEscaneado(idEscaneado){
     try {
         const conn = await getConnection();
-        const result = await conn.query("SELECT ID FROM productos WHERE CodigoBarras = ?",idEscaneado);
+        const result = await conn.query("SELECT ID, AltaBaja FROM productos WHERE CodigoBarras = ?",idEscaneado);
         return result;
     } catch (error) {
         console.log(error);

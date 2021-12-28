@@ -18,10 +18,10 @@
             <span id="datosUsuario">Datos del Usuario</span>
         </div>
         <div class="navegacion">    
-            <button id="caja" class="botonesNav">Caja</button>
             <button id="stock" class="botonesNav" onclick="location.href = './stock.html'">Stock</button>
-            <button id="entradas_salidas" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
+            <button id="entradas_salidas" class="botonesNav" onclick="location.href = './entradas_salidas.html'" >Entradas <br> /Salidas</button>
             <button id="historial" class="botonesNav">Historial</button>
+            <button id="gestion" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
         </div>
 
         <div class="barraOpciones">
@@ -34,15 +34,24 @@
     </div>
 
     <div class="barraCobrar">
-
-        <div class="divProductosBaja">
-            <button id="botonProductosBaja" >PRODUCTOS <br> DADOS DE BAJA</button>
+        <div class="divBtnEfectivo">
+            <button id="500" class="btnEfectivo">$500</button>
+            <button id="200" class="btnEfectivo">$200</button>
+            <button id="100" class="btnEfectivo">$100</button>
+            <button id="50" class="btnEfectivo">$50</button>
+            <button id="20" class="btnEfectivo">$20</button>
         </div>
-        <div class="botonesCrudGestor">
-            <button id="editar" class="botonesOpcion">EDITAR</button>
-            <button id="descartar" class="botonesOpcion" data-open="modal1">DESCARTAR</button>
-            <button id="nuevo" class="botonesOpcion" onclick="location.href='./nuevoProducto.html'">NUEVO </button>
-            <button id="buscar" class="botonesOpcion">BUSCAR</button>
+        <div class="divEfectivo">
+            <span class="letraEfectivo">EFECTIVO:</span>
+            <input type="text" id="inputEfectivo">
+        </div>
+        <div class="divTextoMonetario">
+            <span class="textoMonetario">TOTAL:</span>
+            <span class="textoMonetario">EFECTIVO:</span>
+            <span class="textoMonetario">CAMBIO:</span>
+        </div>
+        <div class="divCobrar">
+            <button id="btnCobrar">COBRAR</button>
         </div>
     </div>
 
@@ -52,7 +61,7 @@
                 <tr>
                     <th>IMAGEN</th>
                     <th>NOMBRE</th>
-                    <th>PRECIO COMPRA</th>
+                    <th>PRECIO</th>
                     <th>CANTIDAD</th>
                     <th>TOTAL MONETARIO</th>
                 </tr>
@@ -63,27 +72,6 @@
 
     <div id="divUbicacion">
         <h1 id="ubicacion">Caja</h1>
-    </div>
-
-    <div class="modal" id="modal1">
-        <button class="close-modal" aria-label="close modal" data-close>X</button>
-        <div class="modal-dialog">
-            <header class="modal-header">
-                <h1 class="tituloModa1">Ingrese los Datos</h1>
-            </header>
-            <section class="modal-content">
-                <div class="divcantidades">
-                    <span>Piezas: </span> <input id="inputPiezas" class="cantidadPrecio" type="number" placeholder="0">
-                </div>
-                <div class="divcantidades">
-                    <span>Paquetes: </span> <input id="inputPaquetes" class="cantidadPrecio" type="number" placeholder="0">
-                </div>
-                <div>
-                    <span>Precio Compra: </span> <input id="inputPrecioCompra" class="cantidadPrecio" type="number" disabled placeholder="0"> <input id="checkboxEditar" type="checkbox">
-                </div>
-            </section>
-            <button id="OK" class="ok">OK</button>
-        </div>
     </div>
     
     <div class="modalBuscar" id="modal2">
@@ -131,31 +119,6 @@
                 <button id="seleccionar" class="botonesBuscar">SELECCIONAR</button>
             </div>
             </section>
-        </div>
-    </div>
-
-    <div class="modalFinalizar" id="modal3">
-        <button class="close-modal" aria-label="close modal" data-close>X</button>
-        <div class="modal-dialog-finalizar">
-            <header class="modal-header">
-                <h1 class="tituloModa3">Ingrese los Datos</h1>
-            </header>
-            <section class="modal-content-finalizar">
-                <div class="divLetras">
-                    <span id="letrasEntrada" class="letras">ENTRADA</span><span id="letrasSalida" class="letras">SALIDA</span>
-                </div>
-                <div class="divCheckBox">
-                    <label class="switch">
-                        <input id="checkBoxEntradaSalida" type="checkbox">
-                        <div class="slider round"></div>
-                      </label>
-                </div>
-                <div class="divEmpleadoSolicitud">
-                    <span id="letraEmpleado">Solicitante:</span> <select id="empleadoSolicitud"></select>
-                </div>
-                
-            </section>
-            <button id="finalizarSolicitud">Finalizar Solicitud</button>
         </div>
     </div>
 

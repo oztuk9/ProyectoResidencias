@@ -12,25 +12,22 @@ const storage = require("../js/local");
 
 //inputs
 
-const inputPiezas = document.getElementById('inputPiezas');
-const inputPaquetes = document.getElementById('inputPaquetes');
-const inputPrecioCompra = document.getElementById('inputPrecioCompra');
 const sFiltrarPor = document.getElementById('filtrarPor');
 const sOrdenar = document.getElementById('ordenar');
-const checkBoxEntradaSalida = document.getElementById('checkBoxEntradaSalida');
-const checkboxEditar = document.getElementById('checkboxEditar');
+const inputEfectivo = document.getElementById('inputEfectivo');
 
 //botones
 
 const bOk = document.getElementById('OK');
 const bEliminar = document.getElementById('eliminar');
-const bEditar = document.getElementById('editar');
-const bEditarPrecioVenta = document.getElementsByClassName('editarPrecioVenta');
 const bBuscar = document.getElementById('buscar');
 const buscarProducto = document.getElementById('buscarProducto');
 const bSeleccionar = document.getElementById('seleccionar');
-const bFinalzar = document.getElementById('finalizar');
-const bfinalizarSolicitud = document.getElementById('finalizarSolicitud');
+const b500 = document.getElementById('500')
+const b200 = document.getElementById('200')
+const b100 = document.getElementById('100')
+const b50 = document.getElementById('50')
+const b20 = document.getElementById('20')
 
 //Selects
 
@@ -44,15 +41,8 @@ var paquetes = "";
 var idRow = "";
 var selectedRow = "";
 var positionRows = 1;
-var editar = false;
 var altaBaja = true;
 var checkInOut = true;
-
-
-const checkBox = document.getElementById('checkboxEditar');
-checkBox.addEventListener('click', (e) => {
-    checkBox.checked ? inputPrecioCompra.disabled = false : inputPrecioCompra.disabled = true;
-})
 
 //Toast seetalert2
 const Swal = require('sweetalert2');
@@ -72,12 +62,6 @@ const Toast = Swal.mixin({
 for (const el of closeEls) {
     el.addEventListener("click", function () {
         this.parentElement.classList.remove("is-visible");
-        editar = false;
-        inputPiezas.value = "";
-        inputPaquetes.value = "";
-        inputPrecioCompra.value = "";
-        inputPrecioCompra.disabled=true;
-        checkboxEditar.checked=false;
     });
 }
 
@@ -114,7 +98,6 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
         } else {
             idProducto = consultaIdProducto.at(0).ID;
             const precio = await bdEntradasSalidas.ultimoRegistroPrecio(idProducto)
-            document.getElementById("modal1").classList.add("is-visible");
             if (precio.length == 0) {
                 bEditarPrecioVenta.disabled = true;
                 Toast.fire({
@@ -526,3 +509,25 @@ async function validacionSolicitudSalida(){
         })
     }
 }
+
+//Colocar efectivo con botones
+
+b500.addEventListener('click',()=>{
+    inputEfectivo.value="500";
+})
+
+b200.addEventListener('click',()=>{
+    inputEfectivo.value="200";
+})
+
+b100.addEventListener('click',()=>{
+    inputEfectivo.value="100";
+})
+
+b50.addEventListener('click',()=>{
+    inputEfectivo.value="50";
+})
+
+b20.addEventListener('click',()=>{
+    inputEfectivo.value="20";
+})

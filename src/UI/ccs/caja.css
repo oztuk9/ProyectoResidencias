@@ -1,651 +1,551 @@
 * {
-    font-family: "Lucida Sans Unicode";
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #divUbicacion {
-    width: 85%;
-    position: absolute;
-    border-bottom: solid 5px #0f362d;
-  }
-  
-  #ubicacion {
-    text-align: center;
-    margin: 0;
-    background-color: #d19d2c;
-    color: #fff;
-  }
-  
-  .sidebar {
-    position: absolute;
-    width: 15%;
-    height: 87%;
-    right: 0;
-    background-color: #ddd;
-    display: grid;
-    grid-template-rows: 25% 35% 40%;
-    padding: 0%;
-    margin: 0%;
-  }
+  font-family: "Lucida Sans Unicode";
+}
 
-  .barraCobrar {
-    position: absolute;
-    width: 100%;
-    height: 13%;
-    bottom: 0;
-    background-color: #ddd;
-    display: grid;
-    grid-template-columns: 30% 70%;
-  }
-  
-  /*Divs del navbar*/
-  
-  .usuario {
-    display: grid;
-    grid-template-rows: 75% 25%;
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  .navegacion {
-    display: grid;
-    grid-template-rows: 25% 25% 25% 25%;
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  /*Opciones*/
-  
-  .barraOpciones {
-    display: grid;
-    grid-template-rows: 15% 15% 35% 35% ;
-    padding: 0%;
-    margin: 0;
-  }
-  
-  .divfiltros {
-    margin: 0 auto;
-    width: 80%;
-  }
+body {
+  margin: 0;
+  padding: 0;
+}
 
-  .cantidadProductos{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 6%;
-    margin-left: 6%;
-  }
-  
-  #inputcodigoBarras {
-    height: 70%;
-    width: 80%;
-    border-radius: 15px;
-    margin: auto;
-    border: 2px solid rgb(175, 180, 182);
-  }
+#divUbicacion {
+  width: 85%;
+  position: absolute;
+  border-bottom: solid 5px #0f362d;
+}
 
-  #inputCantidad{
-    height: 70%;
-    width: 80%;
-    border-radius: 15px;
-    margin: auto;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  #textoCantidad {
-    margin-left: 10%;
-  }
+#ubicacion {
+  text-align: center;
+  margin: 0;
+  background-color: #d19d2c;
+  color: #fff;
+}
 
-  #checkBoxMultiplicar{
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  #cantidad {
-    height: 60%;
-    width: 80%;
-    border-radius: 15px;
-    margin: auto;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  .botonesOpciones {
-    margin: 0 auto;
-    margin-top: 3%;
-    height: 75%;
-    width: 80%;
-    font-size: 130%;
-    border-radius: 15px;
-    border: 0;
-    background-color: rgb(27, 81, 97);
-    color: white;
-    box-shadow: -1px 7px 10px black;
-    transition: 0.7s;
-  }
-  .botonesOpciones:hover {
-    background-color: white;
-    color: rgb(27, 81, 97);
-    cursor: pointer;
-  }
-  
-  #eliminar {
-    background-color: rgb(133, 1, 1);
-  }
-  
-  #eliminar:hover {
-    background-color: white;
-    color: rgb(133, 1, 1);
-  }
-  
-  #finalizar {
-    background-color: #236e25;
-    color: white;
-  }
-  
-  #finalizar:hover {
-    background-color: white;
-    color: #236e25;
-  }
+.sidebar {
+  position: absolute;
+  width: 15%;
+  height: 87%;
+  right: 0;
+  background-color: #ddd;
+  display: grid;
+  grid-template-rows: 25% 45% 30%;
+  padding: 0%;
+  margin: 0%;
+}
 
-  /**/
-  
-  /*grid usuario*/
-  
-  .imagenUsuario {
-    display: block;
-    margin: auto;
-    width: 110px;
-    height: 110px;
-    margin-top: 5%;
-    border-radius: 50%;
-  }
-  
-  #datosUsuario {
-    margin: auto;
-  }
-  
-  /*botones de navegacion */
-  
-  .botonesNav {
-    margin: auto;
-    width: 80%;
-    height: 70%;
-    text-align: center;
-    font-size: 150%;
-    border-radius: 15px;
-    border: 0;
-    background-color: rgb(27, 81, 97);
-    color: white;
-    box-shadow: -1px 7px 10px black;
-    transition: 0.7s;
-  }
-  
-  .botonesNav:hover {
-    background-color: white;
-    color: rgb(27, 81, 97);
-    cursor: pointer;
-  }
-  
-  #caja {
-    background-color: rgb(105, 0, 105);
-    color: white;
-  }
-  
-  #caja:hover {
-    background-color: white;
-    color: rgb(105, 0, 105);
-  }
-  
-  .selectfil {
-    height: 40%;
-    width: 100%;
-    border-radius: 15px;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  /*Tabla de datos*/
-  
-  .divTabla {
-    overflow: scroll;
-    position: absolute;
-    width: 85%;
-    height: 93%;
-    top: 48px;
-  }
-  
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .tabla {
-    width: 100%;
-    background-color: white;
-    text-align: left;
-    border-collapse: collapse;
-  }
-  
-  th,
-  td {
-    padding: 10px;
-  }
-  
-  thead {
-    background-color: #369681;
-    border-bottom: solid 5px #0f362d;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #ddd;
-  }
-  
-  tr:hover td {
-    background-color: #369681;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .tbImagen {
-    width: 80px;
-    height: 80px;
-  }
-  
-  #irUsuario {
-    cursor: pointer;
-  }
-  
-  /*_________________________________________________________________________________________________________*/
-  
-  /*Modales*/
-  
-  .modal {
-    position: absolute;
-    top: 35%;
-    left: 35%;
-    display: flex;
-    height: 250px;
-    width: 400px;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-    background: whitesmoke;
-    border-radius: 15px;
-    box-shadow: -1px 7px 10px black;
-  }
-  
-  .modalBuscar {
-    position: absolute;
-    top: 5%;
-    left: 8%;
-    display: flex;
-    height: 80%;
-    width: 80%;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-    background: whitesmoke;
-    border-radius: 15px;
-    box-shadow: -1px 7px 10px black;
-  }
-  
-  .modalFinalizar {
-    position: absolute;
-    top: 25%;
-    left: 30%;
-    display: flex;
-    height: 40%;
-    width: 35%;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-    background: whitesmoke;
-    border-radius: 15px;
-    box-shadow: -1px 7px 10px black;
-  }
-  
-  
-  /*Componenetes*/
-  
-  /*Componentes modalFinalizar*/
-  
-  .tituloModa3{
-    margin-top: 0;
-  }
-  
-  .modal-dialog-finalizar{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 20% 50% 30%;
-    align-items: center;
-  }
-  
-  .modal-content-finalizar{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 40% 30% 30%;
-  }
-  
-  /*letras Entrada Salida*/
-  
-  .divLetras{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    padding-top: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-  
-  .letras{
-    font-size: 150%;
-    font-weight: bold
-  }
-  
-  #letrasEntrada{
-    text-align: left;
-  }
-  
-  #letrasSalida{
-    text-align: right;
-  }
-  
-  #finalizarSolicitud{
-    height: 60%;
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 0;
-    font-size: 150%;
-    border-radius: 15px;
-    border: 0;
-    box-shadow: -1px 7px 10px black;
-    background-color: #236e25;
-    color: white;
-    cursor: pointer;
-  }
-  
-  #finalizarSolicitud:hover {
-    background-color: white;
-    color: #236e25;
-  }
-  
-  
-  /* Formateamos el label que servirá de contenedor */
-  
-  .divCheckBox{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 350px;
-    height: 34px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Ocultamos el checkbox html */
-  .switch input {
-    display: none;
-  }
-  
-  /* Formateamos la caja del interruptor sobre la cual se deslizará la perilla de control o slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #236e25;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  /* Pintamos la perilla de control o slider usando el selector before */
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  /* Cambiamos el color de fondo cuando el checkbox esta activado */
-  input:checked + .slider {
-    background-color: #bb0000;
-  }
-  
-  /* Deslizamos el slider a la derecha cuando el checkbox esta activado */
-  input:checked + .slider:before {
-    -webkit-transform: translateX(315px);
-    -ms-transform: translateX(315px);
-    transform: translateX(315px);
-  }
-  
-  /* Aplicamos efecto de bordes redondeados en slider y en el fondo del slider */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-  
-  /*Select empleado*/
-  
-  .divEmpleadoSolicitud{
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-    align-content: center;
-  }
-  
-  #letraEmpleado{
-    font-size: 130%; 
-  }
-  
-  #empleadoSolicitud{
-    margin: 0 auto;
-    width: 70%;
-    border-radius: 15px;
-    margin-right: 25%;
-  }
-  
-  /*Componentes modalBuscar*/
-  
-  .modal-dialog-buscar {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .modal-content-buscar {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 90% auto;
-  }
-  
-  .gridFiltros {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-  }
-  
-  #inputfill {
-    margin: auto;
-    width: 80%;
-    height: 40%;
-    border-radius: 15px;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  .botonesBuscar {
-    font-size: 140%;
-    margin: auto;
-    width: 80%;
-    height: 70%;
-    border-radius: 15px;
-    border: 0;
-    box-shadow: -1px 7px 10px black;
-    transition: 0.7s;
-  }
-  
-  #buscarProducto {
-    background-color: rgb(27, 81, 97);
-    color: white;
-    cursor: pointer;
-  }
-  #buscarProducto:hover {
-    background-color: white;
-    color: rgb(27, 81, 97);
-  }
-  
-  #seleccionar {
-    background-color: #236e25;
-    color: white;
-    cursor: pointer;
-  }
-  
-  #seleccionar:hover {
-    background-color: white;
-    color: #236e25;
-  }
-  
-  /*Componentes modal*/
-  
-  .tituloModa1 {
-    margin: 0;
-  }
-  
-  .modal-header {
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
-    height: 50;
-    width: 400;
-    text-align: center;
-  }
-  
-  .modal-content {
-    display: grid;
-    grid-template-rows: auto;
-  }
-  
-  .modal-dialog {
-    width: 90%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 25% 50% 30%;
-  }
-  
-  /*Elementos dentro de la modal*/
-  
-  .divcantidades {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 34% 50%;
-    margin-bottom: 2%;
-  }
-  
-  .cantidadPrecio {
-    border-radius: 15px;
-    margin: auto;
-    border: 2px solid rgb(175, 180, 182);
-  }
-  
-  .editarPrecioVenta {
-    border-radius: 10px;
-    height: 75%;
-    width: 20%;
-    font-size: 110%;
-    border: 0;
-    background-color: rgb(27, 81, 97);
-    color: white;
-    box-shadow: -1px 4px 5px black;
-  }
-  
-  .editarPrecioVenta:hover {
-    cursor: pointer;
-    background-color: white;
-    color: rgb(27, 81, 97);
-  }
-  
-  .ok {
-    margin: 0 auto;
-    font-size: 160%;
-    margin-top: 1%;
-    width: 50%;
-    height: 70%;
-    border-radius: 15px;
-    border: 0;
-    background-color: #236e25;
-    color: white;
-    box-shadow: -1px 4px 5px black;
-  }
-  
-  .ok:hover {
-    cursor: pointer;
-    background-color: white;
-    color: #236e25;
-  }
-  /*Fundamental para mostrar y oculpar la modal*/
-  
-  /*Ocultar modales*/
-  .modal {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-  }
-  
-  .modalBuscar {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-  }
-  
-  .modalFinalizar {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-  }
-  
-  /*Mostrar modales*/
-  
-  .modal.is-visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .modalBuscar.is-visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .modalFinalizar.is-visible {
-    visibility: visible;
-    opacity: 1;
-  }
+.barraCobrar {
+  position: absolute;
+  width: 100%;
+  height: 13%;
+  bottom: 0;
+  background-color: #ddd;
+  display: grid;
+  grid-template-columns: 55% 15% 15% 15%;
+}
+
+/*Divs del navbar*/
+
+.usuario {
+  display: grid;
+  grid-template-rows: 75% 25%;
+  padding: 0%;
+  margin: 0%;
+}
+
+.navegacion {
+  display: grid;
+  grid-template-rows: 22% 34% 22% 22%;
+  padding: 0%;
+  margin: 0%;
+}
+
+/*Opciones*/
+
+.barraOpciones {
+  display: grid;
+  grid-template-rows: 15% 15% 35% 35%;
+  padding: 0%;
+  margin: 0;
+}
+
+.divfiltros {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.cantidadProductos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6%;
+  margin-left: 6%;
+}
+
+#inputcodigoBarras {
+  height: 70%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#inputCantidad {
+  height: 70%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#textoCantidad {
+  margin-left: 10%;
+}
+
+#checkBoxMultiplicar {
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#cantidad {
+  height: 60%;
+  width: 80%;
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.botonesOpciones {
+  margin: 0 auto;
+  margin-top: 3%;
+  height: 75%;
+  width: 80%;
+  font-size: 130%;
+  border-radius: 15px;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+.botonesOpciones:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+  cursor: pointer;
+}
+
+#eliminar {
+  background-color: rgb(133, 1, 1);
+}
+
+#eliminar:hover {
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+#finalizar {
+  background-color: #236e25;
+  color: white;
+}
+
+#finalizar:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+/*barraCobrar*/
+
+.divBtnEfectivo {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  align-items: center;
+}
+
+.btnEfectivo {
+  margin: 0 auto;
+  height: 50%;
+  width: 80%;
+  font-size: 130%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+.btnEfectivo:hover {
+  background-color: white;
+  color: rgb(133, 1, 1);
+}
+
+.divEfectivo {
+  margin-top: 8%;
+  margin-left: 10%;
+
+}
+
+#inputEfectivo {
+  width: 80%;
+  border-radius: 15px;
+  border: 0;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.divTextoMonetario {
+  display: grid;
+  grid-template-rows: 33% 33% 33%;
+  margin: 3%;
+}
+
+#btnCobrar {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5%;
+  width: 80%;
+  height: 75%;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+  transition: 0.7s;
+}
+
+#btnCobrar:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+/**/
+
+/*grid usuario*/
+
+.imagenUsuario {
+  display: block;
+  margin: auto;
+  width: 110px;
+  height: 110px;
+  margin-top: 5%;
+  border-radius: 50%;
+}
+
+#datosUsuario {
+  margin: auto;
+}
+
+/*botones de navegacion */
+
+.botonesNav {
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  text-align: center;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+.botonesNav:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+  cursor: pointer;
+}
+
+#entradas_salidas{
+  height: 80%;
+}
+
+#caja {
+  background-color: rgb(105, 0, 105);
+  color: white;
+}
+
+#caja:hover {
+  background-color: white;
+  color: rgb(105, 0, 105);
+}
+
+.selectfil {
+  height: 40%;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+/*Tabla de datos*/
+
+.divTabla {
+  overflow: scroll;
+  position: absolute;
+  width: 85%;
+  height: 80%;
+  top: 48px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.tabla {
+  width: 100%;
+  background-color: white;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+thead {
+  background-color: #369681;
+  border-bottom: solid 5px #0f362d;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tr:hover td {
+  background-color: #369681;
+  color: white;
+  cursor: pointer;
+}
+
+.tbImagen {
+  width: 80px;
+  height: 80px;
+}
+
+#irUsuario {
+  cursor: pointer;
+}
+
+/*_________________________________________________________________________________________________________*/
+
+/*Modales*/
+
+.modal {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  display: flex;
+  height: 250px;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+.modalBuscar {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  display: flex;
+  height: 80%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+.modalFinalizar {
+  position: absolute;
+}
+
+/*Componentes modalBuscar*/
+
+.modal-dialog-buscar {
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content-buscar {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 90% auto;
+}
+
+.gridFiltros {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+#inputfill {
+  margin: auto;
+  width: 80%;
+  height: 40%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.botonesBuscar {
+  font-size: 140%;
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+#buscarProducto {
+  background-color: rgb(27, 81, 97);
+  color: white;
+  cursor: pointer;
+}
+#buscarProducto:hover {
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#seleccionar {
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#seleccionar:hover {
+  background-color: white;
+  color: #236e25;
+}
+
+/*Componentes modal*/
+
+.tituloModa1 {
+  margin: 0;
+}
+
+.modal-header {
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  height: 50;
+  width: 400;
+  text-align: center;
+}
+
+.modal-content {
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.modal-dialog {
+  width: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 25% 50% 30%;
+}
+
+/*Elementos dentro de la modal*/
+
+.divcantidades {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 34% 50%;
+  margin-bottom: 2%;
+}
+
+.cantidadPrecio {
+  border-radius: 15px;
+  margin: auto;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+.editarPrecioVenta {
+  border-radius: 10px;
+  height: 75%;
+  width: 20%;
+  font-size: 110%;
+  border: 0;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  box-shadow: -1px 4px 5px black;
+}
+
+.editarPrecioVenta:hover {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+.ok {
+  margin: 0 auto;
+  font-size: 160%;
+  margin-top: 1%;
+  width: 50%;
+  height: 70%;
+  border-radius: 15px;
+  border: 0;
+  background-color: #236e25;
+  color: white;
+  box-shadow: -1px 4px 5px black;
+}
+
+.ok:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #236e25;
+}
+/*Fundamental para mostrar y oculpar la modal*/
+
+/*Ocultar modales*/
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modalBuscar {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modalFinalizar {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+/*Mostrar modales*/
+
+.modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalBuscar.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modalFinalizar.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
