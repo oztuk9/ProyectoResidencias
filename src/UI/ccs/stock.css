@@ -110,6 +110,28 @@ body {
   font-size: 120%;
 }
 
+/*Boton TICKET*/
+
+#btnEtiqueta{
+  margin: auto;
+  width: 80%;
+  height: 70%;
+  text-align: center;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  background-color: #236e25;
+  color: white;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  cursor: pointer;
+}
+
+#btnEtiqueta:hover{
+  background-color: white;
+  color: #236e25;
+}
+
 /*Filtros*/
 .divfiltros {
   margin: 0 auto;

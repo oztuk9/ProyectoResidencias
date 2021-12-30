@@ -51,8 +51,7 @@ var multiplicar = false;
 var total = 0;
 var efectivo = 0;
 let nuevaRuta = "";
-var fechaHora = "";
-let usuario = "";
+var fechaHora = ""; 
 
 //Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
 for (let i = 0; i < __dirname.length; i++) {
@@ -356,7 +355,7 @@ function totalCuenta() {
         totalMonetario = (parseFloat(e.cantidad)) * (parseFloat(e.precioVenta))
         total = total + totalMonetario
     });
-    Ttotal.innerHTML = "TOTAL:" + total;
+    Ttotal.innerHTML = "TOTAL:$" + total;
     modificarCambio()
 }
 
@@ -366,13 +365,13 @@ function modificarEfectivo() {
     } else {
         efectivo = inputEfectivo.value;
     }
-    Tefectivo.innerHTML = "EFECTIVO:" + efectivo
+    Tefectivo.innerHTML = "EFECTIVO:$" + efectivo
     modificarCambio()
 }
 
 
 function modificarCambio() {
-    Tcambio.innerHTML = "CAMBIO:" + (parseFloat(efectivo) - parseFloat(total))
+    Tcambio.innerHTML = "CAMBIO:$" + (parseFloat(efectivo) - parseFloat(total))
 }
 
 //Finalizar compra

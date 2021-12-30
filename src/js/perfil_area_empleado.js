@@ -51,6 +51,7 @@ let idArea;
 let UsuarioLogeado;
 let ID_Usuario;
 var equals = false;
+let usuario;
 
 //Cargar usuarios en select
 
@@ -160,7 +161,7 @@ bEliminarUsuario.addEventListener('click', (e) => {
 
 async function cargarDatosUsuario() {
     ID_Usuario = parseInt(storage.getStorage("idUsuario").id)
-    let usuario = await bdUsuarios.selectUsuario(ID_Usuario)
+    usuario = await bdUsuarios.selectUsuario(ID_Usuario)
     console.log(usuario);
     UsuarioLogeado = {
         nombre: usuario.at(0).nombre,

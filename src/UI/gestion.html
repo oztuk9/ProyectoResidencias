@@ -20,8 +20,8 @@
         <div class="navegacion">
             <button id="caja" class="botonesNav" onclick="location.href = './caja.html'">Caja</button>
             <button id="stock" class="botonesNav" onclick="location.href = './stock.html'">Stock</button>
-            <button id="entradas_salidas" class="botonesNav" onclick="location.href = './entradas_salidas.html'" >Entradas <br> /Salidas</button>
-            <button id="historial" class="botonesNav">Historial</button>
+            <button id="entradas_salidas" class="botonesNav"
+                onclick="location.href = './entradas_salidas.html'">Entradas <br> /Salidas</button>
         </div>
 
         <div class="filtros">
@@ -75,8 +75,8 @@
     <div class="barraOpciones">
 
         <div class="divProductosBaja">
-            <button id="botonProductosBaja" >PRODUCTOS <br> DADOS DE BAJA</button>
-            <button id="impresora" >IMPRESORA</button>
+            <button id="botonProductosBaja">PRODUCTOS <br> DADOS DE BAJA</button>
+            <button id="impresora">IMPRESORA</button>
         </div>
         <div class="botonesCrudGestor">
             <button id="descartar" class="botonesOpcion" data-open="modal1">DESCARTAR</button>
@@ -94,7 +94,7 @@
             </header>
             <section class="modal-content">
                 <button id="darDeBajaTemporal" class="opcionesDescartar">DAR DE BAJA TEMPORAL</button>
-                <button id="eliminar" class="opcionesDescartar" >ELIMINAR</button>
+                <button id="eliminar" class="opcionesDescartar">ELIMINAR</button>
             </section>
         </div>
     </div>
@@ -116,10 +116,10 @@
                 <button id="usuarios" class="usem">USUARIOS</button>
             </div>
             <div class="divInputUsuario">
-                <input id="nombre"  class="inputUsuario" placeholder="nombre" type="text">
-                <input id="email"  class="inputUsuario" placeholder="email" type="text">
-                <input id="contraseña"  class="inputUsuario" placeholder="contraseña" type="password">
-                <input id="confContraseña"  class="inputUsuario" placeholder="confirmar contraseña" type="password">
+                <input id="nombre" class="inputUsuario" placeholder="nombre" type="text">
+                <input id="email" class="inputUsuario" placeholder="email" type="text">
+                <input id="contraseña" class="inputUsuario" placeholder="contraseña" type="password">
+                <input id="confContraseña" class="inputUsuario" placeholder="confirmar contraseña" type="password">
             </div>
             <div class="botonesCrudUsuario">
                 <button id="guardarCambiosUsuario">GUARDAR</button>
@@ -138,26 +138,36 @@
                 <div class="divArea">
                     <span>Area</span>
                     <div class="crud">
-                         <button id="areaAgregar" class="botonesCrud" >AGREGAR</button><input id="agregarInputArea" class="inputsEmpleado" type="text">
+                        <button id="areaAgregar" class="botonesCrud">AGREGAR</button><input id="agregarInputArea"
+                            class="inputsEmpleado" type="text">
                     </div>
                     <div class="crud">
-                        <button id="areaEditar" class="botonesCrud">EDITAR</button> <input id="editarInputArea" class="inputsEmpleado" type="text"> <select id="editarSelectArea" class="selectEmpleado"></select>
+                        <button id="areaEditar" class="botonesCrud">EDITAR</button> <input id="editarInputArea"
+                            class="inputsEmpleado" type="text"> <select id="editarSelectArea"
+                            class="selectEmpleado"></select>
                     </div>
                     <div class="crud">
-                        <button id="areaEliminar" class="botonesCrud">ELIMINAR</button> <select id="eliminarSelectArea" class="selectEmpleado"></select>
+                        <button id="areaEliminar" class="botonesCrud">ELIMINAR</button> <select id="eliminarSelectArea"
+                            class="selectEmpleado"></select>
                     </div>
                 </div>
                 <div class="divEmpleado">
                     <span>Empleado</span>
                     <div class="crud">
-                        <button id="empleadoAgregar" class="botonesCrud">AGREGAR</button><input id="agregarInputEmpleado" class="inputsEmpleado" type="text"> <span>Area:</span> <select id="empleadoAreaSelect" class="selectEmpleado"></select>
-                   </div>
-                   <div class="crud">
-                       <button id="empleadoEditar" class="botonesCrud">EDITAR</button> <input id="editarInputEmpleado" class="inputsEmpleado" type="text"> <select id="editarSelectEmpleado" class="selectEmpleado"></select> <select id="empleadoEditarAreaSelect" class="selectEmpleado"></select>
-                   </div>
-                   <div class="crud">
-                       <button id="empleadoEliminar" class="botonesCrud">ELIMINAR</button> <select id="eliminarSelectEmpleado" class="selectEmpleado"></select>
-                   </div>
+                        <button id="empleadoAgregar" class="botonesCrud">AGREGAR</button><input
+                            id="agregarInputEmpleado" class="inputsEmpleado" type="text"> <span>Area:</span> <select
+                            id="empleadoAreaSelect" class="selectEmpleado"></select>
+                    </div>
+                    <div class="crud">
+                        <button id="empleadoEditar" class="botonesCrud">EDITAR</button> <input id="editarInputEmpleado"
+                            class="inputsEmpleado" type="text"> <select id="editarSelectEmpleado"
+                            class="selectEmpleado"></select> <select id="empleadoEditarAreaSelect"
+                            class="selectEmpleado"></select>
+                    </div>
+                    <div class="crud">
+                        <button id="empleadoEliminar" class="botonesCrud">ELIMINAR</button> <select
+                            id="eliminarSelectEmpleado" class="selectEmpleado"></select>
+                    </div>
                 </div>
             </section>
         </div>
@@ -171,18 +181,19 @@
             </header>
             <section class="modal-content-usuario-edit">
                 <div class="selectsUsuario">
-                    
+
                     <div class="divicionesSelect">
                         <span>Usuario: </span> <select id="selectUsuario" class="selectsEditUsuario"></select>
                     </div>
 
                     <div class="divicionesSelect">
-                     <span> Permisos de: </span> <select id="selectPermisos" class="selectsEditUsuario">
-                     </select>
+                        <span> Permisos de: </span> <select id="selectPermisos" class="selectsEditUsuario">
+                        </select>
                     </div>
 
                 </div>
-                <div class="botonesUsuario"><button id="guardarUsuarioEdit" class="botonGE">GUARDAR</button> <button id="eliminarUsuario" class="botonGE">ELIMINAR</button>
+                <div class="botonesUsuario"><button id="guardarUsuarioEdit" class="botonGE">GUARDAR</button> <button
+                        id="eliminarUsuario" class="botonGE">ELIMINAR</button>
                 </div>
             </section>
         </div>
@@ -195,14 +206,22 @@
                 <h1 class="tituloModaImpresora">Configuracion Impresora</h1>
             </header>
             <section class="modal-content-usuario-configurar-impresora">
-                    <div class="Buscar-impresora">
-                            <select id="listaDeImpresoras"></select>
-                            <button id="btnImprimir">Probar</button>
+                <div class="Buscar-impresora">
+                    <div class="divsImpresoras">
+                        <span>Tickets</span>
+                        <select id="listaDeImpresoras"></select>
+                        <button id="btnImprimir">Probar</button>
                     </div>
-                    <div class="statusImpresora">
-                        <button id="btnLimpiarLog">Limpiar log</button>
-                        <textarea  id="estado"></textarea>
+                    <div class="divsImpresoras">
+                        <span>Etiquetas</span>
+                        <select id="listaDeImpresorasTicket"></select>
+                        <button id="btnImprimirTicket">Probar</button>
                     </div>
+                </div>
+                <div class="statusImpresora">
+                    <button id="btnLimpiarLog">Limpiar log</button>
+                    <textarea id="estado"></textarea>
+                </div>
             </section>
         </div>
     </div>
@@ -210,6 +229,7 @@
     <script src="../js/pruebaImprimir.js"></script>
     <script src="../js/gestion.js"></script>
     <script src="../js/perfil_area_empleado.js"></script>
+    <script src="../js/permisosUsuario.js"></script>
 </body>
 
 </html>

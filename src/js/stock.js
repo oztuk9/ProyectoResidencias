@@ -14,6 +14,7 @@ const inputfill = document.getElementById('inputfill');
 
 const bBuscar = document.getElementById('buscar')
 const bReporte = document.getElementById('reporte')
+const btnEtiqueta = document.getElementById('btnEtiqueta')
 
 //selects
 const sFiltrarPor = document.getElementById('filtrarPor');
@@ -71,6 +72,7 @@ function logicaCambiarColores(e) {
         letras = "white";
     }
     cambiarColor(backG, letras)
+    console.log(idRow);
 }
 
 function cambiarColor(backG, letras) {
@@ -152,6 +154,7 @@ async function llenarTablaStock() {
     positionRows = 1
     tbodySolicitud.innerHTML = ""; // reset data
     let datosStock = await bdStock.getDataTable();
+    console.log(copiaArrayStock);
     copiaArrayStock.forEach((e) => {
         tbodySolicitud.innerHTML += `<tr id=${positionRows} value=${e.idAlmacen}>
     <td>
@@ -231,6 +234,51 @@ async function filtrarTabla() {
     inputfill.focus();
 }
 
+
+btnEtiqueta.addEventListener('click', async () => {
+    let datosStock = await bdStock.getDataTable();
+    let producto = copiaArrayStock.at((idRow - 1))
+    const conector = new ConectorPlugin()
+        .cortar()
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .establecerTamanioFuente(1, 1)
+        .texto(producto.nombre + "\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .codigoDeBarras((producto.codigo + ""), ConectorPlugin.Constantes.AccionBarcode39)
+        .texto(producto.codigo + "\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .texto(producto.marca + "\n")
+        .cortar()
+    if (localStorage.getItem("impresoraTickets") === null) {
+        Toast.fire({
+            icon: 'info',
+            title: 'No se a configurado correctamente la impresora',
+            background: 'FFFF',
+            width: 420
+        })
+    } else {
+        if ((storage.getStorage("impresoraTickets").estado) == true) {
+            let nombreImpresora = storage.getStorage("impresoraTickets").nombre
+            console.log(nombreImpresora);
+            const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
+            Toast.fire({
+                icon: 'success',
+                title: 'Etiqueta imprimida',
+                background: 'FFFF',
+                width: 420,
+                timer: 2000
+            })
+        } else {
+            Toast.fire({
+                icon: 'info',
+                title: 'No se a configurado correctamente la impresora',
+                background: 'FFFF',
+                width: 420
+            })
+        }
+    }
+})
+
 bReporte.addEventListener('click', async () => {
     //la impresora puede imprimir 48 caracteres en un renglon antes de hacer salto de linea
     let lineaDivisora = "================================================\n";
@@ -291,19 +339,19 @@ bReporte.addEventListener('click', async () => {
             title: 'No se a configurado correctamente la impresora',
             background: 'FFFF',
             width: 420
-          })
+        })
     } else {
         if ((storage.getStorage("impresora").estado) == true) {
             let nombreImpresora = storage.getStorage("impresora").nombre
             console.log(nombreImpresora);
             const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
-        }else{
+        } else {
             Toast.fire({
                 icon: 'info',
                 title: 'No se a configurado correctamente la impresora',
                 background: 'FFFF',
                 width: 420
-              })
+            })
         }
     }
 })

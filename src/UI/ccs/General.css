@@ -402,8 +402,17 @@ tr:hover td {
   text-align: center;
 }
 
+.divsImpresoras{
+  margin: 10px;
+}
 
 #listaDeImpresoras{
+  height: 70%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+}
+
+#listaDeImpresorasTicket{
   height: 70%;
   border-radius: 15px;
   border: 2px solid rgb(175, 180, 182);
@@ -421,6 +430,22 @@ tr:hover td {
 }
 
 #btnImprimir:hover{
+  background-color: white;
+  color: rgb(27, 81, 97);
+}
+
+#btnImprimirTicket{
+  height: 70%;
+  width: 20%;
+  background-color: rgb(27, 81, 97);
+  color: white;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btnImprimirTicket:hover{
   background-color: white;
   color: rgb(27, 81, 97);
 }
@@ -450,7 +475,7 @@ tr:hover td {
 
 #estado{
   margin-top: 5%;
-  height: 100%;
+  height: 90%;
   border-radius: 15px;
   border-radius: 15px;
   border: 2px solid rgb(175, 180, 182);

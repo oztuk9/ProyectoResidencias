@@ -2,18 +2,21 @@
 
 let nuevaRuta = "";
 for (let i = 0; i < __dirname.length; i++) {
-    if (__dirname.charAt(i)=="\\") {
-        nuevaRuta=nuevaRuta+"\\"
+    if (__dirname.charAt(i) == "\\") {
+        nuevaRuta = nuevaRuta + "\\"
     }
-    nuevaRuta=nuevaRuta+__dirname.charAt(i)
+    nuevaRuta = nuevaRuta + __dirname.charAt(i)
 }
 console.log(nuevaRuta);
 
 
 const $estado = document.querySelector("#estado"),
     $listaDeImpresoras = document.querySelector("#listaDeImpresoras"),
+    $listaDeImpresorasTicket = document.querySelector("#listaDeImpresorasTicket"),
     $btnLimpiarLog = document.querySelector("#btnLimpiarLog"),
-    $btnImprimir = document.querySelector("#btnImprimir"); 
+    $btnImprimir = document.querySelector("#btnImprimir"),
+    $btnImprimirTicket = document.querySelector("#btnImprimirTicket");
+
 const obtenerListaDeImpresoras = () => {
     loguear("Cargando lista...");
     ConectorPlugin.obtenerImpresoras()
@@ -25,9 +28,25 @@ const obtenerListaDeImpresoras = () => {
                 option.value = option.text = nombreImpresora;
                 $listaDeImpresoras.appendChild(option);
             })
+
         })
         .catch(() => {
             loguear("Error obteniendo impresoras. Asegúrese de que el plugin se está ejecutando");
+        });
+}
+
+const obtenerListaDeImpresorasTicket = () => {
+    ConectorPlugin.obtenerImpresoras()
+        .then(listaDeImpresorasTicket => {
+            $listaDeImpresorasTicket.innerHTML = "";
+            listaDeImpresorasTicket.forEach(nombreImpresora => {
+                const option = document.createElement('option');
+                option.value = option.text = nombreImpresora;
+                $listaDeImpresorasTicket.appendChild(option);
+            })
+
+        })
+        .catch(() => {
         });
 }
 
@@ -36,10 +55,40 @@ const limpiarLog = () => $estado.textContent = "";
 
 $btnLimpiarLog.addEventListener("click", limpiarLog);
 
+btnImprimirTicket.addEventListener("click", async () => {
+    let nombreImpresoraTicket = $listaDeImpresorasTicket.value;
+    if (!nombreImpresoraTicket) return loguear("Selecciona una impresora para imprimir etiquetas");
+    const conector = new ConectorPlugin()
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .establecerTamanioFuente(1, 1)
+        .texto("Ranch\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .codigoDeBarras("123", ConectorPlugin.Constantes.AccionBarcode39)
+        .texto("123")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .texto("marca: Member's Mark\n")
+        .cortar()
+        const respuestaAlImprimirTickets = await conector.imprimirEn(nombreImpresoraTicket);
+        if (respuestaAlImprimirTickets === true) {
+            loguear("Etiqueta impreso correctamente");
+            let impresoraT = {
+                estado: true,
+                nombre: nombreImpresoraTicket
+            }
+            storage.setStorage("impresoraTickets", impresoraT)
+        } else {
+            let impresoraT = {
+                estado: false,
+                nombre: ""
+            }
+            storage.setStorage("impresoraTickets", impresoraT)
+            loguear("Error. La respuesta es: " + respuestaAlImprimirTickets);
+        }
+});
 
 $btnImprimir.addEventListener("click", async () => {
     let nombreImpresora = $listaDeImpresoras.value;
-    if (!nombreImpresora) return loguear("Selecciona una impresora");
+    if (!nombreImpresora) return loguear("Selecciona una impresora para imprimir tickets");
     const conector = new ConectorPlugin()
         .texto("================================================\n")
         .feed(3)
@@ -72,13 +121,10 @@ $btnImprimir.addEventListener("click", async () => {
         .texto("Un QR nativo (a veces no funciona):\n")
         .qr("https://www.facebook.com/ElMitoteArandas")
         .feed(1)
-        .textoConAcentos("Un código de barras:\n")
-        .codigoDeBarras("123", ConectorPlugin.Constantes.AccionBarcode39)
-        .feed(1)
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .qrComoImagen("https://www.facebook.com/ElMitoteArandas")
         .establecerTamanioFuente(1, 1)
-        .imagenLocal(nuevaRuta+"\\image\\El mitote Logotipo redimencionada.jpg")
+        .imagenLocal(nuevaRuta + "\\image\\El mitote Logotipo redimencionada.jpg")
         .abrirCajon() // Abrir cajón de dinero. Opcional
         .cortar() // Cortar
     // impresora.cutPartial(); // Cortar parcialmente (opcional)
@@ -86,7 +132,7 @@ $btnImprimir.addEventListener("click", async () => {
     conector.feed(4)
     const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
     if (respuestaAlImprimir === true) {
-        loguear("Impreso correctamente");
+        loguear("Ticket impreso correctamente");
         let impresora = {
             estado: true,
             nombre: nombreImpresora

@@ -1,4 +1,4 @@
-const { BrowserWindow} = require('electron')
+const { BrowserWindow } = require('electron')
 
 let window;
 
@@ -12,16 +12,21 @@ function createWindow() {
             nodeIntegration: true,
             contextIsolation: false,
             nodeIntegrationInWorker: true,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            show: false,
         }
     })
+
     window.loadFile('src/ui/sesion.html');
+    window.maximize();
+    window.once('ready-to-show', () => {
+        window.show();
+      })
 }
 
 function prueba() {
     console.log('Esta funcioanando la funcion desde el main');
 }
-
 
 module.exports = {
     createWindow,

@@ -201,4 +201,5 @@ bEditar.addEventListener('click', e => {
 bImpresora.addEventListener('click',()=>{
     document.getElementById("modal7").classList.add("is-visible");
     obtenerListaDeImpresoras();
+    obtenerListaDeImpresorasTicket();
 })

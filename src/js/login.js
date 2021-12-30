@@ -38,12 +38,25 @@ iniciar.addEventListener('click', async (e)=>{
                 width: 420
               })
         }else{
+          console.log(idUsuario);
+          const usuarioVigente = await bdUsuarios.usuarioVigente(idUsuario.at(0).id)
+          console.log(usuarioVigente);
+          console.log(usuarioVigente.at(0).BajaUsuario);
+          if (usuarioVigente.at(0).BajaUsuario==false) {
             let iniciarSesion = {
-                id: idUsuario.at(0).id,
-                sesionIniciada: true
-            }
-            storage.setStorage("idUsuario", iniciarSesion)
-            location.href='./gestion.html';
+              id: idUsuario.at(0).id,
+              sesionIniciada: true
+          }
+          storage.setStorage("idUsuario", iniciarSesion)
+          location.href='./caja.html';
+          }else{
+            Toast.fire({
+              icon: 'info',
+              title: 'Usuario dado de baja',
+              background: 'FFFF',
+              width: 420
+            })
+          }
         }
     }
 })

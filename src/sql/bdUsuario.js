@@ -130,6 +130,16 @@ async function selectUsuarioPermisos(id) {
     }
 }
 
+async function usuarioVigente(id) {
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("SELECT BajaUsuario FROM usuarios WHERE id=?",id);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     registrarUsuario,
     iniciarSesion,
@@ -139,5 +149,6 @@ module.exports = {
     selectUsuarios,
     cambiarPermisosUsuario,
     bajaUsuario,
-    selectUsuarioPermisos
+    selectUsuarioPermisos,
+    usuarioVigente
 }
