@@ -26,7 +26,7 @@
 
         <div class="barraOpciones">
             <input  id="inputcodigoBarras" type="text" placeholder="CODIGO">
-            <div class="cantidadProductos"><input type="text" id="inputCantidad" placeholder="MULTIPLICAR"> <input id="checkBoxMultiplicar" type="checkbox"></div>
+            <div class="cantidadProductos"><input type="number" id="inputCantidad" placeholder="MULTIPLICAR" disabled min="0"> <input id="checkBoxMultiplicar" type="checkbox" ></div>
             <button id="eliminar" class="botonesOpciones">ELIMINAR</button>
             <button id="buscar" class="botonesOpciones">BUSCAR</button>
             <button id="finalizar" class="botonesOpciones">FINZALIZAR</button>
@@ -43,12 +43,12 @@
         </div>
         <div class="divEfectivo">
             <span class="letraEfectivo">EFECTIVO:</span>
-            <input type="text" id="inputEfectivo">
+            <input type="number" id="inputEfectivo" placeholder="0" min="0">
         </div>
         <div class="divTextoMonetario">
-            <span class="textoMonetario">TOTAL:</span>
-            <span class="textoMonetario">EFECTIVO:</span>
-            <span class="textoMonetario">CAMBIO:</span>
+            <span id="total" class="textoMonetario">TOTAL:0</span>
+            <span id="efectivo" class="textoMonetario">EFECTIVO:0</span>
+            <span id="cambio" class="textoMonetario">CAMBIO:0</span>
         </div>
         <div class="divCobrar">
             <button id="btnCobrar">COBRAR</button>
@@ -211,6 +211,7 @@
         </div>
     </div>
     <script src="../js/caja.js"></script>
+    <script src="../js/Impresora.js"></script>
     <script src="../js/perfil_area_empleado.js"></script>
 </body>
 

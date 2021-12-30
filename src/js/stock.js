@@ -19,7 +19,6 @@ const bReporte = document.getElementById('reporte')
 const sFiltrarPor = document.getElementById('filtrarPor');
 const sOrdenar = document.getElementById('ordenar');
 
-const storage = require("../js/local");
 
 let arrayStock = [];
 let copiaArrayStock = [];
@@ -254,7 +253,9 @@ bReporte.addEventListener('click', async () => {
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .feed(2)
         .texto("================================================\n")
+        .establecerTamanioFuente(3, 3)
         .texto("STOCK\n")
+        .establecerTamanioFuente(1, 1)
         .texto("================================================\n")
         .texto(encabezadoTabla + "\n")
         .texto("================================================\n")

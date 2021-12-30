@@ -1,4 +1,3 @@
-const storage = require('../js/local');
 const bdTabla = require('../sql/bdGestion');
 const logicaTabla = require('../js/tablaProductos')
 const tbody = document.getElementById('tbody');

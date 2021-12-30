@@ -5,10 +5,6 @@ const logicaTabla = require('../js/tablaProductos');
 const tbodySolicitud = document.getElementById('tbodySolicitud');
 const tbody = document.getElementById('tbody');
 
-//muchas de las variables no se usan en este script pero otro script si las usa, como local storage que se usa desde perfil_area_empleado, esto se hizo asi con la dinalidad de no tener problemas con variables duplicadas o variables en otro script que no quedan bien tenerlas ahí.
-
-const storage = require("../js/local");
-
 
 //inputs
 
@@ -129,7 +125,7 @@ inputcodigoBarras.addEventListener('keypress', async (e) => {
         } else {
             Toast.fire({
                 icon: 'info',
-                title: 'El prudcto esta dado de baja',
+                title: 'El producto esta dado de baja',
                 background: 'FFFF',
                 width: 420
             })

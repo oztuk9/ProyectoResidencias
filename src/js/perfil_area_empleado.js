@@ -5,6 +5,7 @@ const bdArea = require('../sql/bdArea');
 const bdEmpleado = require('../sql/bdEmpleado');
 const bdUsuarios = require('../sql/bdUsuario');
 const datosUsuario = document.getElementById('datosUsuario');
+const storage = require("../js/local");
 
 //inputs
 
