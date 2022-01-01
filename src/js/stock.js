@@ -234,7 +234,7 @@ async function filtrarTabla() {
     inputfill.focus();
 }
 
-
+//La cantidad maxima de caracteres de "AccionBarcode93" es de 17 
 btnEtiqueta.addEventListener('click', async () => {
     let datosStock = await bdStock.getDataTable();
     let producto = copiaArrayStock.at((idRow - 1))
@@ -242,12 +242,12 @@ btnEtiqueta.addEventListener('click', async () => {
         .cortar()
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
         .establecerTamanioFuente(1, 1)
-        .texto(producto.nombre + "\n")
+        .texto("Nombre producto: "+producto.nombre + "\n")
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
-        .codigoDeBarras((producto.codigo + ""), ConectorPlugin.Constantes.AccionBarcode39)
+        .codigoDeBarras( (producto.codigo+"") , ConectorPlugin.Constantes.AccionBarcode93)
         .texto(producto.codigo + "\n")
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
-        .texto(producto.marca + "\n")
+        .texto("Marca: "+ producto.marca + "\n")
         .cortar()
     if (localStorage.getItem("impresoraTickets") === null) {
         Toast.fire({
@@ -292,13 +292,6 @@ bReporte.addEventListener('click', async () => {
     const conector = new ConectorPlugin()
         .cortar()
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
-        .imagenLocal(nuevaRuta + "\\image\\El mitote Logotipo redimencionada.jpg")
-        .texto("================================================\n")
-        .texto(nombreRestaurant + "\n")
-        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
-        .textoConAcentos("Ubicación: " + calle + "\n")
-        .texto("Telefono: " + telefono + "\n")
-        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .feed(2)
         .texto("================================================\n")
         .establecerTamanioFuente(3, 3)
@@ -327,11 +320,6 @@ bReporte.addEventListener('click', async () => {
     });
     conector
         .texto("================================================\n")
-        .feed(1)
-        .establecerTamanioFuente(1, 1)
-        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
-        .qrComoImagen("https://www.facebook.com/ElMitoteArandas")
-        .abrirCajon()
         .cortar();
     if (localStorage.getItem("impresora") === null) {
         Toast.fire({

@@ -23,6 +23,7 @@
             <button id="stock" class="botonesNav" onclick="location.href = './stock.html'">Stock</button>
             <button id="entradas_salidas" class="botonesNav" onclick="location.href = './entradas_salidas.html'" >Entradas <br> /Salidas</button>
             <button id="gestion" class="botonesNav" onclick="location.href='./gestion.html'">Gestion</button>
+            <button id="btnCorte">CORTE</button>
         </div>
 
         <div class="barraOpciones">
@@ -207,6 +208,46 @@
 
                 </div>
                 <div class="botonesUsuario"><button id="guardarUsuarioEdit" class="botonGE">GUARDAR</button> <button id="eliminarUsuario" class="botonGE">ELIMINAR</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="modalCorteCaja" id="modal7">
+        <button class="close-modal" aria-label="close modal" data-close>X</button>
+        <div class="modal-dialog-corte-caja">
+            <header class="modal-header">
+                <h1 class="tituloModa1">Corte de caja</h1>
+            </header>
+            <section class="modal-content-corte-caja">
+                <div class="selectsUsuarioCorte">
+
+                    <div class="divicionesSelectCorte">
+                        <span> Area: </span> <select id="selectAreaCorte" class="selectsEditUsuario">
+                        </select>
+                       </div>
+                    
+                    <div class="divicionesSelectCorte">
+                        <span>Usuario: </span> <select id="selectUsuarioCorte" class="selectsEditUsuario"></select>
+                    </div>
+                </div>
+                <div class="datosCorte">
+                    <div class="divsDatosCorte">
+                        <span class="textoCorte">Efectivo esperado en caja</span>
+                        <span id="efectivoBaseDatos" class="textoCorte">1</span>
+                    </div>
+                    <div class="divsDatosCorte">
+                        <span class="textoCorte">¿Cuanto efectivo hay en caja?</span>
+                        <input id="inputEfectivoCaja" type="number">
+                    </div>
+                    <div class="divsDatosCorte">
+                        <span class="textoCorte">Diferencia</span>
+                        <span id="diferenciaCorte" class="textoCorte">1</span>
+                    </div>
+                </div>
+                <div class="divBotonesCorte">
+                    <button id="finalizarCorte" class="botonesCorte">FINALIZAR</button>
+                    <button id="cancelarCorte" class="botonesCorte">CANCELAR</button>
                 </div>
             </section>
         </div>

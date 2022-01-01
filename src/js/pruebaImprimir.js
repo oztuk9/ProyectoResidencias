@@ -70,7 +70,7 @@ btnImprimirTicket.addEventListener("click", async () => {
         .cortar()
         const respuestaAlImprimirTickets = await conector.imprimirEn(nombreImpresoraTicket);
         if (respuestaAlImprimirTickets === true) {
-            loguear("Etiqueta impreso correctamente");
+            loguear("Etiqueta impresa correctamente");
             let impresoraT = {
                 estado: true,
                 nombre: nombreImpresoraTicket

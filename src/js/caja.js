@@ -28,6 +28,7 @@ const b100 = document.getElementById('100');
 const b50 = document.getElementById('50');
 const b20 = document.getElementById('20');
 const btnCobrar = document.getElementById('btnCobrar');
+const btnCorte = document.getElementById('btnCorte')
 
 //Selects
 
@@ -51,7 +52,7 @@ var multiplicar = false;
 var total = 0;
 var efectivo = 0;
 let nuevaRuta = "";
-var fechaHora = ""; 
+var fechaHora = "";
 
 //Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
 for (let i = 0; i < __dirname.length; i++) {
@@ -453,7 +454,6 @@ async function validarSolicitud() {
     }
     if (cantidadSuperior == false) {
         if ((efectivo - total) >= 0) {
-            obtenerUsuario()
             insertarPedidoVentas();
             insertarDetallePedidoVentas();
             Toast.fire({
@@ -504,12 +504,12 @@ async function imprimirTicket() {
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .texto("================================================\n")
         .texto("Fecha y hora: " + fechaHora + "\n")
-        .texto("Lo atendio: " + usuario + "\n")
-        .texto("================================================\n")
-        .feed(2)
+        .texto("Lo atendio: " + usuario.at(0).nombre + "\n")
         .texto("================================================\n")
         .establecerTamanioFuente(3, 3)
+        .texto("============\n")
         .texto("CUENTA\n")
+        .texto("============\n")
         .establecerTamanioFuente(1, 1)
         .texto("================================================\n")
         .texto(encabezadoTabla + "\n")
@@ -533,17 +533,21 @@ async function imprimirTicket() {
     console.log("Efectivo: $" + efectivo);
     console.log("Cambio: $" + (efectivo - total));
     console.log(fechaHora);
-    console.log("Lo atendio: "+usuario);
+    console.log("Lo atendio: " + usuario.at(0).nombre);
     conector
         .texto("================================================\n")
-        .feed(1)
         .establecerTamanioFuente(2, 2)
+        .feed(1)
+        .texto("========================\n")
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
         .texto("Total: $" + total + "\n")
         .texto("Efectivo: $" + efectivo + "\n")
         .texto("Cambio: $" + (efectivo - total) + "\n")
+        .texto("========================\n")
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
-        .texto("================================================\n")
+        .texto("Gracias por su compra\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .texto("========================\n")
         .establecerTamanioFuente(1, 1)
         .qrComoImagen("https://www.facebook.com/ElMitoteArandas")
         .abrirCajon()
@@ -604,8 +608,6 @@ function agregarEspacios(palabra, tipoPalabra) {
     }
 }
 
-async function obtenerUsuario(){
-    ID_Usuario = parseInt(storage.getStorage("idUsuario").id)
-    consultaUsuario = await bdUsuarios.selectUsuario(ID_Usuario)
-    usuario = consultaUsuario.at(0).nombre;
-}   
+btnCorte.addEventListener('click',()=>{
+    document.getElementById("modal7").classList.add("is-visible");
+})

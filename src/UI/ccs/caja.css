@@ -150,6 +150,27 @@ body {
   color: #236e25;
 }
 
+/*Corte de caja*/
+
+#btnCorte{
+  margin: 0 auto;
+  width:80%;
+  height: 80%;
+  font-size: 150%;
+  border-radius: 15px;
+  color: white;
+  background-color:  #d34d00;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  cursor: pointer;
+}
+
+#btnCorte:hover{
+  color: #d34d00;
+  background-color:  white;
+}
+
 /*barraCobrar*/
 
 .divBtnEfectivo {
@@ -370,8 +391,130 @@ tr:hover td {
   box-shadow: -1px 7px 10px black;
 }
 
-.modalFinalizar {
+.modalCorteCaja {
   position: absolute;
+  top: 20%;
+  left: 20%;
+  display: flex;
+  height: 50%;
+  width: 55%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: -1px 7px 10px black;
+}
+
+/*Componentes Corte de caja*/
+
+.modal-dialog-corte-caja{
+  width: 100%;
+  height: 110%;
+}
+
+.selectsUsuarioCorte{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-right: 10%;
+  margin-top: 5%;
+}
+
+.divicionesSelectCorte{
+  padding-left: 20%;
+  padding-right: 10%;
+}
+
+#selectUsuarioCorte{
+  width: 65%;
+}
+
+#selectAreaCorte{
+  margin: auto;
+  width: 70%;
+  align-content: center;
+}
+
+.datosCorte{
+  width: 80%;
+  height: 90%;
+  display: grid;
+  grid-template-rows: 33% 33% 33%;
+}
+
+.divsDatosCorte{
+  width: 100%;
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  border: 1% black;
+  text-align: right;
+}
+
+#efectivoBaseDatos{
+  font-size: 200%;
+}
+
+#diferenciaCorte{
+  font-size: 200%;
+}
+
+#inputEfectivoCaja{
+  margin: 0 auto;
+  height: 100%;
+  width: 50%;
+  border-radius: 15px;
+  border: 2px solid rgb(175, 180, 182);
+  margin-right: 0;
+  font-size: 200%;
+}
+
+.divBotonesCorte{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-top: 1%;
+}
+
+.botonesCorte{
+  margin: auto;
+  width: 60%;
+  height: 150%;
+  text-align: center;
+  font-size: 150%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+}
+
+#finalizarCorte{
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+}
+
+#finalizarCorte:hover{
+  background-color:white;
+  color:  #236e25;
+}
+
+#cancelarCorte{
+  background-color: rgb(133, 1, 1);
+  color: white;
+  cursor: pointer;
+}
+
+#cancelarCorte:hover{
+  background-color: white;
+  color: rgb(133, 1, 1);
 }
 
 /*Componentes modalBuscar*/
@@ -533,6 +676,12 @@ tr:hover td {
   transition: all 0.35s ease-in;
 }
 
+.modalCorteCaja {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
 /*Mostrar modales*/
 
 .modal.is-visible {
@@ -546,6 +695,12 @@ tr:hover td {
 }
 
 .modalFinalizar.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.modalCorteCaja.is-visible {
   visibility: visible;
   opacity: 1;
 }
