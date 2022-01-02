@@ -16,7 +16,7 @@ async function idProductoEscaneado(idEscaneado){
 async function ultimoRegistroPrecio(idAlmacen){
     try {
         const conn = await getConnection();
-        const result = await conn.query("SELECT precioCompra FROM detallePedidoAlmacen WHERE ID_Producto=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
+        const result = await conn.query("SELECT precioCompra FROM detallePedidoAlmacen WHERE ID_Productos=? ORDER BY ID DESC LIMIT 1",parseInt(idAlmacen));
         return result;
     } catch (error) {
         console.log(error);

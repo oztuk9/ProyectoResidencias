@@ -417,18 +417,22 @@ tr:hover td {
 }
 
 .selectsUsuarioCorte{
+  margin: 0 auto;
   display: grid;
-  width: 100%;
+  width: 70%;
   height: 100%;
   grid-template-columns: 50% 50%;
   align-items: center;
-  padding-right: 10%;
   margin-top: 5%;
 }
 
 .divicionesSelectCorte{
-  padding-left: 20%;
+  padding-left: 15%;
   padding-right: 10%;
+}
+
+.divicionesSelectCorteUsuario{
+  padding-right: 20%;
 }
 
 #selectUsuarioCorte{
@@ -457,6 +461,26 @@ tr:hover td {
   text-align: right;
 }
 
+#btnSeleccionarUsuario{
+  width: 80%;
+  height: 120%;
+  text-align: center;
+  font-size: 110%;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: -1px 7px 10px black;
+  transition: 0.7s;
+  background-color: #236e25;
+  color: white;
+  cursor: pointer;
+  margin-left: 30%;
+}
+
+#btnSeleccionarUsuario:hover{
+  background-color:white;
+  color:  #236e25;
+}
+
 #efectivoBaseDatos{
   font-size: 200%;
 }
@@ -465,13 +489,23 @@ tr:hover td {
   font-size: 200%;
 }
 
-#inputEfectivoCaja{
+/*Elimina los botones spinner de los inputs*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+#inputEfectivoCorte{
   margin: 0 auto;
   height: 100%;
   width: 50%;
   border-radius: 15px;
   border: 2px solid rgb(175, 180, 182);
   margin-right: 0;
+  text-align: right;
   font-size: 200%;
 }
 

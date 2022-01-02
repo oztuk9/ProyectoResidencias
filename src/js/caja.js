@@ -14,6 +14,7 @@ const sOrdenar = document.getElementById('ordenar');
 const inputEfectivo = document.getElementById('inputEfectivo');
 const inputCantidad = document.getElementById('inputCantidad');
 const checkBoxMultiplicar = document.getElementById('checkBoxMultiplicar');
+const inputEfectivoCorte = document.getElementById('inputEfectivoCorte');
 
 //botones
 
@@ -28,17 +29,22 @@ const b100 = document.getElementById('100');
 const b50 = document.getElementById('50');
 const b20 = document.getElementById('20');
 const btnCobrar = document.getElementById('btnCobrar');
-const btnCorte = document.getElementById('btnCorte')
+const btnCorte = document.getElementById('btnCorte');
+const btnSeleccionarUsuario = document.getElementById('btnSeleccionarUsuario');
+const btnFinalizarCorte = document.getElementById('finalizarCorte');
 
 //Selects
 
-const sEmpleadoSolicitud = document.getElementById('empleadoSolicitud')
+const sEmpleadoSolicitud = document.getElementById('empleadoSolicitud');
+const selectUsuarioCorte = document.getElementById('selectUsuarioCorte');
 
 //Texto
 
-const Ttotal = document.getElementById('total')
-const Tefectivo = document.getElementById('efectivo')
-const Tcambio = document.getElementById('cambio')
+const Ttotal = document.getElementById('total');
+const Tefectivo = document.getElementById('efectivo');
+const Tcambio = document.getElementById('cambio');
+const TefectivoBaseDatos = document.getElementById('efectivoBaseDatos');
+const TdiferenciaCorte = document.getElementById('diferenciaCorte');
 
 //variables para almacenar datos dinamicos
 var idProducto = "";
@@ -53,6 +59,11 @@ var total = 0;
 var efectivo = 0;
 let nuevaRuta = "";
 var fechaHora = "";
+var totalCorte = 0;
+var efectivoCaja = 0;
+var diferencia = 0;
+var idUsuarioCorte = 0;
+var ultimaVenta = 0;
 
 //Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
 for (let i = 0; i < __dirname.length; i++) {
@@ -170,7 +181,7 @@ async function llenarTabla() {
     tbodySolicitud.innerHTML = ""; // reset data
     listaProductosSolicitados.forEach((e) => {
 
-        tbodySolicitud.innerHTML += `<tr id=${positionRows} value=${e.idAlmacen}>
+        tbodySolicitud.innerHTML += `<tr id=${"Caja"+positionRows} value=${e.idAlmacen}>
     <td>
         <img class="tbImagen" src="${e.imagen}"/>
     </td>
@@ -201,7 +212,7 @@ tbodySolicitud.addEventListener('click', (e) => {
 function logicaCambiarColores(e) {
     var backG, letras;
     if (idRow != "") {
-        if ((idRow % 2 == 0)) {
+        if ((parseInt(idRow.substring(4)) % 2 == 0)) {
             backG = "#ddd";
         } else {
             backG = "#fff";
@@ -241,8 +252,9 @@ function cambiarColor(backG, letras) {
 bEliminar.addEventListener('click', (e) => {
     var copiaArray = listaProductosSolicitados.slice();
     listaProductosSolicitados = [];
+    console.log(idRow.substring(4));
     for (let i = 0; i < copiaArray.length; i++) {
-        if (idRow - 1 == i) {
+        if (parseInt(idRow.substring(4)) - 1 == i) {
             Toast.fire({
                 icon: 'info',
                 title: 'Se elimino el elemento: ' + (i + 1),
@@ -372,7 +384,7 @@ function modificarEfectivo() {
 
 
 function modificarCambio() {
-    Tcambio.innerHTML = "CAMBIO:$" + (parseFloat(efectivo) - parseFloat(total))
+    Tcambio.innerHTML = "CAMBIO:$" + (parseFloat(efectivo) - parseFloat(total)).toFixed(2)
 }
 
 //Finalizar compra
@@ -610,4 +622,68 @@ function agregarEspacios(palabra, tipoPalabra) {
 
 btnCorte.addEventListener('click',()=>{
     document.getElementById("modal7").classList.add("is-visible");
+    cargarUsuariosCorte();
+})
+
+async function cargarUsuariosCorte() {
+    selectUsuarioCorte.innerHTML="";
+    let result = await bdUsuarios.selectUsuarios();
+    objeto = document.createElement('option')
+    objeto.value = 0
+    objeto.text = ""
+    selectUsuarioCorte.appendChild(objeto);
+    for (let i = 0; i < result.length; i++) {
+        if (result[i].id!=1) {
+        objeto = document.createElement('option')
+        objeto.value = result[i].id
+        objeto.text = result[i].nombre
+        selectUsuarioCorte.appendChild(objeto);
+        }
+    }
+}
+
+btnSeleccionarUsuario.addEventListener('click',async ()=>{
+    idUsuarioCorte = selectUsuarioCorte.value;
+    ultimoCorte =  await bdCaja.ultimoCorte(idUsuarioCorte);
+    obtenerUltimaVenta = await bdCaja.obtenerUltimaVenta(idUsuarioCorte);
+    ultimaVenta = obtenerUltimaVenta.at(0).id
+    console.log(ultimoCorte.at(0).id);
+    if (ultimoCorte.length==0) {
+        sinCorte = await bdCaja.sinCorte(idUsuarioCorte)
+        totalCorte=sinCorte.at(0).TotalDinero;
+    }else{
+        console.log(ultimaVenta);
+        console.log(ultimoCorte.at(0).id);
+        if (ultimaVenta>ultimoCorte.at(0).id) {
+            inicioVenta = parseInt(ultimoCorte.at(0).id)+1;
+            conCorte = await bdCaja.conCorte(inicioVenta,ultimaVenta,idUsuarioCorte)
+            totalCorte=conCorte.at(0).TotalDinero;
+            console.log(ultimoCorte.length );
+        }
+    }
+    TefectivoBaseDatos.innerHTML = "$"+totalCorte;
+})
+
+inputEfectivoCorte.addEventListener('keyup',()=>{
+    efectivoCaja = inputEfectivoCorte.value;
+    diferencia = efectivoCaja-totalCorte;
+    TdiferenciaCorte.innerHTML = "$"+diferencia.toFixed(2)
+})
+
+btnFinalizarCorte.addEventListener('click',()=>{
+    datos ={
+        esperadoCaja: totalCorte,
+        efectivoCaja: efectivoCaja,
+        diferencia: diferencia,
+        IDUsuarioCorte: idUsuarioCorte,
+        IDUsuarioAdmin: usuario.at(0).id
+    }
+    corte = {
+        corte: true
+    }
+    bdCaja.insertarCortes(datos);
+    bdCaja.actualizarPedidoVentas(corte,ultimaVenta);
+    esperadoCaja = 0;
+    efectivoCaja = 0;
+    diferencia = 0;
 })

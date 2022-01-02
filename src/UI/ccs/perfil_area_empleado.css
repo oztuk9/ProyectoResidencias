@@ -150,11 +150,9 @@
     border: none !important;
     border-radius: 15px;
     opacity: 0;
-  }
-  
-  #imagenInput:hover {
     cursor: pointer;
   }
+
   
   .modal-dialog-usuario {
     width: 100%;

@@ -74,8 +74,6 @@ function logicaCambiarColores(e) {
             backG = "#369681";
             letras = "white";
         }
-
-
     } else {
         //e.path en la posicion 1 nos devolvera el id de la fila donde hicimos clic (el ID es el de la base de datos, valor que insertamos en la tabla)
         idRow = (e.path[1].id)

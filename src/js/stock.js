@@ -236,6 +236,14 @@ async function filtrarTabla() {
 
 //La cantidad maxima de caracteres de "AccionBarcode93" es de 17 
 btnEtiqueta.addEventListener('click', async () => {
+    if (idRow=="") {
+        Toast.fire({
+            icon: 'info',
+            title: 'Seleccione un producto',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
     let datosStock = await bdStock.getDataTable();
     let producto = copiaArrayStock.at((idRow - 1))
     const conector = new ConectorPlugin()
@@ -277,6 +285,7 @@ btnEtiqueta.addEventListener('click', async () => {
             })
         }
     }
+}
 })
 
 bReporte.addEventListener('click', async () => {
