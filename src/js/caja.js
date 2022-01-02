@@ -32,6 +32,7 @@ const btnCobrar = document.getElementById('btnCobrar');
 const btnCorte = document.getElementById('btnCorte');
 const btnSeleccionarUsuario = document.getElementById('btnSeleccionarUsuario');
 const btnFinalizarCorte = document.getElementById('finalizarCorte');
+const btnCancelarCorte = document.getElementById('cancelarCorte')
 
 //Selects
 
@@ -686,4 +687,24 @@ btnFinalizarCorte.addEventListener('click',()=>{
     esperadoCaja = 0;
     efectivoCaja = 0;
     diferencia = 0;
+    TdiferenciaCorte.innerHTML = "$0"
+    TefectivoBaseDatos.innerHTML = "$0"
+    inputEfectivoCorte.value=""
+    document.querySelector(".modalCorteCaja.is-visible").classList.remove("is-visible");
+    Toast.fire({
+        icon: 'info',
+        title: 'Corte realizado',
+        background: 'FFFF',
+        width: 420
+    })
+})
+
+btnCancelarCorte.addEventListener('click',()=>{
+    document.querySelector(".modalCorteCaja.is-visible").classList.remove("is-visible");
+    esperadoCaja = 0;
+    efectivoCaja = 0;
+    diferencia = 0;
+    TdiferenciaCorte.innerHTML = "$0"
+    TefectivoBaseDatos.innerHTML = "$0"
+    inputEfectivoCorte.value=""
 })

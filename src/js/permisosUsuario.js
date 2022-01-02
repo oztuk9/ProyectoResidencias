@@ -13,7 +13,7 @@ async function obtenerUsuario() {
         if (consultaUsuario.at(0).TipoUsuario == 0) {
             console.log(consultaUsuario.at(0).TipoUsuario);
             botonEmpleados.style.display = 'none'
-            botonUsuarios.style.display = 'none'
+            botonUsuarios.style.visibility = 'hidden'
             document.getElementById('dimecionesGrid').href = 'ccs/permisosComun.css';
             //Busca primero si el elemento con el id "gestion" existe y si existe lo desaparece del flujo html con display none
             if (!!document.getElementById('gestion')) {

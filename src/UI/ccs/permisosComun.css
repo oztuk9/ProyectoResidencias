@@ -1,4 +1,9 @@
 .modal-dialog-usuario {
     grid-template-rows: 10% 35% 1% 39% 10%;
   }
+
+
+  #btnCorte {
+    display:none !important;
+}
   
