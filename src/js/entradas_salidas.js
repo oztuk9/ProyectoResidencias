@@ -25,7 +25,7 @@ const bEditarPrecioVenta = document.getElementsByClassName('editarPrecioVenta');
 const bBuscar = document.getElementById('buscar');
 const buscarProducto = document.getElementById('buscarProducto');
 const bSeleccionar = document.getElementById('seleccionar');
-const bFinalzar = document.getElementById('finalizar');
+const bFinalizar = document.getElementById('finalizar');
 const bfinalizarSolicitud = document.getElementById('finalizarSolicitud');
 
 //Selects
@@ -234,7 +234,7 @@ async function llenarTabla() {
     tbodySolicitud.innerHTML = ""; // reset data
     listaProductosSolicitados.forEach((e) => {
 
-        tbodySolicitud.innerHTML += `<tr id=${positionRows} value=${e.idAlmacen}>
+        tbodySolicitud.innerHTML += `<tr id=${"ES" + positionRows} value=${e.idAlmacen}>
     <td>
         <img class="tbImagen" src="${e.imagen}"/>
     </td>
@@ -265,7 +265,7 @@ tbodySolicitud.addEventListener('click', (e) => {
 function logicaCambiarColores(e) {
     var backG, letras;
     if (idRow != "") {
-        if ((idRow % 2 == 0)) {
+        if ((parseInt(idRow.substring(2)) % 2 == 0)) {
             backG = "#ddd";
         } else {
             backG = "#fff";
@@ -306,7 +306,7 @@ bEliminar.addEventListener('click', (e) => {
     var copiaArray = listaProductosSolicitados.slice();
     listaProductosSolicitados = [];
     for (let i = 0; i < copiaArray.length; i++) {
-        if (idRow - 1 == i) {
+        if (parseInt(idRow.substring(2)) - 1 == i) {
             Toast.fire({
                 icon: 'info',
                 title: 'Se elimino el elemento: ' + (i + 1),
@@ -321,7 +321,7 @@ bEliminar.addEventListener('click', (e) => {
 })
 
 bEditar.addEventListener('click', (e) => {
-    if (idRow == "") {
+    if (parseInt(idRow.substring(2)) == "") {
         Toast.fire({
             icon: 'info',
             title: 'Seleccione el producto que quiere editar',
@@ -339,7 +339,7 @@ bEditar.addEventListener('click', (e) => {
 
 function cargarDatosProductoEditar() {
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
-        if (idRow - 1 == i) {
+        if (parseInt(idRow.substring(2)) - 1 == i) {
             inputPiezas.value = listaProductosSolicitados[i].piezas
             inputPaquetes.value = listaProductosSolicitados[i].paquetes
             inputPrecioCompra.value = listaProductosSolicitados[i].precioCompra;
@@ -351,7 +351,7 @@ function cargarDatosProductoEditar() {
 
 async function editarProductoLista() {
     for (let i = 0; i < listaProductosSolicitados.length; i++) {
-        if (idRow - 1 == i) {
+        if (parseInt(idRow.substring(2)) - 1 == i) {
             listaProductosSolicitados[i].precioCompra = inputPrecioCompra.value;
             listaProductosSolicitados[i].piezas = piezas;
             listaProductosSolicitados[i].paquetes = paquetes;
@@ -414,7 +414,7 @@ bSeleccionar.addEventListener('click', async (e) => {
 
 //Finalizar solicitud
 
-bFinalzar.addEventListener('click', (e) => {
+bFinalizar.addEventListener('click', (e) => {
     if (listaProductosSolicitados.length == 0) {
         Toast.fire({
             icon: 'info',
@@ -423,6 +423,7 @@ bFinalzar.addEventListener('click', (e) => {
             width: 420
         })
     } else {
+        console.log(listaProductosSolicitados);
         cargarEmpleadoSolicitud()
         document.getElementById("modal3").classList.add("is-visible");
     }
@@ -479,6 +480,7 @@ bfinalizarSolicitud.addEventListener('click', (e) => {
         } else {
             pedidoAlmacen();
             detallePedidoAlmacen();
+            imprimirTicket();
         }
         document.querySelector(".modalFinalizar.is-visible").classList.remove("is-visible");
     }
@@ -508,7 +510,7 @@ async function detallePedidoAlmacen() {
             precioCompra: listaProductosSolicitados[i].precioCompra,
             total: (parseFloat(listaProductosSolicitados[i].cantidad)) * (parseFloat(listaProductosSolicitados[i].precioCompra)),
             ID_PedidoAlmacen: parseInt(idAlmacen[0].id),
-            ID_Producto: listaProductosSolicitados[i].idProducto
+            ID_Productos: listaProductosSolicitados[i].idProducto
         }
 
         //Operacion para modificar la cantidad en almacen
@@ -531,14 +533,6 @@ async function detallePedidoAlmacen() {
         bdEntradasSalidas.actualizarAlmacen(actualizarAlmacen, listaProductosSolicitados[i].idProducto);
         bdEntradasSalidas.insertarDetallePedidoAlmacen(detallePedidoAlmacen);
     }
-    listaProductosSolicitados = [];
-    llenarTabla();
-    Toast.fire({
-        icon: 'success',
-        title: 'Se a realizado la solicitud con exito',
-        background: 'FFFF',
-        width: 420
-    })
 }
 
 
@@ -567,6 +561,7 @@ async function validacionSolicitudSalida() {
     if (cantidadSuperior == false) {
         pedidoAlmacen();
         detallePedidoAlmacen();
+        imprimirTicket();
     } else {
         Toast.fire({
             icon: 'error',
@@ -575,5 +570,130 @@ async function validacionSolicitudSalida() {
             width: 600,
             timer: 6000,
         })
+    }
+}
+
+async function imprimirTicket() {
+    let totalProductosSolicitados = 0;
+    let idP = await bdEntradasSalidas.obtenerUltimoIdPedidoAlmacen();
+    console.log(idP.at(0).id);
+    const result = await bdEntradasSalidas.datosProducto(idProducto);
+    tipoSolicitud = "";
+    checkInOut ? tipoSolicitud = "Entrada" : tipoSolicitud = "Salida";
+    empeladoNombre = sEmpleadoSolicitud.options[sEmpleadoSolicitud.selectedIndex].text;
+    areaEmpeado = await bdEntradasSalidas.areaEmpleado(sEmpleadoSolicitud.value)
+    let encabezadoTabla = "Producto        Paquetes  Piezas   Total      "
+    //la impresora puede imprimir 48 caracteres en un renglon antes de hacer salto de linea
+    const conector = new ConectorPlugin()
+        .cortar()
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .establecerTamanioFuente(2, 2)
+        .texto("========================\n")
+        .texto("ENTRADAS Y SALIDAS\n")
+        .texto("========================\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .establecerTamanioFuente(1, 1)
+        .texto("Tipo: " + tipoSolicitud + "\n")
+        .texto("No.Solicitud: "+idP.at(0).id + "\n")
+        .texto("Solicita: " + empeladoNombre + " del area de: " + areaEmpeado.at(0).nombre + "\n")
+        .texto("Autorizo: " + usuario.at(0).nombre + "\n")
+        .texto("================================================\n")
+        .texto(encabezadoTabla + "\n")
+        .texto("================================================\n")
+    listaProductosSolicitados.forEach(e => {
+        if (isNaN(e.paquetes)) {
+            paquetes = 0;
+        } else {
+            paquetes = e.paquetes;
+        }
+        if (isNaN(e.piezas)) {
+            piezas = 0;
+        } else {
+            piezas = parseInt(e.piezas);
+        }
+        let totalProductos = piezas + parseInt(e.paquetes) * parseInt(result.at(0).cantidadPorPaquete);
+        totalProductosSolicitados = totalProductosSolicitados + totalProductos;
+        let rowProducto = ""
+        agregarEspacios(e.nombre, "Producto")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(paquetes, "Paquetes")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(piezas, "Piezas")
+        rowProducto = rowProducto + palabraMoldeada;
+        agregarEspacios(totalProductos, "Total")
+        rowProducto = rowProducto + palabraMoldeada;
+        console.log(rowProducto);
+        conector
+            .establecerTamanioFuente(1, 1)
+            .textoConAcentos(rowProducto + "\n")
+    });
+    conector
+        .texto("================================================\n")
+        .establecerTamanioFuente(2, 2)
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionDerecha)
+        .texto("Total: " + totalProductosSolicitados + "\n")
+        .establecerTamanioFuente(1, 1)
+        .cortar();
+    if (localStorage.getItem("impresora") === null) {
+        Toast.fire({
+            icon: 'info',
+            title: 'No se a configurado correctamente la impresora',
+            background: 'FFFF',
+            width: 420
+        })
+    } else {
+        if ((storage.getStorage("impresora").estado) == true) {
+            let nombreImpresora = storage.getStorage("impresora").nombre
+            console.log(nombreImpresora);
+            const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
+        } else {
+            Toast.fire({
+                icon: 'info',
+                title: 'No se a configurado correctamente la impresora',
+                background: 'FFFF',
+                width: 420
+            })
+        }
+    }
+    listaProductosSolicitados = [];
+    llenarTabla();
+    Toast.fire({
+        icon: 'success',
+        title: 'Se a realizado la solicitud con exito',
+        background: 'FFFF',
+        width: 420
+    })
+}
+
+function agregarEspacios(palabra, tipoPalabra) {
+    palabraMoldeada = "";
+    palabra = palabra + "";
+    let sizeLetra;
+    switch (tipoPalabra) {
+        case 'Producto':
+            sizeLetra = 16;
+            break;
+        case 'Paquetes':
+            sizeLetra = 10;
+            break;
+        case 'Piezas':
+            sizeLetra = 9;
+            break;
+        case 'Total':
+            sizeLetra = 11;
+            break;
+    }
+
+    if (palabra.length < sizeLetra) {
+        contador = sizeLetra - palabra.length;
+        for (let i = 0; i < contador; i++) {
+            palabra = palabra + " ";
+        }
+        palabraMoldeada = palabra
+    } else if (palabra.length >= sizeLetra) {
+        for (let i = 0; i < sizeLetra - 1; i++) {
+            palabraMoldeada = palabraMoldeada + palabra.charAt(i)
+        }
+        palabraMoldeada = palabraMoldeada + " ";
     }
 }

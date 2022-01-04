@@ -92,6 +92,30 @@ async function actualizarAlmacen(update,id){
     }
 }
 
+//Obtener area del empleado
+
+async function areaEmpleado(id){
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("SELECT nombre FROM area WHERE id=?", id);
+        return result;
+    } catch (error) {
+        console.log(error);   
+    }
+}
+
+//Obtener la cantidad total de productos solicitados
+
+async function totalProductos(id){
+    try {
+        const conn = await getConnection();
+        const result = await conn.query("SELECT SUM(Total) as total FROM detallepedidoalmacen WHERE ID_PedidoAlmacen = ?", id);
+        return result;
+    } catch (error) {
+        console.log(error);   
+    }
+}
+
 module.exports = {
     idProductoEscaneado,
     ultimoRegistroPrecio,
@@ -100,5 +124,7 @@ module.exports = {
     insertarDetallePedidoAlmacen,
     obtenerUltimoIdPedidoAlmacen,
     cantidadAlmacen,
-    actualizarAlmacen
+    actualizarAlmacen,
+    areaEmpleado,
+    totalProductos
 }

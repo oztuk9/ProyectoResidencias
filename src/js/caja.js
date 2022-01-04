@@ -65,6 +65,7 @@ var efectivoCaja = 0;
 var diferencia = 0;
 var idUsuarioCorte = 0;
 var ultimaVenta = 0;
+var corte = false;
 
 //Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
 for (let i = 0; i < __dirname.length; i++) {
@@ -182,7 +183,7 @@ async function llenarTabla() {
     tbodySolicitud.innerHTML = ""; // reset data
     listaProductosSolicitados.forEach((e) => {
 
-        tbodySolicitud.innerHTML += `<tr id=${"Caja"+positionRows} value=${e.idAlmacen}>
+        tbodySolicitud.innerHTML += `<tr id=${"Caja" + positionRows} value=${e.idAlmacen}>
     <td>
         <img class="tbImagen" src="${e.imagen}"/>
     </td>
@@ -514,12 +515,12 @@ async function imprimirTicket() {
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
         .textoConAcentos("Ubicación: " + calle + "\n")
         .texto("Telefono: " + telefono + "\n")
-        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .texto("================================================\n")
         .texto("Fecha y hora: " + fechaHora + "\n")
         .texto("Lo atendio: " + usuario.at(0).nombre + "\n")
         .texto("================================================\n")
         .establecerTamanioFuente(3, 3)
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
         .texto("============\n")
         .texto("CUENTA\n")
         .texto("============\n")
@@ -621,90 +622,161 @@ function agregarEspacios(palabra, tipoPalabra) {
     }
 }
 
-btnCorte.addEventListener('click',()=>{
+btnCorte.addEventListener('click', () => {
     document.getElementById("modal7").classList.add("is-visible");
     cargarUsuariosCorte();
 })
 
 async function cargarUsuariosCorte() {
-    selectUsuarioCorte.innerHTML="";
+    selectUsuarioCorte.innerHTML = "";
     let result = await bdUsuarios.selectUsuarios();
     objeto = document.createElement('option')
     objeto.value = 0
     objeto.text = ""
     selectUsuarioCorte.appendChild(objeto);
     for (let i = 0; i < result.length; i++) {
-        if (result[i].id!=1) {
-        objeto = document.createElement('option')
-        objeto.value = result[i].id
-        objeto.text = result[i].nombre
-        selectUsuarioCorte.appendChild(objeto);
+        if (result[i].id != 1) {
+            objeto = document.createElement('option')
+            objeto.value = result[i].id
+            objeto.text = result[i].nombre
+            selectUsuarioCorte.appendChild(objeto);
         }
     }
 }
 
-btnSeleccionarUsuario.addEventListener('click',async ()=>{
-    idUsuarioCorte = selectUsuarioCorte.value;
-    ultimoCorte =  await bdCaja.ultimoCorte(idUsuarioCorte);
-    obtenerUltimaVenta = await bdCaja.obtenerUltimaVenta(idUsuarioCorte);
-    ultimaVenta = obtenerUltimaVenta.at(0).id
-    console.log(ultimoCorte.at(0).id);
-    if (ultimoCorte.length==0) {
-        sinCorte = await bdCaja.sinCorte(idUsuarioCorte)
-        totalCorte=sinCorte.at(0).TotalDinero;
-    }else{
-        console.log(ultimaVenta);
-        console.log(ultimoCorte.at(0).id);
-        if (ultimaVenta>ultimoCorte.at(0).id) {
-            inicioVenta = parseInt(ultimoCorte.at(0).id)+1;
-            conCorte = await bdCaja.conCorte(inicioVenta,ultimaVenta,idUsuarioCorte)
-            totalCorte=conCorte.at(0).TotalDinero;
-            console.log(ultimoCorte.length );
+btnSeleccionarUsuario.addEventListener('click', async () => {
+
+    if (selectUsuarioCorte.value == 0) {
+        Toast.fire({
+            icon: 'info',
+            title: 'Seleccione un usuario',
+            background: 'FFFF',
+            width: 420
+        })
+    } else {
+        esperadoCaja = 0;
+        efectivoCaja = 0;
+        diferencia = 0;
+        TdiferenciaCorte.innerHTML = "$0"
+        TefectivoBaseDatos.innerHTML = "$0"
+        inputEfectivoCorte.value = ""
+
+        idUsuarioCorte = selectUsuarioCorte.value;
+        ultimoCorte = await bdCaja.ultimoCorte(idUsuarioCorte);
+        if (ultimoCorte.length == 0) {
+            sinCorte = await bdCaja.sinCorte(idUsuarioCorte)
+            if (sinCorte.at(0).TotalDinero == null) {
+                totalCorte = 0;
+            } else {
+                totalCorte = sinCorte.at(0).TotalDinero;
+            }
+        } else {
+            obtenerUltimaVenta = await bdCaja.obtenerUltimaVenta(idUsuarioCorte);
+            ultimaVenta = obtenerUltimaVenta.at(0).id
+            if (ultimaVenta > ultimoCorte.at(0).id) {
+                inicioVenta = parseInt(ultimoCorte.at(0).id) + 1;
+                conCorte = await bdCaja.conCorte(inicioVenta, ultimaVenta, idUsuarioCorte)
+                totalCorte = conCorte.at(0).TotalDinero;
+            }
         }
+        TefectivoBaseDatos.innerHTML = "$" + totalCorte;
     }
-    TefectivoBaseDatos.innerHTML = "$"+totalCorte;
 })
 
-inputEfectivoCorte.addEventListener('keyup',()=>{
+inputEfectivoCorte.addEventListener('keyup', () => {
     efectivoCaja = inputEfectivoCorte.value;
-    diferencia = efectivoCaja-totalCorte;
-    TdiferenciaCorte.innerHTML = "$"+diferencia.toFixed(2)
+    diferencia = efectivoCaja - totalCorte;
+    TdiferenciaCorte.innerHTML = "$" + diferencia.toFixed(2)
 })
 
-btnFinalizarCorte.addEventListener('click',()=>{
-    datos ={
+btnFinalizarCorte.addEventListener('click', () => {
+    if (totalCorte==0) {
+        Toast.fire({
+            icon: 'error',
+            title: 'El usuario no a tenido ventas desde el ultimo corte',
+            background: 'FFFF',
+            width: 420
+        })
+    }else{
+    datos = {
         esperadoCaja: totalCorte,
         efectivoCaja: efectivoCaja,
         diferencia: diferencia,
         IDUsuarioCorte: idUsuarioCorte,
         IDUsuarioAdmin: usuario.at(0).id
     }
-    corte = {
+    corteUpdate = {
         corte: true
     }
     bdCaja.insertarCortes(datos);
-    bdCaja.actualizarPedidoVentas(corte,ultimaVenta);
+    bdCaja.actualizarPedidoVentas(corteUpdate, ultimaVenta);
+    ticketCorte();
     esperadoCaja = 0;
     efectivoCaja = 0;
     diferencia = 0;
     TdiferenciaCorte.innerHTML = "$0"
     TefectivoBaseDatos.innerHTML = "$0"
-    inputEfectivoCorte.value=""
+    inputEfectivoCorte.value = ""
     document.querySelector(".modalCorteCaja.is-visible").classList.remove("is-visible");
     Toast.fire({
-        icon: 'info',
+        icon: 'success',
         title: 'Corte realizado',
         background: 'FFFF',
         width: 420
     })
+}
 })
 
-btnCancelarCorte.addEventListener('click',()=>{
+btnCancelarCorte.addEventListener('click', () => {
     document.querySelector(".modalCorteCaja.is-visible").classList.remove("is-visible");
     esperadoCaja = 0;
     efectivoCaja = 0;
     diferencia = 0;
     TdiferenciaCorte.innerHTML = "$0"
     TefectivoBaseDatos.innerHTML = "$0"
-    inputEfectivoCorte.value=""
+    inputEfectivoCorte.value = ""
 })
+
+async function ticketCorte() {
+    cajero = selectUsuarioCorte.options[selectUsuarioCorte.selectedIndex].text;
+    realizo = usuario.at(0).nombre;
+    const conector = new ConectorPlugin()
+        .cortar()
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro)
+        .feed(2)
+        .texto("================================================\n")
+        .establecerTamanioFuente(2, 2)
+        .texto("Corte de caja\n")
+        .establecerTamanioFuente(1, 1)
+        .texto("================================================\n")
+        .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
+        .texto("Cajero: " + cajero + "\n")
+        .texto("Realizo: " + realizo + "\n")
+        .texto("================================================\n")
+        .texto("Efectivo esperado en caja:              $" + totalCorte + "\n")
+        .texto("Efectivo fisico:                        $" + efectivoCaja + "\n")
+        .texto("Diferencia:                             $" + diferencia + "\n")
+        .texto("================================================\n")
+        .cortar();
+    if (localStorage.getItem("impresora") === null) {
+        Toast.fire({
+            icon: 'info',
+            title: 'No se a configurado correctamente la impresora',
+            background: 'FFFF',
+            width: 420
+        })
+    } else {
+        if ((storage.getStorage("impresora").estado) == true) {
+            let nombreImpresora = storage.getStorage("impresora").nombre
+            console.log(nombreImpresora);
+            const respuestaAlImprimir = await conector.imprimirEn(nombreImpresora);
+        } else {
+            Toast.fire({
+                icon: 'info',
+                title: 'No se a configurado correctamente la impresora',
+                background: 'FFFF',
+                width: 420
+            })
+        }
+    }
+}
