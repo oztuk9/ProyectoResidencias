@@ -15,13 +15,24 @@ body {
   box-shadow: -1px 5px 10px black;
 }
 
+.display {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #columnas {
-  margin-top: 5%;
   display: grid;
   grid-template-columns: 40% 40%;
+  height: 85%;
+  width: 90%;
+  padding-top: 10%;
 }
 
 #column1 {
+  height: 80%;
   display: grid;
   grid-template-rows: 45% 10% 35%;
   padding-left: 30%;
@@ -30,12 +41,28 @@ body {
   margin-bottom: 0;
 }
 #column2 {
+  width: 100%;
+  height: 70%;
   display: grid;
-  grid-template-columns: 40% 60%;
-  padding: 5%;
+  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
+  margin-top: 10%;
   margin: 3%;
   padding: 0;
   font-size: 110%;
+}
+
+.divsInput {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 100%;
+  height: 0%;
+}
+
+.divsSelect {
+  display: grid;
+  grid-template-columns: 40% 50% 10%;
+  width: 100%;
+  height: 0%;
 }
 
 #imagen {
@@ -54,6 +81,10 @@ body {
   transition: 1.5s ease;
 }
 
+.descripcionImagen{
+  margin-top: 6%;
+}
+
 #imagenInput {
   position: relative;
   width: 250px;
@@ -66,7 +97,7 @@ body {
   opacity: 0;
 }
 
-#imagenInput:hover{
+#imagenInput:hover {
   cursor: hand;
 }
 
@@ -75,12 +106,16 @@ body {
   border: 2px solid rgb(175, 180, 182);
 }
 
-.DescripcionDato {
-  line-height: 350%;
-  border-radius: 15px;
+.divBotones {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-top: 5%;
 }
 
 .agregarSelect {
+  margin-left: 25%;
+  width: 50%;
   border-radius: 10px;
   font-weight: bold;
   font-size: large;
@@ -88,82 +123,69 @@ body {
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
-  transition: .7s;
+  transition: 0.7s;
 }
 
-.agregarSelect:hover{
+.agregarSelect:hover {
   background-color: fff;
-  color:#236e25;
+  color: #236e25;
   cursor: hand;
 }
 
 #select_marca {
-  margin-bottom: 20px;
-  margin-top: 20px;
   border-radius: 10px;
-  height: 30px;
-  width: 90%;
   border: 2px solid rgb(175, 180, 182);
 }
 
 #select_categoria {
-  margin-bottom: 20px;
-  margin-top: 12px;
   border-radius: 15px;
-  height: 30px;
-  width: 90%;
   border: 2px solid rgb(175, 180, 182);
 }
 
 .InputData {
-  margin-bottom: 2.5%;
-  margin-top: 4%;
-  border-radius: 15px;
   width: 100%;
+  border-radius: 15px;
   border: 2px solid rgb(175, 180, 182);
 }
 
-.radios:hover{
+.radios:hover {
   cursor: hand;
 }
 
-.finalizar {
-  position: relative;
-  width: 150;
-  height: 50;
-  left: 150%;
-  bottom: 20%;
+.botones{
+  margin: 0 auto;
+  margin-top: 0%;
+  width: 80%;
+  font-size: 150%;
+}
+
+#finalizar {
   border-radius: 15px;
   background-color: #236e25;
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
-  transition: .7s;
+  transition: 0.7s;
 }
 
-.finalizar:hover{
+#finalizar:hover {
   background-color: fff;
-  color:#236e25;
+  color: #236e25;
   cursor: pointer;
 }
 
 #cancelar {
-  position: relative;
-  left: 50%;
-  top: 7%;
-  height: 50;
-  width: 150;
   border-radius: 15px;
   background-color: #bb0000;
   color: fff;
   border: 0;
   box-shadow: -1px 7px 5px black;
-  transition: .7s;
+  transition: 0.7s;
 }
 
-#cancelar:hover{
+#cancelar:hover {
   background-color: fff;
-  color:#bb0000;
+  color: #bb0000;
   cursor: hand;
 }
 
@@ -196,17 +218,16 @@ body {
   cursor: default;
 }
 
-
 /*CUSTOM VARIABLES HERE*/
 
-.tituloModal{
+.tituloModal {
   position: relative;
   text-align: center;
   margin-top: 20px;
   top: 20px;
 }
 
-.formModal{
+.formModal {
   position: relative;
   top: 20%;
 }
@@ -215,7 +236,6 @@ body {
   height: 100px;
   width: 400px;
 }
-
 
 .modal-header {
   position: relative;
@@ -234,14 +254,14 @@ body {
   margin-top: 1rem;
 }
 
-.modal-content{
+.modal-content {
   width: 400px;
   height: 100;
   padding: 0%;
   padding-top: 7%;
 }
 
-.modal-footer{
+.modal-footer {
   padding: 0%;
 }
 
@@ -249,18 +269,18 @@ body {
   position: absolute;
   right: 5px;
   top: 5px;
-  width: 30PX;
-  height: 30PX;
+  width: 30px;
+  height: 30px;
   border-radius: 5px;
   border-radius: 15px;
   border: 0;
   background-color: #bb0000;
-  color:#fff;
+  color: #fff;
 }
 
-.close-modal:hover{
+.close-modal:hover {
   cursor: hand;
-  transition: .5s;
+  transition: 0.5s;
   transform: scale(1.1);
 }
 
@@ -288,7 +308,6 @@ body {
   border: 2px solid rgb(175, 180, 182);
 }
 
-
 .finalizarModal {
   position: relative;
   width: 100px;
@@ -302,10 +321,9 @@ body {
   box-shadow: -1px 7px 10px black;
 }
 
-
-.finalizarModal:hover{
+.finalizarModal:hover {
   background-color: fff;
-  color:#236e25;
+  color: #236e25;
   cursor: hand;
 }
 
@@ -320,5 +338,4 @@ body {
 .modal.is-visible {
   visibility: visible;
   opacity: 1;
-
 }
