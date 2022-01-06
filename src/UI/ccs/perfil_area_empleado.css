@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+#datosUsuario{
+  margin-top: 7%;
+}
+
 .tituloModa4{
   font-size: 180%;
   text-align: center;

@@ -307,9 +307,9 @@ tr:hover td {
 .modalConfigurarImpresora {
   position: absolute;
   display: block;
-  top: 25%;
+  top: 20%;
   left: 30%;
-  height: 40%;
+  height: 50%;
   width: 35%;
   align-items: center;
   justify-content: center;

@@ -26,9 +26,9 @@ body {
 #columnas {
   display: grid;
   grid-template-columns: 40% 40%;
-  height: 85%;
+  height: 95%;
   width: 90%;
-  padding-top: 10%;
+  padding-top: 5%;
 }
 
 #column1 {
