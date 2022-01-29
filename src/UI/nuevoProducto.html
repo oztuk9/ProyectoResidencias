@@ -20,14 +20,14 @@
                 <input type="file" id="imagenInput" accept="image/*" />
             </div>
             <span class="descripcionImagen">Descripcion:</span>
-            <textarea name="txtDescripcion" id="descripcion" cols="30" rows="15"></textarea>
+            <textarea name="txtDescripcion" id="descripcion" cols="30" rows="15" maxlength="100"></textarea>
         </div>
 
 
         <div id="column2">
             <div class="divsInput">
                 <span class="DescripcionDato">Nombre:</span>
-                <input id="nombre" class="InputData" type="text">
+                <input id="nombre" class="InputData" type="text" maxlength="20">
             </div>
             <div class="divsSelect">
                 <span class="DescripcionDato">Marca:</span>
@@ -41,19 +41,19 @@
             </div>
             <div class="divsInput">
                 <span class="DescripcionDato">Precio venta:</span>
-                <input id="precioVenta" class="InputData" type="number">
+                <input id="precioVenta" class="InputData" type="number" max="9999999999">
             </div>
             <div class="divsInput">
-                <span class="DescripcionDato">Minimo:</span>
-                <input id="minimo" class="InputData" type="number">
+                <span class="DescripcionDato">Minimo en almacen:</span>
+                <input id="minimo" class="InputData" type="number" max="9999999999">
             </div>
             <div class="divsInput">
-                <span class="DescripcionDato">Maximo:</span>
-                <input id="maximo" class="InputData" type="number">
+                <span class="DescripcionDato">Maximo en almacen:</span>
+                <input id="maximo" class="InputData" type="number" max="9999999999">
             </div>
             <div class="divsInput">
                 <span class="DescripcionDato">Cantidad por paquete:</span>
-                <input id="cantidadPorPaquete" class="InputData" type="number">
+                <input id="cantidadPorPaquete" class="InputData" type="number" max="9999999999">
             </div>
             <div class="divsInput">
                 <span class="DescripcionDato">Codigo de barras:</span>
@@ -68,7 +68,7 @@
                             <span>No, generar</span>
                         </div>
                     </div>
-                    <input id="codigoBarras" class="InputData" type="text">
+                    <input id="codigoBarras" class="InputData" type="text" maxlength="15">
                 </div>
             </div>
             <div class="divBotones">

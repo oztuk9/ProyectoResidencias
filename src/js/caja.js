@@ -67,6 +67,10 @@ var idUsuarioCorte = 0;
 var ultimaVenta = 0;
 var corte = false;
 
+//Focus al cargar caja
+
+inputcodigoBarras.focus();
+
 //Con esto agregamos la ruta y agregamos dos slash invertidos para que asi pueda ser leida la ruta para imprimir la imagen del negocio
 for (let i = 0; i < __dirname.length; i++) {
     if (__dirname.charAt(i) == "\\") {

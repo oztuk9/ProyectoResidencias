@@ -92,12 +92,14 @@ async function actualizarAlmacen(update,id){
     }
 }
 
+
+
 //Obtener area del empleado
 
 async function areaEmpleado(id){
     try {
         const conn = await getConnection();
-        const result = await conn.query("SELECT nombre FROM area WHERE id=?", id);
+        const result = await conn.query("SELECT A.nombre FROM area as A INNER JOIN trabajador as T where T.ID=?", id);
         return result;
     } catch (error) {
         console.log(error);   

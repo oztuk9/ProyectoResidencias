@@ -50,6 +50,8 @@ checkBox.addEventListener('click', (e) => {
     checkBox.checked ? inputPrecioCompra.disabled = false : inputPrecioCompra.disabled = true;
 })
 
+inputcodigoBarras.focus();
+
 //Toast seetalert2
 const Swal = require('sweetalert2');
 const Toast = Swal.mixin({
@@ -582,6 +584,7 @@ async function imprimirTicket() {
     checkInOut ? tipoSolicitud = "Entrada" : tipoSolicitud = "Salida";
     empeladoNombre = sEmpleadoSolicitud.options[sEmpleadoSolicitud.selectedIndex].text;
     areaEmpeado = await bdEntradasSalidas.areaEmpleado(sEmpleadoSolicitud.value)
+    console.log(areaEmpeado.at(0).nombre);
     let encabezadoTabla = "Producto        Paquetes  Piezas   Total      "
     //la impresora puede imprimir 48 caracteres en un renglon antes de hacer salto de linea
     const conector = new ConectorPlugin()
@@ -594,7 +597,7 @@ async function imprimirTicket() {
         .establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda)
         .establecerTamanioFuente(1, 1)
         .texto("Tipo: " + tipoSolicitud + "\n")
-        .texto("No.Solicitud: "+idP.at(0).id + "\n")
+        .texto("No.Solicitud: " + idP.at(0).id + "\n")
         .texto("Solicita: " + empeladoNombre + " del area de: " + areaEmpeado.at(0).nombre + "\n")
         .texto("Autorizo: " + usuario.at(0).nombre + "\n")
         .texto("================================================\n")

@@ -274,3 +274,6 @@ function addValuesEdit(result) {
   descripcion.value = result[0].Descripcion;
 
 }
+
+//Codigo para generar codigo de barras de forma automatica
+
