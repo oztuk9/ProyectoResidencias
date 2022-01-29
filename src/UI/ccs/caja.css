@@ -393,11 +393,11 @@ tr:hover td {
 
 .modalCorteCaja {
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 15%;
+  left: 15%;
   display: flex;
-  height: 50%;
-  width: 55%;
+  height: 60%;
+  width: 60%;
   align-items: center;
   justify-content: center;
   padding: 2rem;
